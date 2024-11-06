@@ -19,5 +19,8 @@ public:
 
 private:
     Ui::Cartelera *ui;
+
+    void cargarCartelera();
+
 };
 #endif // CARTELERA_H
