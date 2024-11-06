@@ -12,4 +12,6 @@ int main(int argc, char *argv[])
     return a.exec();
 
     std::cout << "hola mundo";
+
+    std::cout << "AAAAAAAAAA";
 }
