@@ -11,16 +11,13 @@ CONFIG += c++17
 
 SOURCES += \
     cine.cpp \
-    main.cpp \
-    pelicula.cpp
+    main.cpp
 
 HEADERS += \
-    cine.h \
-    pelicula.h
+    cine.h
 
 FORMS += \
-    cine.ui \
-    pelicula.ui
+    cine.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
