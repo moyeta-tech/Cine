@@ -10,13 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    cartelera.cpp
+    pelicula.cpp
 
 HEADERS += \
-    cartelera.h
+    pelicula.h
 
 FORMS += \
-    cartelera.ui
+    pelicula.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

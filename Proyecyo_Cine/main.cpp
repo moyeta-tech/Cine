@@ -1,4 +1,4 @@
-#include "cartelera.h"
+#include "pelicula.h"
 
 #include <QApplication>
 
@@ -7,13 +7,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Cartelera w;
+    Pelicula w;
     w.show();
     return a.exec();
 
-    std::cout << "hola mundo";
-
-    std::cout << "AAAAAAAAAA";
-
-     std::cout << "asdfohla";
 }
