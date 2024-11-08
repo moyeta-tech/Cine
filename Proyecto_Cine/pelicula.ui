@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+<<<<<<<< HEAD:Proyecto_Cine/pelicula.ui
  <class>Pelicula</class>
  <widget class="QMainWindow" name="Pelicula">
+========
+ <class>Cartelera</class>
+ <widget class="QMainWindow" name="Cartelera">
+>>>>>>>> f839cb2e0aef11a33ebe0426f67c5e18f022f8b2:Proyecto_Cine/cartelera.ui
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +16,11 @@
    </rect>
   </property>
   <property name="windowTitle">
+<<<<<<<< HEAD:Proyecto_Cine/pelicula.ui
    <string>MainWindow</string>
+========
+   <string>Cartelera</string>
+>>>>>>>> f839cb2e0aef11a33ebe0426f67c5e18f022f8b2:Proyecto_Cine/cartelera.ui
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
