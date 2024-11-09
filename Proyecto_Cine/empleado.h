@@ -1,18 +1,19 @@
 #include "persona.h"
 #ifndef EMPLEADO_H
 #define EMPLEADO_H
-#include "vector"
+
 using namespace std;
 
 class Empleado : public Persona
 {
-    int idCliente;
-    std::vector<string> historial;
+    int idEmpleado;
+    string Puesto;
 public:
-    Empleado(string nombre, string apellido, int dni, int edad, int telefono, int idcliente);
-    int getIDcliente();
-    void setIDcliente(int idcliente);
-    void agregarHistorial(string reserva);
+    Empleado(string nombre, string apellido, int dni, int edad, int telefono, int idempleado);
+    int getIDempleado();
+    void setIDempleado(int idempleado);
+    string getPuesto();
+    void setPuesto(string puesto);
 
 
 

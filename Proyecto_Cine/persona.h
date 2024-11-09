@@ -12,7 +12,8 @@ class Persona
     int Edad;
     int Telefono;
 public:
-    Persona(string nombre, string apellido, int dni, int edad, int telefono);
+    Persona(); // CONSTRUCTOR POR DEFECTO
+    Persona(string nombre, string apellido, int dni, int edad, int telefono); // CONSTRUCTOR QUE USA PARAMETROS
     string getNombre();
     void setNombre(string nombre);
     string getApellido();

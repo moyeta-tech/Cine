@@ -1,7 +1,7 @@
 #include "peliculas.h"
 #include "ui_peliculas.h"
 
-peliculas::peliculas(QWidget *parent)
+peliculas::peliculas(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::peliculas)
 {

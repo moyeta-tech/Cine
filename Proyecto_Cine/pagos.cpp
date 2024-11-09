@@ -1,7 +1,7 @@
 #include "pagos.h"
 #include "ui_pagos.h"
 
-pagos::pagos(QWidget *parent)
+pagos::pagos(QString metodo, float monto, QString fecha, QWidget *parent = nullptr)
     : QWidget(parent)
     , ui(new Ui::pagos)
 {

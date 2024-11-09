@@ -1,7 +1,7 @@
 #include "precios.h"
 #include "ui_precios.h"
 
-precios::precios(QWidget *parent)
+precios::precios(QString tipoentrada, float preciobase, float descuento, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::precios)
 {
