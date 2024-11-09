@@ -11,10 +11,16 @@ CONFIG += c++17
 
 SOURCES += \
     cine.cpp \
-    main.cpp
+    cliente.cpp \
+    empleado.cpp \
+    main.cpp \
+    persona.cpp
 
 HEADERS += \
-    cine.h
+    cine.h \
+    cliente.h \
+    empleado.h \
+    persona.h
 
 FORMS += \
     cine.ui
