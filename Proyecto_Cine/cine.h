@@ -2,7 +2,8 @@
 #define CINE_H
 
 #include <QMainWindow>
-#include "vector"
+#include "array"
+#include "QDebug"
 
 namespace Ui {
 class Cine;
@@ -15,22 +16,20 @@ class Cine : public QMainWindow
 public:
     explicit Cine(QWidget *parent = nullptr);
     ~Cine();
-/*
-    QString getNombre;
+
+    // ATRIBUTOS
+    QString Nombre;
+    QString Ubicacion;
+    std::array<int, 4> salas;
+    // METODOS
+    QString getNombre();
     void setNombre(QString nombre);
-    QString getUbicacion;
+    QString getUbicacion();
     void setUbicacion(QString ubicacion);
-    std::vector<int> getSalas();
-    void setSalas();
-*/
 
 private:
     Ui::Cine *ui;
-/*
-    QString Nombre;
-    QString Ubicacion;
-    std::vector<int> salas;
-*/
+
 };
 
 #endif // CINE_H
