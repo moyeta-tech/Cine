@@ -10,20 +10,40 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    asientos.cpp \
     cine.cpp \
     cliente.cpp \
     empleado.cpp \
+    horarios.cpp \
     main.cpp \
-    persona.cpp
+    pagos.cpp \
+    peliculas.cpp \
+    persona.cpp \
+    precios.cpp \
+    reserva.cpp \
+    sala.cpp
 
 HEADERS += \
+    asientos.h \
     cine.h \
     cliente.h \
     empleado.h \
-    persona.h
+    horarios.h \
+    pagos.h \
+    peliculas.h \
+    persona.h \
+    precios.h \
+    reserva.h \
+    sala.h
 
 FORMS += \
-    cine.ui
+    asientos.ui \
+    cine.ui \
+    horarios.ui \
+    pagos.ui \
+    peliculas.ui \
+    precios.ui \
+    reserva.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

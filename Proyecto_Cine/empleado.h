@@ -2,6 +2,7 @@
 #ifndef EMPLEADO_H
 #define EMPLEADO_H
 #include "vector"
+using namespace std;
 
 class Empleado : public Persona
 {

@@ -2,6 +2,7 @@
 #define PERSONA_H
 
 #include "string"
+using namespace std;
 
 class Persona
 {
