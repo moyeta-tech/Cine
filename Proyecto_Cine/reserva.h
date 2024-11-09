@@ -21,6 +21,12 @@ public:
     void setFecha(QString fecha);
     int getcantAsientos();
     void setcantAsientos(int cantasientos);
+    Cliente *getCliente();
+    void setCliente(Cliente *cliente);
+    Horarios *getHorario();
+    void setHorario(Horarios *horario);
+    pagos *getPago();
+    void setPago(pagos *pago);
 
 
 
