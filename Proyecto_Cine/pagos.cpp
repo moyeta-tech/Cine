@@ -1,3 +1,4 @@
+/*
 #include "pagos.h"
 #include "ui_pagos.h"
 
@@ -12,3 +13,5 @@ pagos::~pagos()
 {
     delete ui;
 }
+
+*/

@@ -1,3 +1,4 @@
+/*
 #include "reserva.h"
 #include "ui_reserva.h"
 
@@ -12,3 +13,4 @@ reserva::~reserva()
 {
     delete ui;
 }
+*/

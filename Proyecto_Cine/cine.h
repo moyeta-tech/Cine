@@ -5,6 +5,15 @@
 #include "array"
 #include "QDebug"
 
+#include <QMenuBar>
+#include <QAction>
+#include <QMessageBox>
+
+#include "peliculas.h"
+
+
+
+
 namespace Ui {
 class Cine;
 }
@@ -27,9 +36,11 @@ public:
     QString getUbicacion();
     void setUbicacion(QString ubicacion);
 
+private slots:
+    void agregarPelicula();
+
 private:
     Ui::Cine *ui;
-
 };
 
 #endif // CINE_H

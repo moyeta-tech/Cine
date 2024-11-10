@@ -1,3 +1,4 @@
+/*
 #include "horarios.h"
 #include "ui_horarios.h"
 
@@ -12,3 +13,4 @@ Horarios::~Horarios()
 {
     delete ui;
 }
+*/

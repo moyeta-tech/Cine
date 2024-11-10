@@ -1,3 +1,4 @@
+/*
 #ifndef HORARIOS_H
 #define HORARIOS_H
 
@@ -32,3 +33,4 @@ private:
 };
 
 #endif // HORARIOS_H
+*/

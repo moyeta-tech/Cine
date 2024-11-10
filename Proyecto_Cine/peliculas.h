@@ -1,19 +1,19 @@
 #ifndef PELICULAS_H
 #define PELICULAS_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
-class peliculas;
+class Peliculas;
 }
 
-class peliculas : public QWidget
+class Peliculas : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit peliculas(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis, QWidget *parent = nullptr);
-    ~peliculas();
+    explicit Peliculas(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis, QWidget *parent = nullptr);
+    ~Peliculas();
     QString getTitulo();
     void setTitulo(QString titulo);
     int getDuracion();
@@ -26,12 +26,14 @@ public:
     void setSinopsis(QString sinopsis);
 
 private:
-    Ui::peliculas *ui;
+    Ui::Peliculas *ui;
     QString Titulo;
     int Duracion;
     QString Genero;
     QString Clasificacion;
     QString Sinopsis;
 };
+
+
 
 #endif // PELICULAS_H

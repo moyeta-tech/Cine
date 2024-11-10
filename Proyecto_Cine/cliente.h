@@ -14,7 +14,7 @@ public:
     int getIDcliente();
     void setIDcliente(int idcliente);
     void agregarHistorial(string reserva);
-    void getHistorial(historial);
+    // void getHistorial(historial);
     void mostrarHistorial();
 };
 

@@ -1,14 +1,17 @@
 #include "peliculas.h"
 #include "ui_peliculas.h"
 
-peliculas::peliculas(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis, QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::peliculas)
+Peliculas::Peliculas(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Peliculas)
 {
     ui->setupUi(this);
+
+    //Titulo de la ventana
+    this->setWindowTitle("Peliculas");
 }
 
-peliculas::~peliculas()
+Peliculas::~Peliculas()
 {
     delete ui;
 }

@@ -1,3 +1,4 @@
+/*
 #ifndef RESERVA_H
 #define RESERVA_H
 #include "cliente.h"
@@ -41,3 +42,4 @@ private:
 };
 
 #endif // RESERVA_H
+*/
