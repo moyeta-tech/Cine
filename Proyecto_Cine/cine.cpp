@@ -2,6 +2,9 @@
 #include "ui_cine.h"
 
 #include "peliculas.h"
+#include "clientes.h"
+#include "empleados.h"
+
 
 Cine::Cine(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +20,12 @@ Cine::Cine(QWidget *parent)
 
     //Boton de prueba para agregar pelicula
     connect(ui->actionRegistro_peliculas, &QAction::triggered, this, &Cine::agregarPelicula);
+
+    connect (ui->actionRegistrar_clientes, &QAction::triggered, this, &Cine::agregarClientes);
+
+
+    connect (ui->actionRegistrar_personal, &QAction::triggered, this, &Cine::agregarEmpleados);
+
 }
 
 Cine::~Cine()
@@ -46,10 +55,19 @@ void Cine::setUbicacion(QString Ubicacion){
 
 void Cine::agregarPelicula()
 {
-    // Ahora pasamos todos los parámetros que requiere el constructor de Peliculas
     Peliculas dialog("Nueva Película", 120, "Acción", "PG-13", "Sinopsis de la película", this);
-
-    // Abrimos el diálogo
     dialog.exec();
 }
 
+void Cine::agregarClientes()
+{
+    Clientes dialog(this);
+    dialog.exec();
+
+}
+
+void Cine::agregarEmpleados()
+{
+    Empleados dialog(this);
+    dialog.exec();
+}

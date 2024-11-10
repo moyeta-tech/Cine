@@ -1,3 +1,4 @@
+/*
 #include "Sala.h"
 
     // Constructor
@@ -13,3 +14,4 @@
 
 
     }
+*/

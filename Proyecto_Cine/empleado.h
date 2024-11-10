@@ -16,8 +16,6 @@ public:
     void setPuesto(string puesto);
 
 
-
-
 };
 
 #endif // EMPLEADO_H

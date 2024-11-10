@@ -13,5 +13,4 @@ pagos::~pagos()
 {
     delete ui;
 }
-
 */

@@ -9,11 +9,6 @@
 #include <QAction>
 #include <QMessageBox>
 
-#include "peliculas.h"
-
-
-
-
 namespace Ui {
 class Cine;
 }
@@ -37,9 +32,21 @@ public:
     void setUbicacion(QString ubicacion);
 
 private slots:
+    //Slots para los elementos de QMenuBar
     void agregarPelicula();
+    void agregarClientes();
+    void agregarEmpleados();
+
+    //Slots para los botones
+/*
+    void mostrarPrecios();
+    void mostrarHorarios();
+
+    void venderBoletos();
+*/
 
 private:
+
     Ui::Cine *ui;
 };
 

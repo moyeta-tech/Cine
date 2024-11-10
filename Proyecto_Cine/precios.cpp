@@ -1,3 +1,4 @@
+/*
 #include "precios.h"
 #include "ui_precios.h"
 
@@ -12,3 +13,4 @@ precios::~precios()
 {
     delete ui;
 }
+*/
