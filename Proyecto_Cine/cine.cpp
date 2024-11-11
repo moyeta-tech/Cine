@@ -34,24 +34,26 @@ Cine::~Cine()
     delete ui;
 }
 
+// GET Y SET DE NOMBRE
 
 QString Cine::getNombre(){
     return Nombre;
 }
 
-/*
  void Cine::setNombre(QString nombre){
-
+     Nombre = nombre;
 }
+
+// GET Y SET DE UBICACION
 
 QString Cine::getUbicacion(){
     return Ubicacion;
 }
 
-void Cine::setUbicacion(QString Ubicacion){
-
+void Cine::setUbicacion(QString ubicacion){
+    Ubicacion = ubicacion;
 }
-*/
+
 
 void Cine::agregarPelicula()
 {

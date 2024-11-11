@@ -17,3 +17,23 @@ Empleados::~Empleados()
 {
     delete ui;
 }
+
+// GET Y SET DE IDEMPLEADO
+
+int Empleados::getIDempleado(){
+    return idEmpleado;
+}
+
+void Empleados::setIDempleado(int idempleado){
+    idEmpleado = idempleado;
+}
+
+// GET Y SET DE PUESTO
+
+QString Empleados::getPuesto(){
+    return Puesto;
+}
+
+void Empleados::setPuesto(QString puesto){
+    Puesto = puesto;
+}

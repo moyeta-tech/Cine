@@ -15,21 +15,21 @@ public:
     explicit Empleados(QWidget *parent = nullptr);
     ~Empleados();
 
-    /*
-    Empleado(string nombre, string apellido, int dni, int edad, int telefono, int idempleado);
+
+    Empleado(QString nombre, QString apellido, int dni, int edad, int telefono, int idempleado);
     int getIDempleado();
     void setIDempleado(int idempleado);
-    string getPuesto();
-    void setPuesto(string puesto);
+    QString getPuesto();
+    void setPuesto(QString puesto);
 
-*/
+
 
 private:
     Ui::Empleados *ui;
-/*
+
     int idEmpleado;
-    string Puesto;
-*/
+    QString Puesto;
+
 
 };
 

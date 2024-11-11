@@ -1,4 +1,4 @@
-/*
+
 #ifndef PAGOS_H
 #define PAGOS_H
 
@@ -31,4 +31,4 @@ private:
 };
 
 #endif // PAGOS_H
-*/
+

@@ -2,27 +2,29 @@
 #define SALA_H
 
 #include <vector>
+#include "string"
+
+using namespace std;
 
 
 class sala {
 
 private:
-    int numero;
-    std::vector<bool> asientos;
+    int NumSala;
+    int Capacidad;
+
 public:
 
     //Constructor
 
-    sala(int num, int numAsientos);
+    sala(int numsala, int capacidad);
 
 
     //Metodos
-
-    int getNumero() const;
-    bool checkAsiento(int asiento) const;
-    void ocuparAsiento(int asiento);
-    void liberarAsiento(int asiento);
-    void mostrarEstado() const;
+    int getNumSala();
+    void setNumSala (int numsala);
+    int getCapacidad();
+    void setCapacidad (int capacidad);
 
 };
 

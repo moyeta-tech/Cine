@@ -1,17 +1,27 @@
-/*
 #include "Sala.h"
 
     // Constructor
-    sala::sala(int num, int numAsientos)
-    : numero(num), asientos(numAsientos, false) {
-}
+    sala::sala(int numsala, int capacidad) {
+    }
     // Métodos
-    int sala::getNumero() const {
-        return numero;
+
+    // GET Y SET DE NUMSALA
+
+    int sala::getNumSala() {
+        return NumSala;
     }
 
-    bool sala::checkAsiento(int asiento) const{
-
-
+    void sala::setNumSala(int numsala){
+        NumSala = numsala;
     }
-*/
+
+    // GET Y SET DE CAPACIDAD
+
+    int sala::getCapacidad(){
+        return Capacidad;
+    }
+
+    void sala::setCapacidad(int capacidad){
+        Capacidad = capacidad;
+    }
+

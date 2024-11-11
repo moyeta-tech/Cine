@@ -1,4 +1,4 @@
-/*
+
 #ifndef PRECIOS_H
 #define PRECIOS_H
 
@@ -26,10 +26,10 @@ public:
 
 private:
     Ui::precios *ui;
-    QString tipoEntrada;
+    QString TipoEntrada;
     float PrecioBase;
     float Descuento;
 };
 
 #endif // PRECIOS_H
-*/
+
