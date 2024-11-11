@@ -1,3 +1,4 @@
+
 #ifndef PAGOS_H
 #define PAGOS_H
 
@@ -14,6 +15,7 @@ class pagos : public QWidget
 public:
     explicit pagos(QString metodo, float monto, QString fecha, QWidget *parent = nullptr);
     ~pagos();
+
     QString getMetodo();
     void setMetodo(QString metodo);
     float getMonto();
@@ -29,3 +31,4 @@ private:
 };
 
 #endif // PAGOS_H
+

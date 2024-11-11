@@ -1,3 +1,4 @@
+
 #ifndef PRECIOS_H
 #define PRECIOS_H
 
@@ -22,11 +23,13 @@ public:
     void setDescuento(float descuento);
     float calcularPrecio();
 
+
 private:
     Ui::precios *ui;
-    QString tipoEntrada;
+    QString TipoEntrada;
     float PrecioBase;
     float Descuento;
 };
 
 #endif // PRECIOS_H
+

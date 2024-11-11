@@ -6,25 +6,172 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>508</width>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Imagen</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Imagen</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Precios</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>Horarios</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Imagen</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>Venta</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>508</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuCine">
+    <property name="title">
+     <string>Cine</string>
+    </property>
+    <addaction name="actionRegistro_cine"/>
+    <addaction name="actionImprimir"/>
+   </widget>
+   <widget class="QMenu" name="menuPersonal">
+    <property name="title">
+     <string>Personal</string>
+    </property>
+    <addaction name="actionRegistrar_personal"/>
+    <addaction name="actionVer_personal"/>
+   </widget>
+   <widget class="QMenu" name="menuClientes">
+    <property name="title">
+     <string>Clientes</string>
+    </property>
+    <addaction name="actionRegistrar_clientes"/>
+    <addaction name="actionVer_clientes"/>
+   </widget>
+   <widget class="QMenu" name="menuPelicular">
+    <property name="title">
+     <string>Peliculas</string>
+    </property>
+    <addaction name="actionRegistro_peliculas"/>
+    <addaction name="actionVer_peliculas"/>
+    <addaction name="actionImprimir_2"/>
+   </widget>
+   <addaction name="menuCine"/>
+   <addaction name="menuPersonal"/>
+   <addaction name="menuClientes"/>
+   <addaction name="menuPelicular"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionRegistro_cine">
+   <property name="text">
+    <string>Registro cine</string>
+   </property>
+  </action>
+  <action name="actionImprimir">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionRegistrar_personal">
+   <property name="text">
+    <string>Registrar personal</string>
+   </property>
+  </action>
+  <action name="actionVer_personal">
+   <property name="text">
+    <string>Ver personal</string>
+   </property>
+  </action>
+  <action name="actionRegistrar_clientes">
+   <property name="text">
+    <string>Registrar clientes</string>
+   </property>
+  </action>
+  <action name="actionVer_clientes">
+   <property name="text">
+    <string>Ver clientes</string>
+   </property>
+  </action>
+  <action name="actionRegistro_peliculas">
+   <property name="text">
+    <string>Registro peliculas</string>
+   </property>
+  </action>
+  <action name="actionVer_peliculas">
+   <property name="text">
+    <string>Ver peliculas</string>
+   </property>
+  </action>
+  <action name="actionImprimir_2">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionGenerar_ticket">
+   <property name="text">
+    <string>Generar ticket</string>
+   </property>
+  </action>
+  <action name="actionImprimir_3">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionGenerar_venta">
+   <property name="text">
+    <string>Generar venta</string>
+   </property>
+  </action>
+  <action name="actionImprimir_4">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

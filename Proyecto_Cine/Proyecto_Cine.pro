@@ -12,8 +12,8 @@ CONFIG += c++17
 SOURCES += \
     asientos.cpp \
     cine.cpp \
-    cliente.cpp \
-    empleado.cpp \
+    clientes.cpp \
+    empleados.cpp \
     horarios.cpp \
     main.cpp \
     pagos.cpp \
@@ -26,8 +26,8 @@ SOURCES += \
 HEADERS += \
     asientos.h \
     cine.h \
-    cliente.h \
-    empleado.h \
+    clientes.h \
+    empleados.h \
     horarios.h \
     pagos.h \
     peliculas.h \
@@ -39,6 +39,8 @@ HEADERS += \
 FORMS += \
     asientos.ui \
     cine.ui \
+    clientes.ui \
+    empleados.ui \
     horarios.ui \
     pagos.ui \
     peliculas.ui \
