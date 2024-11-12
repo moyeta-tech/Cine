@@ -15,6 +15,7 @@ SOURCES += \
     clientes.cpp \
     empleados.cpp \
     horarios.cpp \
+    iniciosesion.cpp \
     main.cpp \
     pago.cpp \
     peliculas.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     clientes.h \
     empleados.h \
     horarios.h \
+    iniciosesion.h \
     pago.h \
     peliculas.h \
     persona.h \
@@ -42,6 +44,7 @@ FORMS += \
     clientes.ui \
     empleados.ui \
     horarios.ui \
+    iniciosesion.ui \
     pago.ui \
     peliculas.ui \
     precios.ui \
