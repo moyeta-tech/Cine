@@ -1,9 +1,15 @@
 #include "cine.h"
 #include "ui_cine.h"
 
+#include <QDebug>
+
 #include "peliculas.h"
 #include "clientes.h"
 #include "empleados.h"
+#include "precios.h"
+#include "horarios.h"
+#include "venta.h"
+#include "pago.h"
 
 
 Cine::Cine(QWidget *parent)
@@ -18,13 +24,15 @@ Cine::Cine(QWidget *parent)
     //Titulo de la ventana
     this->setWindowTitle("Inicio");
 
-    //Boton de prueba para agregar pelicula
+    //Conectamos el menu a los slots correspondientes
     connect(ui->actionRegistro_peliculas, &QAction::triggered, this, &Cine::agregarPelicula);
-
     connect (ui->actionRegistrar_clientes, &QAction::triggered, this, &Cine::agregarClientes);
-
-
     connect (ui->actionRegistrar_personal, &QAction::triggered, this, &Cine::agregarEmpleados);
+
+    //Conetamos los botones a los slots correspondientes
+    connect(ui->Boton_horario, &QPushButton::clicked, this, &Cine::mostrarHorarios);
+    connect(ui->Boton_precio, &QPushButton::clicked, this, &Cine::mostrarPrecios);
+    connect(ui->Boton_venta, &QPushButton::clicked, this, &Cine::ventaBoletos);
 
 }
 
@@ -73,3 +81,46 @@ void Cine::agregarEmpleados()
     Empleados dialog(this);
     dialog.exec();
 }
+
+
+void Cine::mostrarPrecios()
+{
+    Precios dialog(" ", 0.0f, 0.0f);
+    dialog.exec();
+}
+
+void Cine::mostrarHorarios()
+{
+    Horarios dialog(" ", " ");
+    dialog.exec();
+
+}
+
+
+void Cine::ventaBoletos()
+{
+    // Asignar valores correctos a las variables
+    QString fecha = "2024-11-11";
+    int cantAsientos = 5;
+
+    // Crear el cliente, horario y pago con los parámetros necesarios
+    Clientes *cliente = new Clientes();  // Cliente se crea con su constructor sin parámetros
+    QString hora = "12:00";
+    QString dia = "Lunes";
+    Horarios *horario = new Horarios(hora, dia, this);  // Ahora pasamos los parámetros requeridos
+
+    QString metodo = "Tarjeta";
+    float monto = 100.0;
+    QString fechaPago = "2024-11-11";
+    Pago *pago = new Pago(metodo, monto, fechaPago, this);  // Se pasan los parámetros requeridos
+
+    // Crear la ventana de Venta
+    Venta *ventaDialog = new Venta(fecha, cantAsientos, cliente, horario, pago, this);
+
+    // Mostrar el diálogo
+    ventaDialog->exec();
+}
+
+
+
+

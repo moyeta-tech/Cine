@@ -2,7 +2,7 @@
 #include "ui_horarios.h"
 
 Horarios::Horarios(QString hora, QString dia, QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::Horarios)
 {
     ui->setupUi(this);
@@ -12,6 +12,7 @@ Horarios::~Horarios()
 {
     delete ui;
 }
+
 // GET Y SET DE HORA
 QString Horarios::getHora(){
     return Hora;

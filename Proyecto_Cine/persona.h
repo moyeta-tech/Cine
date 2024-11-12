@@ -1,7 +1,8 @@
 #ifndef PERSONA_H
 #define PERSONA_H
 
-#include "string"
+#include <string>
+
 using namespace std;
 
 class Persona
@@ -11,9 +12,12 @@ class Persona
     int Dni;
     int Edad;
     int Telefono;
+
 public:
     Persona(); // CONSTRUCTOR POR DEFECTO
+
     Persona(string nombre, string apellido, int dni, int edad, int telefono); // CONSTRUCTOR QUE USA PARAMETROS
+
     string getNombre();
     void setNombre(string nombre);
     string getApellido();

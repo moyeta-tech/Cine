@@ -1,50 +1,57 @@
-
 #include "precios.h"
 #include "ui_precios.h"
 
-precios::precios(QString tipoentrada, float preciobase, float descuento, QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::precios)
+Precios::Precios(QString tipoentrada, float preciobase, float descuento, QDialog *parent)
+    : QDialog(parent)
+    , ui(new Ui::Precios),
+    TipoEntrada(tipoentrada), PrecioBase(preciobase), Descuento(descuento)
 {
     ui->setupUi(this);
 }
 
-precios::~precios()
+
+Precios::~Precios()
 {
     delete ui;
 }
 
 // GET Y SET DE TIPOENTRADA
-
-QString precios::getTipoEntrada(){
-    return TipoEntrada;
-}
-
-void precios::setTipoEntrada(QString tipoentrada){
+void Precios::setTipoEntrada(QString tipoentrada)
+{
     TipoEntrada = tipoentrada;
 }
 
-// GET Y SET DE PRECIOBASE
-
-float precios::getprecioBase(){
-    return PrecioBase;
+QString Precios::getTipoEntrada()
+{
+    return TipoEntrada;
 }
 
-void precios::setprecioBase(float preciobase){
+
+// GET Y SET DE PRECIOBASE
+void Precios::setprecioBase(float preciobase)
+{
     PrecioBase = preciobase;
 }
 
-// GET Y SET DE DESCUENTO
+float Precios::getprecioBase()
+{
+    return PrecioBase;
+}
 
-float precios::getDescuento(){
+// GET Y SET DE DESCUENTO
+void Precios::setDescuento(float descuento)
+{
+    Descuento = descuento;
+}
+
+float Precios::getDescuento()
+{
     return Descuento;
 }
 
-void precios::setDescuento(float descuento){
-    Descuento = descuento;
-}
 // CALCULAR EL PRECIO FINAL
-float precios::calcularPrecio(){
+float Precios::calcularPrecio()
+{
     float res = PrecioBase - Descuento;
     return res;
 }

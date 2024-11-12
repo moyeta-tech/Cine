@@ -34,12 +34,9 @@ private slots:
     void agregarEmpleados();
 
     //Slots para los botones
-/*
     void mostrarPrecios();
     void mostrarHorarios();
-
-    void venderBoletos();
-*/
+    void ventaBoletos();
 
 private:
     Ui::Cine *ui;

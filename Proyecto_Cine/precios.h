@@ -1,20 +1,21 @@
-
 #ifndef PRECIOS_H
 #define PRECIOS_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
-class precios;
+class Precios;
 }
 
-class precios : public QWidget
+class Precios : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit precios(QString tipoentrada, float preciobase, float descuento, QWidget *parent = nullptr);
-    ~precios();
+    explicit Precios(QString tipoentrada, float preciobase, float descuento, QDialog *parent = nullptr);
+
+    ~Precios();
+
     QString getTipoEntrada();
     void setTipoEntrada(QString tipoentrada);
     float getprecioBase();
@@ -25,11 +26,11 @@ public:
 
 
 private:
-    Ui::precios *ui;
+    Ui::Precios *ui;
+
     QString TipoEntrada;
     float PrecioBase;
     float Descuento;
 };
 
 #endif // PRECIOS_H
-

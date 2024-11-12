@@ -1,20 +1,22 @@
 #ifndef ASIENTOS_H
 #define ASIENTOS_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
-class asientos;
+class Asientos;
 }
 
-class asientos : public QWidget
+class Asientos : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit asientos(QWidget *parent = nullptr);
-    asientos(int numero, bool estado);
-    ~asientos();
+    explicit Asientos(QWidget *parent = nullptr);
+    Asientos(int numero, bool estado);
+
+    ~Asientos();
+
     int getNumero();
     void setNumero(int numero);
     QString getFila();
@@ -22,11 +24,16 @@ public:
     bool isOcupado();
     void setOcupado(bool ocupado);
 
+private slots:
+    void continuarPago();
+
 private:
-    Ui::asientos *ui;
+    Ui::Asientos *ui;
+
     int Numero;
     bool Ocupado;
     QString Fila;
+
 };
 
 #endif // ASIENTOS_H

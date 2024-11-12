@@ -16,12 +16,12 @@ SOURCES += \
     empleados.cpp \
     horarios.cpp \
     main.cpp \
-    pagos.cpp \
+    pago.cpp \
     peliculas.cpp \
     persona.cpp \
     precios.cpp \
-    reserva.cpp \
-    sala.cpp
+    sala.cpp \
+    venta.cpp
 
 HEADERS += \
     asientos.h \
@@ -29,12 +29,12 @@ HEADERS += \
     clientes.h \
     empleados.h \
     horarios.h \
-    pagos.h \
+    pago.h \
     peliculas.h \
     persona.h \
     precios.h \
-    reserva.h \
-    sala.h
+    sala.h \
+    venta.h
 
 FORMS += \
     asientos.ui \
@@ -42,10 +42,10 @@ FORMS += \
     clientes.ui \
     empleados.ui \
     horarios.ui \
-    pagos.ui \
+    pago.ui \
     peliculas.ui \
     precios.ui \
-    reserva.ui
+    venta.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
