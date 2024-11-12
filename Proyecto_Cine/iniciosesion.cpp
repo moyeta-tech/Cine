@@ -28,8 +28,8 @@ bool InicioSesion::validarCredenciales(const QString &usuario, const QString &co
 
 void InicioSesion::iniciarSesion()
 {
-    QString usuario = ui->usuarioLineEdit->text();
-    QString contraseña = ui->contraseñaLineEdit->text();
+    QString usuario = ui->lineEdit_id->text();
+    QString contraseña = ui->lineEdit_contrasena->text();
 
     if (usuario.isEmpty() || contraseña.isEmpty()) {
         QMessageBox::warning(this, "Campos Vacíos", "Por favor, ingresa un usuario y una contraseña.");

@@ -36,6 +36,8 @@ private slots:
     void seleccionAsientos();
 
 
+    void on_Boton_continuar_clicked();
+
 private:
     Ui::Venta *ui;
 

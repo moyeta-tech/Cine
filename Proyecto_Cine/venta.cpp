@@ -15,6 +15,7 @@ Venta::Venta(QString fecha, int cantasientos, Clientes *cliente, Horarios *horar
 
     //Boton para seleccionar los asientos
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::seleccionAsientos);
+    connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::accept);
 }
 
 Venta::~Venta()
@@ -87,3 +88,12 @@ void Venta::seleccionAsientos()
     Asientos dialog(this);
     dialog.exec();
 }
+
+// AL PRESIONAR BOTON CONTINUAR, TERMINAR LA OPERACION DE VENTA Y MOSTRAR LA INFORMACION DEL CLIENTE HACIA EL MISMO, SE CERRARÁ
+
+void Venta::on_Boton_continuar_clicked()
+{
+    Venta *finalizar = new Venta(Fecha, cantAsientos, cliente, horario, pago, this);
+    finalizar->accept();
+}
+

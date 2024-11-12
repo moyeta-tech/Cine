@@ -6,6 +6,9 @@ Pago::Pago(QString metodo, float monto, QString fecha, QWidget *parent)
     , ui(new Ui::Pago)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Informacion de reserva");
+
+    connect(ui->Boton_finalizar, &QPushButton::clicked, this, &QDialog::accept);
 }
 
 Pago::~Pago()
@@ -44,5 +47,9 @@ void Pago::setFecha(QString fecha){
 }
 
 
-
+void Pago::on_Boton_finalizar_clicked()
+{
+    Pago *finalizar = new Pago(Metodo, Monto, Fecha, this);
+    finalizar->accept();
+}
 
