@@ -24,6 +24,8 @@ Cine::Cine(QWidget *parent)
     //Titulo de la ventana
     this->setWindowTitle("Inicio");
 
+    initstylesheet();
+
     //Conectamos el menu a los slots correspondientes
     connect(ui->actionRegistro_peliculas, &QAction::triggered, this, &Cine::agregarPelicula);
     connect (ui->actionRegistrar_clientes, &QAction::triggered, this, &Cine::agregarClientes);
@@ -41,6 +43,17 @@ Cine::~Cine()
     qDebug() << "Destruyendo Cine..";
     delete ui;
 }
+
+// HOJA DE ESTILOS
+
+void Cine::initstylesheet(){
+    QFile style(":/src/stylesheet/stylesheet.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
+}
+
 
 // GET Y SET DE NOMBRE
 
