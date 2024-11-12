@@ -1,8 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>src/stylesheet/stylesheet.css</file>
+        <file>src/stylesheet/stylesheet-inicio.css</file>
     </qresource>
     <qresource prefix="/images">
         <file>src/icons/image cine.ico</file>
+        <file>src/icons/changepass.png</file>
+        <file>src/icons/login.png</file>
+        <file>src/icons/wrongpass.png</file>
     </qresource>
 </RCC>

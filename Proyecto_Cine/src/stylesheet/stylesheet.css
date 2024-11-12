@@ -1,126 +1,50 @@
-/*-----QWidget-----*/
-QWidget
-{
-	background-color: #6692d3;
-	color: #ffffff;
-	border-color: #181c21;
-
+/* Fondo principal de la ventana */
+QMainWindow {
+    background-color: #E9F1F7;
 }
 
-
-/*-----QMenuBar-----*/
-QMenuBar
-{
-	background-color: #6692fc;
-	color: #fff;
-	border-color: #181c21;
-
+/* Título y etiquetas */
+QLabel#tituloLabel {
+    color: #623CEA;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-
-QMenuBar::item
-{
-    background-color: transparent;
-
+/* Botones primarios */
+QPushButton {
+    background-color: #545E75;
+    color: #E7DFC6;
+    border: 2px solid #304D6D;
+    border-radius: 5px;
+    padding: 8px;
 }
 
-
-QMenuBar::item:selected
-{
-    background-color: #389bff;
-
+QPushButton:hover {
+    background-color: #63ADF2;
+    color: #304D6D;
 }
 
-
-QMenuBar::item:pressed
-{
-    background-color: #3a76b4;
-    border: 1px solid #5ab8a0;
-    margin-bottom: -1px;
-    padding-bottom: 1px;
-
+QPushButton:pressed {
+    background-color: #A62639;
+    color: #E9F1F7;
 }
 
-
-/*-----QMenu-----*/
-QMenu
-{
-    background-color: #e1f4ff;
-    border: 1px solid;
-    color: #000;
-
+/* Campos de texto */
+QLineEdit {
+    background-color: #A7CCED;
+    color: #304D6D;
+    border: 1px solid #82A0BC;
+    border-radius: 4px;
+    padding: 4px;
 }
 
-
-QMenu::separator
-{
-    height: 1px;
-    background-color: #000;
-    color: #ffffff;
-    padding-left: 4px;
-    margin-left: 10px;
-    margin-right: 5px;
-
+/* Mensajes de advertencia */
+QMessageBox {
+    background-color: #F4E409;
+    color: #511C29;
 }
 
-
-QMenu::item
-{
-    min-width : 150px;
-    padding: 3px 20px 3px 20px;
-
-}
-
-
-QMenu::item:selected
-{
-    background-color: #3a76b4;
-    color: #ffffff;
-
-}
-
-
-QMenu::item:disabled
-{
-    color: #262626;
-
-}
-
-
-/*-----QPushButton-----*/
-QPushButton
-{
-	background-color: #e1f4ff;
-	color: #000000;
-	border-style: solid;
-	border-color: #181c21;
-	font-weight: bold;
-	font-size: 12px;
-	font-family: Arial;
-
-}
-
-
-QPushButton::hover
-{
-	background-color: #f6fbff;
-
-}
-
-
-QPushButton::pressed
-{
-	background-color: #cdcdcd;
-
-}
-
-
-/*-----QLineEdit-----*/
-QLineEdit
-{
-	background-color: #12160c;
-	color: #ffffff;
-	border: 1px solid #6692fc;
-	padding: 3px;
-
+QMessageBox QLabel {
+    color: #710000;
+    font-weight: bold;
 }

@@ -10,7 +10,6 @@
 #include "horarios.h"
 #include "venta.h"
 #include "pago.h"
-#include "iniciosesion.h"
 
 
 Cine::Cine(QWidget *parent)

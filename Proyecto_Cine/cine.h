@@ -2,13 +2,13 @@
 #define CINE_H
 
 #include <QMainWindow>
-#include "array"
-#include "QDebug"
+#include <array>
+#include <QDebug>
 
 #include <QMenuBar>
 #include <QAction>
 #include <QMessageBox>
-#include "QFile"
+#include <QFile>
 
 namespace Ui {
 class Cine;
