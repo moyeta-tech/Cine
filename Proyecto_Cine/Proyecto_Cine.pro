@@ -72,3 +72,6 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
  f839cb2e0aef11a33ebe0426f67c5e18f022f8b2:Proyecto_Cine/Proyecto_Cine.pro
+
+RESOURCES += \
+    Recursos.qrc

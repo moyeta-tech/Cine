@@ -8,6 +8,7 @@
 #include <QMenuBar>
 #include <QAction>
 #include <QMessageBox>
+#include "QFile"
 
 namespace Ui {
 class Cine;
@@ -26,6 +27,7 @@ public:
     void setNombre(QString nombre);
     QString getUbicacion();
     void setUbicacion(QString ubicacion);
+    void initstylesheet();
 
 private slots:
     //Slots para los elementos de QMenuBar
