@@ -113,26 +113,38 @@ void Cine::mostrarHorarios()
 
 void Cine::ventaBoletos()
 {
+    InicioSesion inicio(this);
+
     // Asignar valores correctos a las variables
     QString fecha = "2024-11-11";
     int cantAsientos = 5;
 
     // Crear el cliente, horario y pago con los parámetros necesarios
-    Clientes *cliente = new Clientes();  // Cliente se crea con su constructor sin parámetros
+    Clientes cliente;  // Cliente se crea con su constructor sin parámetros
     QString hora = "12:00";
     QString dia = "Lunes";
-    Horarios *horario = new Horarios(hora, dia, this);  // Ahora pasamos los parámetros requeridos
+    Horarios horario(hora, dia, this);  // Ahora pasamos los parámetros requeridos
 
     QString metodo = "Tarjeta";
     float monto = 100.0;
     QString fechaPago = "2024-11-11";
-    Pago *pago = new Pago(metodo, monto, fechaPago, this);  // Se pasan los parámetros requeridos
+    Pago pago(metodo, monto, fechaPago, this);  // Se pasan los parámetros requeridos
 
     // Crear la ventana de Venta
-    Venta *ventaDialog = new Venta(fecha, cantAsientos, cliente, horario, pago, this);
+    Venta ventaDialog(fecha, cantAsientos, &cliente, &horario, &pago, this);
 
-    // Mostrar el diálogo
-    ventaDialog->exec();
+    if(ui->Boton_venta){
+
+        if(inicio.exec()){
+            // Mostrar el diálogo
+            ventaDialog.exec();
+        } else {
+            QMessageBox::warning(this, "Error", "Inicie sesión");
+        }
+
+    }
+
+
 }
 
 
