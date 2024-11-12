@@ -112,7 +112,6 @@ void Cine::mostrarHorarios()
 
 void Cine::ventaBoletos()
 {
-    InicioSesion inicio(this);
 
     // Asignar valores correctos a las variables
     QString fecha = "2024-11-11";
@@ -132,16 +131,8 @@ void Cine::ventaBoletos()
     // Crear la ventana de Venta
     Venta ventaDialog(fecha, cantAsientos, &cliente, &horario, &pago, this);
 
-    if(ui->Boton_venta){
-
-        if(inicio.exec()){
-            // Mostrar el diálogo
-            ventaDialog.exec();
-        } else {
-            QMessageBox::warning(this, "Error", "Inicie sesión");
-        }
-
-    }
+    // Mostrar el diálogo
+    ventaDialog.exec();
 
 
 }
