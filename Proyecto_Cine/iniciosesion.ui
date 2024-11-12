@@ -35,6 +35,9 @@
        <property name="text">
         <string>contraseña</string>
        </property>
+       <property name="echoMode">
+        <enum>QLineEdit::EchoMode::Password</enum>
+       </property>
       </widget>
      </item>
      <item>

@@ -2,6 +2,7 @@
 #define INICIOSESION_H
 
 #include <QDialog>
+#include <QFile>
 
 namespace Ui {
 class InicioSesion;
@@ -18,11 +19,13 @@ public:
 private slots:
     void iniciarSesion();
     void salirVentana();
+    void recuperarPassword();
+    void initstylesheet();
 
 private:
     Ui::InicioSesion *ui;
 
-    bool validarCredenciales(const QString &usuario, const QString &contraseña);
+    bool validarCredenciales(const QString &usuario, const QString &password);
 };
 
 #endif // INICIOSESION_H

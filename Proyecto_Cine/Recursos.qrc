@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>src/stylesheet/stylesheet.css</file>
+        <file>src/stylesheet/stylesheet-inicio.css</file>
     </qresource>
     <qresource prefix="/images">
         <file>src/icons/image cine.ico</file>
