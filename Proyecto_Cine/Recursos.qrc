@@ -5,5 +5,8 @@
     </qresource>
     <qresource prefix="/images">
         <file>src/icons/image cine.ico</file>
+        <file>src/icons/changepass.png</file>
+        <file>src/icons/login.png</file>
+        <file>src/icons/wrongpass.png</file>
     </qresource>
 </RCC>

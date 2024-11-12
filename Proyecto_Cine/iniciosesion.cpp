@@ -3,6 +3,7 @@
 #include "ui_iniciosesion.h"
 
 #include <QMessageBox>
+#include <QIcon>
 
 InicioSesion::InicioSesion(QWidget *parent)
     : QDialog(parent)
@@ -17,6 +18,9 @@ InicioSesion::InicioSesion(QWidget *parent)
     connect(ui->Boton_iniciar, &QPushButton::clicked, this, &InicioSesion::iniciarSesion);
     connect(ui->Boton_salir, &QPushButton::clicked, this, &InicioSesion::salirVentana);
     connect(ui->Boton_olvide, &QPushButton::clicked, this, &InicioSesion::recuperarPassword);
+
+    ui->label->setPixmap(QPixmap(":/images/src/icons/login.png").scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 }
 
 InicioSesion::~InicioSesion()
@@ -52,15 +56,16 @@ void InicioSesion::iniciarSesion()
     }
     else
     {
+        ui->label->setPixmap(QPixmap(":/images/src/icons/wrongpass.png").scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         QMessageBox::warning(this, "Credenciales Incorrectas", "El usuario o la contraseña son incorrectos.");
     }
 }
 
 void InicioSesion::salirVentana()
 {
-    // Si se hace clic en "Salir", cerramos la aplicación
-    QApplication::quit();
+    this->close();  // Cierra solo la ventana actual (InicioSesion)
 }
+
 
 void InicioSesion::recuperarPassword()
 {

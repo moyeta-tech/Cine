@@ -2,6 +2,7 @@
 #include "ui_recuperarpassw.h"
 
 #include <QMessageBox>
+#include <QIcon>
 
 RecuperarPassw::RecuperarPassw(QWidget *parent)
     : QDialog(parent)
@@ -15,6 +16,9 @@ RecuperarPassw::RecuperarPassw(QWidget *parent)
 
     connect(ui->Boton_rec, &QPushButton::clicked, this, &RecuperarPassw::recuperarPassword);
     connect(ui->Boton_cancelar, &QPushButton::clicked, this, &RecuperarPassw::cancelarRecuperacion);
+
+    ui->label->setPixmap(QPixmap(":/images/src/icons/changepass.png").scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 }
 
 RecuperarPassw::~RecuperarPassw()
