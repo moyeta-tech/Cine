@@ -46,12 +46,12 @@ private slots:
     void mostrarHorarios();
     void ventaBoletos();
 
-<<<<<<< HEAD
+
     // SLOT PARA AGREGAR UNA NUEVA PELICULA AL VECTOR
     void procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis);
-=======
+
     void initstylesheet();
->>>>>>> 724aafccd9b8b8dfb3091b12d66cdb715f57cf92
+
 
 private:
     Ui::Cine *ui;

@@ -2,11 +2,9 @@
 #define PELICULAS_H
 
 #include <QDialog>
-<<<<<<< HEAD
 #include "vector"
-=======
 #include <QFile>
->>>>>>> 724aafccd9b8b8dfb3091b12d66cdb715f57cf92
+
 
 namespace Ui {
 class Peliculas;
@@ -29,18 +27,16 @@ public:
     void setClasificacion(QString clasificacion);
     QString getSinopsis();
     void setSinopsis(QString sinopsis);
+    void initstylesheet();
 
 private slots:
-<<<<<<< HEAD
+
     void on_pushButton_2_clicked();
 
 signals:
     void peliAgregada(QString titulo, int duracion, QString genero, QString clasificacion,
                       QString sinopsis);
-=======
-    void initstylesheet();
 
->>>>>>> 724aafccd9b8b8dfb3091b12d66cdb715f57cf92
 private:
     Ui::Peliculas *ui;
     QString Titulo;
