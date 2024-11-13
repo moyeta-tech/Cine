@@ -9,6 +9,7 @@ Clientes::Clientes(QWidget *parent)
 
     this->setWindowTitle("Formulario de clientes");
 
+    initstylesheet();
 }
 
 Clientes::~Clientes()
@@ -41,3 +42,12 @@ void Clientes::mostrarHistorial(){
     cout << "Historial: " << Historial << endl;
 }
 */
+
+void Clientes::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
+}

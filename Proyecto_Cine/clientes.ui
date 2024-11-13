@@ -84,7 +84,7 @@
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="label_historial">
        <property name="text">
         <string/>
        </property>

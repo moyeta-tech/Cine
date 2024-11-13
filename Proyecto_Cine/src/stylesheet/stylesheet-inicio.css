@@ -40,7 +40,7 @@ QLineEdit {
 
 /* Mensajes de advertencia (QMessageBox) */
 QMessageBox {
-    background-color: #F4E409;  /* Fondo de advertencia */
+    background-color: #E9F1F7;  /* Fondo de advertencia */
     color: #511C29;             /* Texto */
 }
 
@@ -49,7 +49,3 @@ QMessageBox QLabel {
     font-weight: bold;
 }
 
-/* Icono de la ventana de inicio de sesión */
-QDialog#InicioSesion {
-    icon: url(":/images/src/icons/image cine.ico"); /* Icono de la ventana */
-}

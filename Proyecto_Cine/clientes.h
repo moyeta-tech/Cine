@@ -1,10 +1,9 @@
 #ifndef CLIENTES_H
 #define CLIENTES_H
 
-#include "iostream"
 #include <QDialog>
-#include "vector"
-
+#include <vector>
+#include <QFile>
 
 using namespace std;
 
@@ -28,6 +27,8 @@ public:
  //   void agregarHistorial(reserva *Reserva);
     void mostrarHistorial();
 
+private slots:
+    void initstylesheet();
 
 private:
     Ui::Clientes *ui;

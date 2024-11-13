@@ -27,7 +27,6 @@ public:
     void setNombre(QString nombre);
     QString getUbicacion();
     void setUbicacion(QString ubicacion);
-    void initstylesheet();
 
 private slots:
     //Slots para los elementos de QMenuBar
@@ -39,6 +38,8 @@ private slots:
     void mostrarPrecios();
     void mostrarHorarios();
     void ventaBoletos();
+
+    void initstylesheet();
 
 private:
     Ui::Cine *ui;

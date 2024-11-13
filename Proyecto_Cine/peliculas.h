@@ -2,6 +2,7 @@
 #define PELICULAS_H
 
 #include <QDialog>
+#include <QFile>
 
 namespace Ui {
 class Peliculas;
@@ -24,6 +25,9 @@ public:
     void setClasificacion(QString clasificacion);
     QString getSinopsis();
     void setSinopsis(QString sinopsis);
+
+private slots:
+    void initstylesheet();
 
 private:
     Ui::Peliculas *ui;

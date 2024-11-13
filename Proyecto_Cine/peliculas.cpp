@@ -9,6 +9,8 @@ Peliculas::Peliculas(QString titulo, int duracion, QString genero, QString clasi
 
     //Titulo de la ventana
     this->setWindowTitle("Peliculas");
+
+    initstylesheet();
 }
 
 Peliculas::~Peliculas()
@@ -66,4 +68,12 @@ void Peliculas::setSinopsis(QString sinopsis){
     Sinopsis = sinopsis;
 }
 
+void Peliculas::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
+}
 
