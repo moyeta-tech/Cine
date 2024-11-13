@@ -105,6 +105,27 @@ void Peliculas::on_pushButton_2_clicked()
    emit peliAgregada(pelicula->getTitulo(), pelicula->getDuracion(), pelicula->getGenero(),
                       pelicula->getClasificacion(), pelicula->getSinopsis());
 
-    accept(); // SE CIERRA EL DIALOGO
+     // SE CIERRA EL DIALOGO
+}
+
+
+void Peliculas::on_pushButton_clicked()
+{
+    QString valor = ui->lineEdit->text();
+
+    bool found = false;
+    for(Peliculas *pelicula : vectorPelicula){
+        if(pelicula->getTitulo() == valor){
+            found = true;
+            break;
+        }
+    }
+
+
+    if(found){
+        QMessageBox::information(this, "Aviso", "La Pelicula se encuentra cargada");
+    } else {
+         QMessageBox::warning(this, "Advertencia", "Pelicula no encontrada");
+    }
 }
 

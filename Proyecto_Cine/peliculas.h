@@ -4,6 +4,8 @@
 #include <QDialog>
 #include "vector"
 #include <QFile>
+#include "algorithm"
+#include "QMessageBox"
 
 
 namespace Ui {
@@ -32,6 +34,8 @@ public:
 private slots:
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
 
 signals:
     void peliAgregada(QString titulo, int duracion, QString genero, QString clasificacion,
