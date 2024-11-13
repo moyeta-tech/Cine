@@ -11,6 +11,7 @@ RecuperarPassw::RecuperarPassw(QWidget *parent)
     ui->setupUi(this);
 
     this->setWindowTitle("Recuperar contraseña");
+    setWindowIcon(QIcon(":/images/src/icons/image cine.ico"));
 
     initstylesheet();
 

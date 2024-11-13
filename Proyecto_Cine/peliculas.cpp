@@ -10,6 +10,8 @@ Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent
 
     //Titulo de la ventana
     this->setWindowTitle("Peliculas");
+
+    initstylesheet();
 }
 
 
@@ -68,6 +70,14 @@ void Peliculas::setSinopsis(QString sinopsis){
     Sinopsis = sinopsis;
 }
 
+void Peliculas::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
+}
 
 
 void Peliculas::on_pushButton_2_clicked()

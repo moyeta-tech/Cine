@@ -2,11 +2,15 @@
     <qresource prefix="/">
         <file>src/stylesheet/stylesheet.css</file>
         <file>src/stylesheet/stylesheet-inicio.css</file>
+        <file>src/stylesheet/stylesheet-ventanas.css</file>
     </qresource>
     <qresource prefix="/images">
         <file>src/icons/image cine.ico</file>
         <file>src/icons/changepass.png</file>
         <file>src/icons/login.png</file>
         <file>src/icons/wrongpass.png</file>
+        <file>src/icons/billete.png</file>
+        <file>src/icons/boleto.png</file>
+        <file>src/icons/cartel.png</file>
     </qresource>
 </RCC>

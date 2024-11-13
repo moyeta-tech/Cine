@@ -35,6 +35,11 @@ Cine::Cine(QWidget *parent)
     connect(ui->Boton_precio, &QPushButton::clicked, this, &Cine::mostrarPrecios);
     connect(ui->Boton_venta, &QPushButton::clicked, this, &Cine::ventaBoletos);
 
+    //Establecemos los iconos
+    ui->label->setPixmap(QPixmap(":/images/src/icons/cartel.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->label_2->setPixmap(QPixmap(":/images/src/icons/billete.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->label_3->setPixmap(QPixmap(":/images/src/icons/boleto.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 }
 
 Cine::~Cine()
@@ -49,7 +54,8 @@ Cine::~Cine()
 
 // HOJA DE ESTILOS
 
-void Cine::initstylesheet(){
+void Cine::initstylesheet()
+{
     QFile style(":/src/stylesheet/stylesheet.css");
     bool styleOK = style.open(QFile::ReadOnly);
     qDebug() << "Apertura de archivos: " <<styleOK;
