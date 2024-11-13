@@ -8,8 +8,10 @@ Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent
 {
     ui->setupUi(this);
 
-    //Titulo de la ventana
+    // Titulo de la ventana
     this->setWindowTitle("Peliculas");
+    // SELECCIONAR MAS DE 99 EN EL SPINBOX
+    ui->spinBox->setMaximum(200);
 
     initstylesheet();
 }
@@ -79,7 +81,7 @@ void Peliculas::initstylesheet()
     this->setStyleSheet(stringEstilo);
 }
 
-
+// BOTON QUE AGREGA LA PELICULA AL VECTOR
 void Peliculas::on_pushButton_2_clicked()
 {
     Peliculas *pelicula = new Peliculas(vectorPelicula, this);
@@ -105,10 +107,9 @@ void Peliculas::on_pushButton_2_clicked()
    emit peliAgregada(pelicula->getTitulo(), pelicula->getDuracion(), pelicula->getGenero(),
                       pelicula->getClasificacion(), pelicula->getSinopsis());
 
-     // SE CIERRA EL DIALOGO
 }
 
-
+    // BOTON PARA BUSCAR PELICULA
 void Peliculas::on_pushButton_clicked()
 {
     QString valor = ui->lineEdit->text();
@@ -121,11 +122,31 @@ void Peliculas::on_pushButton_clicked()
         }
     }
 
-
     if(found){
         QMessageBox::information(this, "Aviso", "La Pelicula se encuentra cargada");
     } else {
          QMessageBox::warning(this, "Advertencia", "Pelicula no encontrada");
     }
+}
+
+// BOTON QUE ELIMINA LA PELICULA
+void Peliculas::on_pushButton_4_clicked()
+{
+    QString nombrePeli = ui->lineEdit->text();
+
+    bool encontrado = false;
+    for(auto it = vectorPelicula.begin(); it != vectorPelicula.end(); it++){
+        if((*it)->getTitulo() == nombrePeli){ // SE UTILIZA (*it) PORQUE VectorPelicula ES UN PUNTERO A Peliculas
+            vectorPelicula.erase(it);
+            QMessageBox::information(this, "Aviso", "Se ha eliminado la pelicula");
+            encontrado = true;
+            break;
+        }
+    }
+
+    if(!encontrado){
+        QMessageBox::warning(this, "Error", "No se ha eliminado la pelicula o no se encuentra en el sistema");
+    }
+
 }
 

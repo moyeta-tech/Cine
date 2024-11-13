@@ -37,6 +37,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_4_clicked();
+
 signals:
     void peliAgregada(QString titulo, int duracion, QString genero, QString clasificacion,
                       QString sinopsis);
