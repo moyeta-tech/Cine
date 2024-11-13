@@ -27,6 +27,8 @@ public:
 private slots:
     void continuarPago();
 
+    void on_Boton_continuar_clicked();
+
 private:
     Ui::Asientos *ui;
 

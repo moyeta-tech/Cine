@@ -6,6 +6,7 @@ Horarios::Horarios(QString hora, QString dia, QWidget *parent)
     , ui(new Ui::Horarios)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Horarios");
 }
 
 Horarios::~Horarios()

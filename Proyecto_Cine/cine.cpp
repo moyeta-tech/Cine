@@ -3,7 +3,6 @@
 
 #include <QDebug>
 
-#include "peliculas.h"
 #include "clientes.h"
 #include "empleados.h"
 #include "precios.h"
@@ -36,17 +35,27 @@ Cine::Cine(QWidget *parent)
     connect(ui->Boton_precio, &QPushButton::clicked, this, &Cine::mostrarPrecios);
     connect(ui->Boton_venta, &QPushButton::clicked, this, &Cine::ventaBoletos);
 
+    //Establecemos los iconos
+    ui->label->setPixmap(QPixmap(":/images/src/icons/cartel.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->label_2->setPixmap(QPixmap(":/images/src/icons/billete.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->label_3->setPixmap(QPixmap(":/images/src/icons/boleto.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 }
 
 Cine::~Cine()
 {
     qDebug() << "Destruyendo Cine..";
     delete ui;
+    // Liberar la memoria de los objetos almacenados en el vector
+    for (Peliculas* p : vectorPelicula) {
+        delete p;  // Elimina el objeto al que apunta el puntero
+    }
 }
 
 // HOJA DE ESTILOS
 
-void Cine::initstylesheet(){
+void Cine::initstylesheet()
+{
     QFile style(":/src/stylesheet/stylesheet.css");
     bool styleOK = style.open(QFile::ReadOnly);
     qDebug() << "Apertura de archivos: " <<styleOK;
@@ -78,8 +87,10 @@ void Cine::setUbicacion(QString ubicacion){
 
 void Cine::agregarPelicula()
 {
-    Peliculas dialog("Nueva Película", 120, "Acción", "PG-13", "Sinopsis de la película", this);
-    dialog.exec();
+    Peliculas *dialog = new Peliculas(this->vectorPelicula, this);
+    connect(dialog, &Peliculas::peliAgregada, this, &Cine::procesarPeliAgregada);
+
+    dialog->exec();
 }
 
 void Cine::agregarClientes()
@@ -112,28 +123,38 @@ void Cine::mostrarHorarios()
 
 void Cine::ventaBoletos()
 {
+
     // Asignar valores correctos a las variables
     QString fecha = "2024-11-11";
     int cantAsientos = 5;
 
     // Crear el cliente, horario y pago con los parámetros necesarios
-    Clientes *cliente = new Clientes();  // Cliente se crea con su constructor sin parámetros
+    Clientes cliente;  // Cliente se crea con su constructor sin parámetros
     QString hora = "12:00";
     QString dia = "Lunes";
-    Horarios *horario = new Horarios(hora, dia, this);  // Ahora pasamos los parámetros requeridos
+    Horarios horario(hora, dia, this);  // Ahora pasamos los parámetros requeridos
 
     QString metodo = "Tarjeta";
     float monto = 100.0;
     QString fechaPago = "2024-11-11";
-    Pago *pago = new Pago(metodo, monto, fechaPago, this);  // Se pasan los parámetros requeridos
+    Pago pago(metodo, monto, fechaPago, this);  // Se pasan los parámetros requeridos
 
     // Crear la ventana de Venta
-    Venta *ventaDialog = new Venta(fecha, cantAsientos, cliente, horario, pago, this);
+    Venta ventaDialog(fecha, cantAsientos, &cliente, &horario, &pago, this);
 
     // Mostrar el diálogo
-    ventaDialog->exec();
+    ventaDialog.exec();
 }
 
+void Cine::procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis){
+    Peliculas *nuevaPeli = new Peliculas(vectorPelicula, this);
 
+    nuevaPeli->setTitulo(titulo);
+    nuevaPeli->setDuracion(duracion);
+    nuevaPeli->setGenero(genero);
+    nuevaPeli->setClasificacion(clasificacion);
+    nuevaPeli->setSinopsis(sinopsis);
+
+}
 
 

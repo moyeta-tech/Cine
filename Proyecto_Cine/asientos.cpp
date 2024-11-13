@@ -13,6 +13,7 @@ Asientos::Asientos(QWidget *parent)
 
     //Conectamos el boton continuar para llegar a la ventana de pago
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Asientos::continuarPago);
+    connect(ui->Boton_continuar, &QPushButton::clicked, this, &Asientos::accept);
 }
 
 Asientos::~Asientos()
@@ -53,5 +54,12 @@ void Asientos::continuarPago()
     QString fecha = "2024-11-11"; // Obtener fecha de alguna propiedad de Asientos
     Pago dialog(metodo, monto, fecha, this); // Pasa los parámetros correctamente
     dialog.exec();
+}
+
+
+void Asientos::on_Boton_continuar_clicked()
+{
+    Asientos *finalizar = new Asientos(this);
+    finalizar->accept();
 }
 

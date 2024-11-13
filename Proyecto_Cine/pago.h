@@ -23,6 +23,9 @@ public:
     void setFecha(QString fecha);
 
 
+private slots:
+    void on_Boton_finalizar_clicked();
+
 private:
     Ui::Pago *ui;
 
