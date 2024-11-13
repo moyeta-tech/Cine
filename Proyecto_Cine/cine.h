@@ -9,6 +9,13 @@
 #include <QAction>
 #include <QMessageBox>
 #include <QFile>
+#include "clientes.h"
+#include "empleados.h"
+#include "peliculas.h"
+#include "sala.h"
+#include "map"
+#include "unordered_map"
+#include "array"
 
 namespace Ui {
 class Cine;
@@ -40,12 +47,20 @@ private slots:
     void mostrarHorarios();
     void ventaBoletos();
 
+    // SLOT PARA AGREGAR UNA NUEVA PELICULA AL VECTOR
+    void procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis);
+
 private:
     Ui::Cine *ui;
     // ATRIBUTOS
     QString Nombre;
     QString Ubicacion;
-    std::array<int, 4> salas;
+
+    // CONTENEDORES PARA EL MANEJO DE DATOS
+
+    std::vector<Peliculas*> vectorPelicula;
+    std::map<int, Clientes> mapClientes;
+    std::map<int, Empleados> mapEmpleados;
 };
 
 #endif // CINE_H

@@ -3,7 +3,6 @@
 
 #include <QDebug>
 
-#include "peliculas.h"
 #include "clientes.h"
 #include "empleados.h"
 #include "precios.h"
@@ -42,6 +41,10 @@ Cine::~Cine()
 {
     qDebug() << "Destruyendo Cine..";
     delete ui;
+    // Liberar la memoria de los objetos almacenados en el vector
+    for (Peliculas* p : vectorPelicula) {
+        delete p;  // Elimina el objeto al que apunta el puntero
+    }
 }
 
 // HOJA DE ESTILOS
@@ -78,8 +81,10 @@ void Cine::setUbicacion(QString ubicacion){
 
 void Cine::agregarPelicula()
 {
-    Peliculas dialog("Nueva Película", 120, "Acción", "PG-13", "Sinopsis de la película", this);
-    dialog.exec();
+    Peliculas *dialog = new Peliculas(this->vectorPelicula, this);
+    connect(dialog, &Peliculas::peliAgregada, this, &Cine::procesarPeliAgregada);
+
+    dialog->exec();
 }
 
 void Cine::agregarClientes()
@@ -133,10 +138,17 @@ void Cine::ventaBoletos()
 
     // Mostrar el diálogo
     ventaDialog.exec();
-
-
 }
 
+void Cine::procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis){
+    Peliculas *nuevaPeli = new Peliculas(vectorPelicula, this);
 
+    nuevaPeli->setTitulo(titulo);
+    nuevaPeli->setDuracion(duracion);
+    nuevaPeli->setGenero(genero);
+    nuevaPeli->setClasificacion(clasificacion);
+    nuevaPeli->setSinopsis(sinopsis);
+
+}
 
 

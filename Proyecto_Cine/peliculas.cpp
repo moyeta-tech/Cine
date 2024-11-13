@@ -1,15 +1,17 @@
 #include "peliculas.h"
 #include "ui_peliculas.h"
 
-Peliculas::Peliculas(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis, QWidget *parent) :
+Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Peliculas)
+    ui(new Ui::Peliculas),
+    vectorPelicula(vectorPeliculaRef)
 {
     ui->setupUi(this);
 
     //Titulo de la ventana
     this->setWindowTitle("Peliculas");
 }
+
 
 Peliculas::~Peliculas()
 {
@@ -66,4 +68,33 @@ void Peliculas::setSinopsis(QString sinopsis){
     Sinopsis = sinopsis;
 }
 
+
+
+void Peliculas::on_pushButton_2_clicked()
+{
+    Peliculas *pelicula = new Peliculas(vectorPelicula, this);
+
+    pelicula->setTitulo(ui->lineEdit_2->text());
+    pelicula->setDuracion(ui->spinBox->value());
+    pelicula->setGenero(ui->lineEdit_4->text());
+    pelicula->setClasificacion(ui->lineEdit_5->text());
+    pelicula->setSinopsis(ui->textEdit->toPlainText());
+
+    vectorPelicula.push_back(pelicula);
+
+    // Usar qDebug() para verificar si los datos se están ingresando
+    for (Peliculas* p : vectorPelicula) {
+        qDebug() << "Título: " << p->getTitulo();
+        qDebug() << "Duración: " << p->getDuracion();
+        qDebug() << "Género: " << p->getGenero();
+        qDebug() << "Clasificación: " << p->getClasificacion();
+        qDebug() << "Sinopsis: " << p->getSinopsis();
+        qDebug() << "------";
+    }
+
+   emit peliAgregada(pelicula->getTitulo(), pelicula->getDuracion(), pelicula->getGenero(),
+                      pelicula->getClasificacion(), pelicula->getSinopsis());
+
+    accept(); // SE CIERRA EL DIALOGO
+}
 
