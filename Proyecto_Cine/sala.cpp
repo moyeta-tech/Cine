@@ -1,27 +1,32 @@
 #include "Sala.h"
 
-    // Constructor
-    sala::sala(int numsala, int capacidad) {
-    }
-    // Métodos
+// Constructor
+sala::sala(int numsala, int capacidad) {
+}
 
-    // GET Y SET DE NUMSALA
+// Métodos
 
-    int sala::getNumSala() {
-        return NumSala;
-    }
+// GET Y SET DE NUMSALA
 
-    void sala::setNumSala(int numsala){
-        NumSala = numsala;
-    }
+int sala::getNumSala()
+{
+    return NumSala;
+}
 
-    // GET Y SET DE CAPACIDAD
+void sala::setNumSala(int numsala)
+{
+    NumSala = numsala;
+}
 
-    int sala::getCapacidad(){
-        return Capacidad;
-    }
+// GET Y SET DE CAPACIDAD
 
-    void sala::setCapacidad(int capacidad){
-        Capacidad = capacidad;
-    }
+int sala::getCapacidad()
+{
+    return Capacidad;
+}
+
+void sala::setCapacidad(int capacidad)
+{
+    Capacidad = capacidad;
+}
 

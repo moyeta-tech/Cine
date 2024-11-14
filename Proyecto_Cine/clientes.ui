@@ -77,7 +77,7 @@
       </widget>
      </item>
      <item row="6" column="0">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="Boton_historial">
        <property name="text">
         <string>Mostrar historial de compras</string>
        </property>
@@ -95,7 +95,7 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>

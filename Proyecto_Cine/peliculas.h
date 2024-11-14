@@ -2,11 +2,12 @@
 #define PELICULAS_H
 
 #include <QDialog>
-#include "vector"
+
+#include <vector>
 #include <QFile>
-#include "algorithm"
-#include "QMessageBox"
-#include "QDebug"
+#include <algorithm>
+#include <QMessageBox>
+#include <QDebug>
 
 
 namespace Ui {
@@ -20,6 +21,7 @@ class Peliculas : public QDialog
 public:
     explicit Peliculas(std::vector<Peliculas *> &vectorPeliculaRef, QWidget *parent = nullptr);
     ~Peliculas();
+
     QString getTitulo();
     void setTitulo(QString titulo);
     int getDuracion();
@@ -30,15 +32,16 @@ public:
     void setClasificacion(QString clasificacion);
     QString getSinopsis();
     void setSinopsis(QString sinopsis);
-    void initstylesheet();
 
 private slots:
+    void agregarPelicula();
+    void modificarPelicula();
+    void eliminarPelicula();
+    void guardarCambios();
+    void buscarPelicula();
 
-    void on_pushButton_2_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_pushButton_4_clicked();
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    void initstylesheet();
 
 signals:
     void peliAgregada(QString titulo, int duracion, QString genero, QString clasificacion,

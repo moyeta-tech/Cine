@@ -2,6 +2,7 @@
 #define PRECIOS_H
 
 #include <QDialog>
+#include <QFile>
 
 namespace Ui {
 class Precios;
@@ -23,6 +24,10 @@ public:
     float getDescuento();
     void setDescuento(float descuento);
     float calcularPrecio();
+
+private slots:
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    void initstylesheet();
 
 
 private:

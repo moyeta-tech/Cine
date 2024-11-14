@@ -8,9 +8,12 @@ Clientes::Clientes(std::vector<Clientes *> &vectorClientesRef, QWidget *parent)
 {
     ui->setupUi(this);
 
+    //Establecemos el titul ode la ventana
     this->setWindowTitle("Formulario de clientes");
 
+    //Llamamos al slot para cargar el stylesheet
     initstylesheet();
+
 }
 
 Clientes::~Clientes()
@@ -120,7 +123,8 @@ void Clientes::on_buttonBox_accepted()
 
      // Usar qDebug() para verificar si los datos se están ingresando
 
-    for(Clientes *c : vectorClientes){
+    for(Clientes *c : vectorClientes)
+    {
         qDebug() << "IdCliente: " << c->getIDcliente();
         qDebug() << "Nombre: " << c->getNombre();
         qDebug() << "Apellido: " << c->getApellido();

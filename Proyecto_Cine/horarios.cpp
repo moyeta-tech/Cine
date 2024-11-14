@@ -6,7 +6,12 @@ Horarios::Horarios(QString hora, QString dia, QWidget *parent)
     , ui(new Ui::Horarios)
 {
     ui->setupUi(this);
+
+    //Establecemos el titulo de la ventana
     this->setWindowTitle("Horarios");
+
+    //Llamamos al slot para cargar el stylesheet
+    initstylesheet();
 }
 
 Horarios::~Horarios()
@@ -15,20 +20,34 @@ Horarios::~Horarios()
 }
 
 // GET Y SET DE HORA
-QString Horarios::getHora(){
+QString Horarios::getHora()
+{
     return Hora;
 }
 
-void Horarios::setHora(QString hora){
+void Horarios::setHora(QString hora)
+{
     Hora = hora;
 }
 
 // GET Y SET DE DIA
 
-QString Horarios::getDia(){
+QString Horarios::getDia()
+{
     return Dia;
 }
 
-void Horarios::setDia(QString dia){
+void Horarios::setDia(QString dia)
+{
     Dia = dia;
+}
+
+// HOJA DE ESTILOS
+void Horarios::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventana.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
 }

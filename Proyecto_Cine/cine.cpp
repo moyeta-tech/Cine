@@ -9,6 +9,7 @@
 #include "horarios.h"
 #include "venta.h"
 #include "pago.h"
+#include "verempleados.h"
 
 
 Cine::Cine(QWidget *parent)
@@ -20,15 +21,17 @@ Cine::Cine(QWidget *parent)
     ui->setupUi(this);
     qDebug() << "Interfaz de usuario cargada";
 
-    //Titulo de la ventana
+    //Establecemos el titulo de la ventana
     this->setWindowTitle("Inicio");
 
+    //Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
     //Conectamos el menu a los slots correspondientes
     connect(ui->actionRegistro_peliculas, &QAction::triggered, this, &Cine::agregarPelicula);
     connect (ui->actionRegistrar_clientes, &QAction::triggered, this, &Cine::agregarClientes);
     connect (ui->actionRegistrar_personal, &QAction::triggered, this, &Cine::agregarEmpleados);
+    connect (ui->actionVer_personal, &QAction::triggered, this, &Cine::mostrarEmpelados);
 
     //Conetamos los botones a los slots correspondientes
     connect(ui->Boton_horario, &QPushButton::clicked, this, &Cine::mostrarHorarios);
@@ -44,16 +47,16 @@ Cine::Cine(QWidget *parent)
 
 Cine::~Cine()
 {
-    qDebug() << "Destruyendo Cine..";
+    qDebug() << "Destruyendo Cine...";
     delete ui;
     // Liberar la memoria de los objetos almacenados en el vector
-    for (Peliculas* p : vectorPelicula) {
+    for (Peliculas* p : vectorPelicula)
+    {
         delete p;  // Elimina el objeto al que apunta el puntero
     }
 }
 
 // HOJA DE ESTILOS
-
 void Cine::initstylesheet()
 {
     QFile style(":/src/stylesheet/stylesheet.css");
@@ -105,6 +108,13 @@ void Cine::agregarEmpleados()
     Empleados dialog(this);
     dialog.exec();
 }
+
+void Cine::mostrarEmpelados()
+{
+    VerEmpleados dialog(this);
+    dialog.exec();
+}
+
 
 
 void Cine::mostrarPrecios()

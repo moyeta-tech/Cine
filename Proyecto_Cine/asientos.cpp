@@ -9,11 +9,14 @@ Asientos::Asientos(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Seleccion de asiento");
+    //Establecemos el titulo de la ventana
+    this->setWindowTitle("Paso 2: Seleccion de asiento");
+
+    //Llamamos al slot para cargar el stylesheet
+    initstylesheet();
 
     //Conectamos el boton continuar para llegar a la ventana de pago
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Asientos::continuarPago);
-    connect(ui->Boton_continuar, &QPushButton::clicked, this, &Asientos::accept);
 }
 
 Asientos::~Asientos()
@@ -56,10 +59,13 @@ void Asientos::continuarPago()
     dialog.exec();
 }
 
-
-void Asientos::on_Boton_continuar_clicked()
+// HOJA DE ESTILOS
+void Asientos::initstylesheet()
 {
-    Asientos *finalizar = new Asientos(this);
-    finalizar->accept();
+    QFile style(":/src/stylesheet/stylesheet-ventana.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
 }
 

@@ -92,6 +92,24 @@ QTextEdit {
     min-height: 100px;          /* Altura mínima */
 }
 
+/* QTableWidget */
+QTableWidget {
+    background-color: #E9F1F7;  /* Fondo de la tabla */
+    color: #304D6D;             /* Texto en la tabla */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+}
+
+QTableWidget::item {
+    border: 1px solid #82A0BC;  /* Bordes de los elementos de la tabla */
+    padding: 4px;
+}
+
+QTableWidget QTableCornerButton {
+    background-color: #545E75;  /* Esquina de la tabla */
+}
+
 /* Mensajes de advertencia (QMessageBox) */
 QMessageBox {
     background-color: #E9F1F7;  /* Fondo de advertencia */

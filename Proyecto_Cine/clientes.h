@@ -2,9 +2,10 @@
 #define CLIENTES_H
 
 #include <QDialog>
+
 #include <vector>
 #include <QFile>
-#include "QDebug"
+#include <QDebug>
 
 using namespace std;
 
@@ -36,10 +37,12 @@ public:
     void setTelefono(int telefono);
 
     std::vector<QString> getHistorial();
- //   void agregarHistorial(reserva *Reserva);
+
+    //void agregarHistorial(reserva *Reserva);
     void mostrarHistorial();
 
 private slots:
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
     void on_buttonBox_accepted();
@@ -50,7 +53,6 @@ signals:
                          int edad, int telefono);
 private:
     Ui::Clientes *ui;
-
 
     string Nombre;
     string Apellido;

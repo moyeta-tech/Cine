@@ -2,20 +2,20 @@
 #define CINE_H
 
 #include <QMainWindow>
+
 #include <array>
 #include <QDebug>
-
 #include <QMenuBar>
 #include <QAction>
 #include <QMessageBox>
 #include <QFile>
+
 #include "clientes.h"
 #include "empleados.h"
 #include "peliculas.h"
 #include "sala.h"
 #include "map"
 #include "unordered_map"
-#include "array"
 
 namespace Ui {
 class Cine;
@@ -40,6 +40,7 @@ private slots:
     void agregarPelicula();
     void agregarClientes();
     void agregarEmpleados();
+    void mostrarEmpelados();
 
     //Slots para los botones
     void mostrarPrecios();
@@ -52,6 +53,8 @@ private slots:
 
     // SLOT PARA AGREGAR UN CLIENTE AL MAPA
     void procesarClienteAgregado(string nombre, string apellido, int dni, int edad, int telefono, int idcliente);
+
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
 

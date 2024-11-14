@@ -11,7 +11,11 @@ Venta::Venta(QString fecha, int cantasientos, Clientes *cliente, Horarios *horar
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Proceso de compra");
+    //Establecemos el titulo de la ventana
+    this->setWindowTitle("Paso 1: Seleccion de prelicula y valor");
+
+    //Llamamos al slot para cargar el stylesheet
+    initstylesheet();
 
     //Boton para seleccionar los asientos
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::seleccionAsientos);
@@ -97,3 +101,12 @@ void Venta::on_Boton_continuar_clicked()
     finalizar->accept();
 }
 
+// HOJA DE ESTILOS
+void Venta::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventana.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
+}

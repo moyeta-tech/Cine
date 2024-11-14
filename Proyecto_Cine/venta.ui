@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>536</width>
+    <height>343</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,12 +16,8 @@
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>2D</string>
-       </property>
-      </widget>
+     <item row="5" column="1">
+      <widget class="QSpinBox" name="spinBox_3d"/>
      </item>
      <item row="5" column="3">
       <widget class="QLabel" name="label_14">
@@ -30,29 +26,39 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="3">
+     <item row="4" column="2">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>$$$</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="3">
+      <widget class="QLabel" name="label_16">
+       <property name="text">
+        <string>Socio cinemamax</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QSpinBox" name="spinBox_2d"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>2D</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
       <widget class="QLabel" name="label_9">
        <property name="text">
         <string>Total</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1" colspan="3">
-      <widget class="QComboBox" name="comboBox"/>
-     </item>
-     <item row="6" column="2">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>$$$</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="3">
-      <widget class="QPushButton" name="Boton_continuar">
-       <property name="text">
-        <string>Continuar</string>
-       </property>
-      </widget>
+     <item row="1" column="1" colspan="3">
+      <widget class="QDateTimeEdit" name="dateTimeEdit"/>
      </item>
      <item row="5" column="2">
       <widget class="QLabel" name="label_11">
@@ -61,33 +67,29 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_5">
+     <item row="7" column="3">
+      <widget class="QPushButton" name="Boton_2x1">
        <property name="text">
         <string>2x1</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="3">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Horario</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
       <widget class="QLabel" name="label_15">
        <property name="text">
-        <string/>
+        <string>Con tarjeta de credito</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Seleccione la pelicula</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Cantidad</string>
-       </property>
-      </widget>
+     <item row="0" column="1" colspan="3">
+      <widget class="QComboBox" name="comboBox_pelicula"/>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_3">
@@ -103,13 +105,17 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
-      <widget class="QSpinBox" name="spinBox_2"/>
-     </item>
-     <item row="4" column="2">
-      <widget class="QLabel" name="label_10">
+     <item row="4" column="3">
+      <widget class="QLabel" name="label_13">
        <property name="text">
-        <string>$$$</string>
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QPushButton" name="Boton_10">
+       <property name="text">
+        <string>10%</string>
        </property>
       </widget>
      </item>
@@ -120,28 +126,54 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QSpinBox" name="spinBox_3"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+     <item row="6" column="1">
+      <widget class="QLabel" name="label_12">
        <property name="text">
-        <string>Horario</string>
+        <string>Con tarjeta de debito</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
-      <widget class="QSpinBox" name="spinBox"/>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Seleccione la pelicula</string>
+       </property>
+      </widget>
      </item>
-     <item row="4" column="3">
-      <widget class="QLabel" name="label_13">
+     <item row="7" column="2">
+      <widget class="QPushButton" name="Boton_25">
+       <property name="text">
+        <string>25%</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Cantidad</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="3">
+      <widget class="QPushButton" name="Boton_continuar">
+       <property name="text">
+        <string>Continuar</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0" rowspan="2">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Descuentos</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QLabel" name="label_17">
        <property name="text">
         <string/>
        </property>
       </widget>
-     </item>
-     <item row="1" column="1" colspan="3">
-      <widget class="QDateTimeEdit" name="dateTimeEdit"/>
      </item>
     </layout>
    </item>

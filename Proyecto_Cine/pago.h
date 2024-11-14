@@ -2,6 +2,7 @@
 #define PAGO_H
 
 #include <QDialog>
+#include <QFile>
 
 namespace Ui {
 class Pago;
@@ -24,7 +25,10 @@ public:
 
 
 private slots:
-    void on_Boton_finalizar_clicked();
+    void finalizarCompra();
+
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    void initstylesheet();
 
 private:
     Ui::Pago *ui;

@@ -24,21 +24,21 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="label_sucursal">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="label_horario">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="QLabel" name="label_13">
+      <widget class="QLabel" name="label_cantidad">
        <property name="text">
         <string/>
        </property>
@@ -52,31 +52,31 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QLabel" name="label_14">
+      <widget class="QLabel" name="label_asiento">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="comboBox_medios"/>
      </item>
      <item row="4" column="1">
-      <widget class="QLabel" name="label_9">
+      <widget class="QLabel" name="label_tipo">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="label_pelicula">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="label_fecha">
        <property name="text">
         <string/>
        </property>
@@ -104,7 +104,7 @@
       </widget>
      </item>
      <item row="7" column="1">
-      <widget class="QLabel" name="label_12">
+      <widget class="QLabel" name="label_total">
        <property name="text">
         <string/>
        </property>

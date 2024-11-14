@@ -2,6 +2,7 @@
 #define EMPLEADOS_H
 
 #include <QDialog>
+#include <QFile>
 
 namespace Ui {
 class Empleados;
@@ -22,7 +23,9 @@ public:
     QString getPuesto();
     void setPuesto(QString puesto);
 
-
+private slots:
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    void initstylesheet();
 
 private:
     Ui::Empleados *ui;

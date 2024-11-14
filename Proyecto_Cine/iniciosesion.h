@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QFile>
-#include "QDebug"
+#include <QDebug>
 
 namespace Ui {
 class InicioSesion;
@@ -21,6 +21,8 @@ private slots:
     void iniciarSesion();
     void salirVentana();
     void recuperarPassword();
+
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
 private:

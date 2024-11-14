@@ -10,7 +10,11 @@ Empleados::Empleados(QWidget *parent)
 
     ui->setupUi(this);
 
+    //Establecemos el titulo de la ventana
     this->setWindowTitle("Formulario de empleados");
+
+    //Llamamos al slot para cargar el stylesheet
+    initstylesheet();
 }
 
 Empleados::~Empleados()
@@ -20,20 +24,34 @@ Empleados::~Empleados()
 
 // GET Y SET DE IDEMPLEADO
 
-int Empleados::getIDempleado(){
+int Empleados::getIDempleado()
+{
     return idEmpleado;
 }
 
-void Empleados::setIDempleado(int idempleado){
+void Empleados::setIDempleado(int idempleado)
+{
     idEmpleado = idempleado;
 }
 
 // GET Y SET DE PUESTO
 
-QString Empleados::getPuesto(){
+QString Empleados::getPuesto()
+{
     return Puesto;
 }
 
-void Empleados::setPuesto(QString puesto){
+void Empleados::setPuesto(QString puesto)
+{
     Puesto = puesto;
+}
+
+// HOJA DE ESTILOS
+void Empleados::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
 }

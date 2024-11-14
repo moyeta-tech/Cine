@@ -6,9 +6,15 @@ Pago::Pago(QString metodo, float monto, QString fecha, QWidget *parent)
     , ui(new Ui::Pago)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Informacion de reserva");
 
-    connect(ui->Boton_finalizar, &QPushButton::clicked, this, &QDialog::accept);
+    //Establecemos el titulo de la ventana
+    this->setWindowTitle("Paso 3: Seleccion metodo de pago");
+
+    //Llamamos al slot para cargar el stylesheet
+    initstylesheet();
+
+    //Conectamos los botones con los slots
+    connect(ui->Boton_finalizar, &QPushButton::clicked, this, &Pago::finalizarCompra);
 }
 
 Pago::~Pago()
@@ -17,39 +23,53 @@ Pago::~Pago()
 }
 
 // GET Y SET DE METODO
-
-QString Pago::getMetodo(){
+QString Pago::getMetodo()
+{
     return Metodo;
 }
 
-void Pago::setMetodo(QString metodo){
+void Pago::setMetodo(QString metodo)
+{
     Metodo = metodo;
 }
 
 // GET Y SET DE MONTO
 
-float Pago::getMonto(){
+float Pago::getMonto()
+{
     return Monto;
 }
 
-void Pago::setMonto(float monto){
+void Pago::setMonto(float monto)
+{
     Monto = monto;
 }
 
 // GET Y SET DE FECHA
 
-QString Pago::getFecha(){
+QString Pago::getFecha()
+{
     return Fecha;
 }
 
-void Pago::setFecha(QString fecha){
+void Pago::setFecha(QString fecha)
+{
     Fecha = fecha;
 }
 
 
-void Pago::on_Boton_finalizar_clicked()
+void Pago::finalizarCompra()
 {
     Pago *finalizar = new Pago(Metodo, Monto, Fecha, this);
     finalizar->accept();
 }
 
+// HOJA DE ESTILOS
+void Pago::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventana.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " <<styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
+}

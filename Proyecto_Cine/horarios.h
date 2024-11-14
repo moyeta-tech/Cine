@@ -2,6 +2,7 @@
 #define HORARIOS_H
 
 #include <QDialog>
+#include <QFile>
 
 namespace Ui {
 class Horarios;
@@ -20,6 +21,9 @@ public:
     QString getDia();
     void setDia(QString dia);
 
+private slots:
+    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    void initstylesheet();
 
 private:
     Ui::Horarios *ui;
