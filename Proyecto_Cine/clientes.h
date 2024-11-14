@@ -46,8 +46,8 @@ private slots:
 
 
 signals:
-    void clienteAgregado(string nombre, string apellido, int dni,
-                         int edad, int telefono, int idcliente);
+    void clienteAgregado(int idcliente, string nombre, string apellido, int dni,
+                         int edad, int telefono);
 private:
     Ui::Clientes *ui;
 

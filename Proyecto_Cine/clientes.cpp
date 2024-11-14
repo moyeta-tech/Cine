@@ -110,11 +110,13 @@ void Clientes::on_buttonBox_accepted()
     Clientes *cliente = new Clientes(vectorClientes, this);
 
     cliente->setIDcliente(ui->lineEdit->text().toInt());
-    cliente->setNombre(ui->lineEdit_2->text());
-    cliente->setApellido(ui->lineEdit_3->text());
+    cliente->setNombre(ui->lineEdit_2->text().toStdString());
+    cliente->setApellido(ui->lineEdit_3->text().toStdString());
     cliente->setDni(ui->lineEdit_4->text().toInt());
     cliente->setEdad(ui->spinBox->value());
-    cliente->setTelefono(ui->lineEdit_5->text.toInt());
+    cliente->setTelefono(ui->lineEdit_5->text().toInt());
+
+    vectorClientes.push_back(cliente); // INTRODUCIMOS LOS DATOS
 
      // Usar qDebug() para verificar si los datos se están ingresando
 
