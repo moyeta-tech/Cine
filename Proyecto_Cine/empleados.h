@@ -17,7 +17,7 @@ public:
     ~Empleados();
 
 
-    Empleados (QString nombre, QString apellido, int dni, int edad, int telefono, int idempleado);
+    Empleados (int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono);
     int getIDempleado();
     void setIDempleado(int idempleado);
     QString getPuesto();

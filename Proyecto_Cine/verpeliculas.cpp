@@ -9,6 +9,17 @@ VerPeliculas::VerPeliculas(QWidget *parent)
 
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
+
+    // CONFIGURAMOS LA TABLA VERCLIENTES PARA 5 COLUMNAS
+    ui->tableWidget->setColumnCount(5);
+
+    // DECLARAMOS QSTRINGLIST PARA LAS COLUMNAS
+
+    QStringList encabezados;
+
+    encabezados << "Titulo" << "Duracion" << "Genero" << "Clasificacion" << "Sinopsis";
+
+    ui->tableWidget->setHorizontalHeaderLabels(encabezados);
 }
 
 VerPeliculas::~VerPeliculas()

@@ -67,7 +67,7 @@ void Pago::finalizarCompra()
 // HOJA DE ESTILOS
 void Pago::initstylesheet()
 {
-    QFile style(":/src/stylesheet/stylesheet-ventana.css");
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
     bool styleOK = style.open(QFile::ReadOnly);
     qDebug() << "Apertura de archivos: " <<styleOK;
     QString stringEstilo = QString::fromLatin1(style.readAll());

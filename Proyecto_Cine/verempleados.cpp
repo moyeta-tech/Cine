@@ -13,6 +13,17 @@ VerEmpleados::VerEmpleados(QWidget *parent)
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
+    // CONFIGURAMOS LA TABLA VERCLIENTES PARA 6 COLUMNAS
+      ui->tableWidget->setColumnCount(6);
+
+    // DECLARAMOS QSTRINGLIST PARA LAS COLUMNAS
+
+    QStringList encabezados;
+
+    encabezados << "IDempleado" << "Nombre" << "Apellido" << "Dni" << "Edad" << "Telefono";
+
+    ui->tableWidget->setHorizontalHeaderLabels(encabezados);
+
     //Conectamos los botones
     connect(ui->Boton_mostrar, &QPushButton::clicked, this, &VerEmpleados::mostrarEmpleado);
     connect(ui->Boton_cerrar, &QPushButton::clicked, this, &VerEmpleados::cerrarVentana);

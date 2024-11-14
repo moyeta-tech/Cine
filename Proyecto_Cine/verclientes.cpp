@@ -9,6 +9,17 @@ VerClientes::VerClientes(QWidget *parent)
 
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
+
+    // CONFIGURAMOS LA TABLA VERCLIENTES PARA 6 COLUMNAS
+    ui->tableWidget->setColumnCount(6);
+
+    // DECLARAMOS QSTRINGLIST PARA LAS COLUMNAS
+
+    QStringList encabezados;
+
+    encabezados << "IDcliente" << "Nombre" << "Apellido" << "Dni" << "Edad" << "Telefono";
+
+    ui->tableWidget->setHorizontalHeaderLabels(encabezados);
 }
 
 VerClientes::~VerClientes()
