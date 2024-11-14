@@ -9,7 +9,9 @@
 #include "horarios.h"
 #include "venta.h"
 #include "pago.h"
+#include "verclientes.h"
 #include "verempleados.h"
+#include "verpeliculas.h"
 
 
 Cine::Cine(QWidget *parent)
@@ -29,7 +31,11 @@ Cine::Cine(QWidget *parent)
 
     //Conectamos el menu a los slots correspondientes
     connect(ui->actionRegistro_peliculas, &QAction::triggered, this, &Cine::agregarPelicula);
+    connect (ui->actionVer_peliculas, &QAction::triggered, this, &Cine::mostrarPeliculas);
+
     connect (ui->actionRegistrar_clientes, &QAction::triggered, this, &Cine::agregarClientes);
+    connect (ui->actionVer_clientes, &QAction::triggered, this, &Cine::mostrarClientes);
+
     connect (ui->actionRegistrar_personal, &QAction::triggered, this, &Cine::agregarEmpleados);
     connect (ui->actionVer_personal, &QAction::triggered, this, &Cine::mostrarEmpelados);
 
@@ -95,12 +101,22 @@ void Cine::agregarPelicula()
 
     dialog->exec();
 }
+void Cine::mostrarPeliculas()
+{
+    VerPeliculas dialog(this);
+    dialog.exec();
+}
 
 void Cine::agregarClientes()
 {
     Clientes dialog(vectorClientes, this);
     dialog.exec();
+}
 
+void Cine::mostrarClientes()
+{
+    VerClientes dialog(this);
+    dialog.exec();
 }
 
 void Cine::agregarEmpleados()
@@ -114,8 +130,6 @@ void Cine::mostrarEmpelados()
     VerEmpleados dialog(this);
     dialog.exec();
 }
-
-
 
 void Cine::mostrarPrecios()
 {

@@ -38,7 +38,11 @@ public:
 private slots:
     //Slots para los elementos de QMenuBar
     void agregarPelicula();
+    void mostrarPeliculas();
+
     void agregarClientes();
+    void mostrarClientes();
+
     void agregarEmpleados();
     void mostrarEmpelados();
 

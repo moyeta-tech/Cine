@@ -24,7 +24,9 @@ SOURCES += \
     recuperarpassw.cpp \
     sala.cpp \
     venta.cpp \
-    verempleados.cpp
+    verclientes.cpp \
+    verempleados.cpp \
+    verpeliculas.cpp
 
 HEADERS += \
     asientos.h \
@@ -40,7 +42,9 @@ HEADERS += \
     recuperarpassw.h \
     sala.h \
     venta.h \
-    verempleados.h
+    verclientes.h \
+    verempleados.h \
+    verpeliculas.h
 
 FORMS += \
     asientos.ui \
@@ -54,7 +58,9 @@ FORMS += \
     precios.ui \
     recuperarpassw.ui \
     venta.ui \
-    verempleados.ui
+    verclientes.ui \
+    verempleados.ui \
+    verpeliculas.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
