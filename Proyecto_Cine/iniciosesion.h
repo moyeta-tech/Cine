@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QFile>
+#include "QDebug"
 
 namespace Ui {
 class InicioSesion;

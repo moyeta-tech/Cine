@@ -6,6 +6,7 @@
 #include <QFile>
 #include "algorithm"
 #include "QMessageBox"
+#include "QDebug"
 
 
 namespace Ui {

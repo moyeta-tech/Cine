@@ -50,6 +50,8 @@ private slots:
     // SLOT PARA AGREGAR UNA NUEVA PELICULA AL VECTOR
     void procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis);
 
+    // SLOT PARA AGREGAR UN CLIENTE AL MAPA
+    void procesarClienteAgregado(string nombre, string apellido, int dni, int edad, int telefono, int idcliente);
     void initstylesheet();
 
 
@@ -62,7 +64,7 @@ private:
     // CONTENEDORES PARA EL MANEJO DE DATOS
 
     std::vector<Peliculas*> vectorPelicula;
-    std::map<int, Clientes> mapClientes;
+    std::vector<Clientes*> vectorClientes;
     std::map<int, Empleados> mapEmpleados;
 };
 

@@ -1,9 +1,10 @@
 #include "clientes.h"
 #include "ui_clientes.h"
 
-Clientes::Clientes(QWidget *parent)
+Clientes::Clientes(std::vector<Clientes *> &vectorClientesRef, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Clientes)
+    , vectorClientes(vectorClientesRef)
 {
     ui->setupUi(this);
 
@@ -24,6 +25,56 @@ int Clientes::getIDcliente(){
 }
 void Clientes::setIDcliente(int idcliente){
     idCliente = idcliente;
+}
+
+// GET Y SET DE NOMBRE
+
+string Clientes::getNombre(){
+    return Nombre;
+}
+
+void Clientes::setNombre(string nombre){
+    Nombre = nombre;
+}
+
+// GET Y SET DE APELLIDO
+
+string Clientes::getApellido(){
+    return Apellido;
+}
+
+void Clientes::setApellido(string apellido){
+    Apellido = apellido;
+}
+
+// GET Y SET DE DNI
+
+int Clientes::getDni(){
+    return Dni;
+}
+
+void Clientes::setDni(int dni){
+    Dni = dni;
+}
+
+// GET Y SET DE EDAD
+
+int Clientes::getEdad(){
+    return Edad;
+}
+
+void Clientes::setEdad(int edad){
+    Edad = edad;
+}
+
+// GET Y SET DE TELEFONO
+
+int Clientes::getTelefono(){
+    return Telefono;
+}
+
+void Clientes::setTelefono(int telefono){
+    Telefono = telefono;
 }
 
 // GET DE HISTORIAL
@@ -50,4 +101,34 @@ void Clientes::initstylesheet()
     qDebug() << "Apertura de archivos: " <<styleOK;
     QString stringEstilo = QString::fromLatin1(style.readAll());
     this->setStyleSheet(stringEstilo);
+}
+
+
+
+void Clientes::on_buttonBox_accepted()
+{
+    Clientes *cliente = new Clientes(vectorClientes, this);
+
+    cliente->setIDcliente(ui->lineEdit->text().toInt());
+    cliente->setNombre(ui->lineEdit_2->text());
+    cliente->setApellido(ui->lineEdit_3->text());
+    cliente->setDni(ui->lineEdit_4->text().toInt());
+    cliente->setEdad(ui->spinBox->value());
+    cliente->setTelefono(ui->lineEdit_5->text.toInt());
+
+     // Usar qDebug() para verificar si los datos se están ingresando
+
+    for(Clientes *c : vectorClientes){
+        qDebug() << "IdCliente: " << c->getIDcliente();
+        qDebug() << "Nombre: " << c->getNombre();
+        qDebug() << "Apellido: " << c->getApellido();
+        qDebug() << "Dni: " << c->getDni();
+        qDebug() << "Edad: " << c->getEdad();
+        qDebug() << "Telefono: " << c->getTelefono();
+
+    }
+
+    emit clienteAgregado(cliente->getIDcliente(), cliente->getNombre(),
+                         cliente->getApellido(), cliente->getDni(),
+                         cliente->getEdad(), cliente->getTelefono());
 }

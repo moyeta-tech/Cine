@@ -95,7 +95,7 @@ void Cine::agregarPelicula()
 
 void Cine::agregarClientes()
 {
-    Clientes dialog(this);
+    Clientes dialog(vectorClientes, this);
     dialog.exec();
 
 }
@@ -129,7 +129,7 @@ void Cine::ventaBoletos()
     int cantAsientos = 5;
 
     // Crear el cliente, horario y pago con los parámetros necesarios
-    Clientes cliente;  // Cliente se crea con su constructor sin parámetros
+    Clientes cliente(vectorClientes);  // Cliente se crea con su constructor sin parámetros
     QString hora = "12:00";
     QString dia = "Lunes";
     Horarios horario(hora, dia, this);  // Ahora pasamos los parámetros requeridos
@@ -154,6 +154,18 @@ void Cine::procesarPeliAgregada(QString titulo, int duracion, QString genero, QS
     nuevaPeli->setGenero(genero);
     nuevaPeli->setClasificacion(clasificacion);
     nuevaPeli->setSinopsis(sinopsis);
+
+}
+
+void Cine::procesarClienteAgregado(string nombre, string apellido, int dni, int edad, int telefono, int idcliente){
+    Clientes *nuevoCliente = new Clientes(vectorClientes, this);
+
+    nuevoCliente->setIDcliente(idcliente);
+    nuevoCliente->setNombre(nombre);
+    nuevoCliente->setApellido(apellido);
+    nuevoCliente->setDni(dni);
+    nuevoCliente->setEdad(edad);
+    nuevoCliente->setTelefono(telefono);
 
 }
 
