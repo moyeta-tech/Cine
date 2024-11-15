@@ -16,6 +16,7 @@
 #include "sala.h"
 #include "map"
 #include "unordered_map"
+#include "verpeliculas.h"
 
 namespace Ui {
 class Cine;
@@ -34,6 +35,7 @@ public:
     void setNombre(QString nombre);
     QString getUbicacion();
     void setUbicacion(QString ubicacion);
+
 
 private slots:
     //Slots para los elementos de QMenuBar
@@ -55,8 +57,11 @@ private slots:
     // SLOT PARA AGREGAR UNA NUEVA PELICULA AL VECTOR
     void procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis);
 
-    // SLOT PARA AGREGAR UN CLIENTE AL MAPA
+    // SLOT PARA AGREGAR UN CLIENTE AL VECTOR
     void procesarClienteAgregado(string nombre, string apellido, int dni, int edad, int telefono, int idcliente);
+
+    // SLOT PARA AGREGAR UN EMPLEADO
+    void procesarEmpleadoAgregado(QString nombre, QString apellido, int dni, int edad, int telefono, int idempleado, QString puesto);
 
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
@@ -72,7 +77,7 @@ private:
 
     std::vector<Peliculas*> vectorPelicula;
     std::vector<Clientes*> vectorClientes;
-    std::map<int, Empleados> mapEmpleados;
+    std::vector<Empleados* > vectorEmpleados;
 };
 
 #endif // CINE_H

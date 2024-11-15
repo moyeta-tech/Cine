@@ -101,9 +101,17 @@ void Cine::agregarPelicula()
 
     dialog->exec();
 }
+
 void Cine::mostrarPeliculas()
 {
-    VerPeliculas dialog(this);
+
+    VerPeliculas dialog(vectorPelicula,this);
+    dialog.setWindowTitle("Tabla de peliculas");
+
+    // LLAMAMOS AL METODO PARA ACTUALIZAR LA TABLA
+    dialog.actualizaPeliculasTabla(vectorPelicula);
+
+    // MUESTRA LA TABLA DE PELICULAS ACTUALIZADA
     dialog.exec();
 }
 
@@ -121,7 +129,7 @@ void Cine::mostrarClientes()
 
 void Cine::agregarEmpleados()
 {
-    Empleados dialog(this);
+    Empleados dialog(vectorEmpleados, this);
     dialog.exec();
 }
 
@@ -193,4 +201,14 @@ void Cine::procesarClienteAgregado(string nombre, string apellido, int dni, int 
 
 }
 
+void Cine::procesarEmpleadoAgregado(QString nombre, QString apellido, int dni, int edad, int telefono, int idempleado, QString puesto){
+    Empleados *nuevoEmpleado = new Empleados(vectorEmpleados, this);
 
+    nuevoEmpleado->setIDempleado(idempleado);
+    nuevoEmpleado->setNombre(nombre);
+    nuevoEmpleado->setApellido(apellido);
+    nuevoEmpleado->setDni(dni);
+    nuevoEmpleado->setEdad(edad);
+    nuevoEmpleado->setTelefono(telefono);
+    nuevoEmpleado->setPuesto(puesto);
+}

@@ -25,14 +25,19 @@ public:
     Clientes (string nombre, string apellido, int dni, int edad, int telefono, int idcliente);
     string getNombre();
     void setNombre(string nombre);
+
     int getIDcliente();
     void setIDcliente(int idcliente);
+
     string getApellido();
     void setApellido(string apellido);
+
     int getDni();
     void setDni(int dni);
+
     int getEdad();
     void setEdad(int edad);
+
     int getTelefono();
     void setTelefono(int telefono);
 

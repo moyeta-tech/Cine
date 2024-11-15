@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QFile>
+#include "peliculas.h"
 
 namespace Ui {
 class VerPeliculas;
@@ -13,8 +14,12 @@ class VerPeliculas : public QDialog
     Q_OBJECT
 
 public:
-    explicit VerPeliculas(QWidget *parent = nullptr);
+    explicit VerPeliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent = nullptr);
     ~VerPeliculas();
+
+    // METODO PARA AGREGAR LAS PELICULAS A LA TABLA
+
+    void actualizaPeliculasTabla(std::vector<Peliculas *> &vectorPelicula);
 
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
@@ -22,6 +27,7 @@ private slots:
 
 private:
     Ui::VerPeliculas *ui;
+    std::vector<Peliculas*> &vectorPelicula;
 };
 
 #endif // VERPELICULAS_H

@@ -33,7 +33,7 @@ Peliculas::~Peliculas()
 
 // GET Y SET DE TITULO
 
-QString Peliculas::getTitulo(){
+QString Peliculas::getTitulo() const{
     return Titulo;
 }
 
@@ -43,7 +43,7 @@ void Peliculas::setTitulo(QString titulo){
 
 // GET Y SET DE DURACION
 
-int Peliculas::getDuracion()
+int Peliculas::getDuracion() const
 {
     return Duracion;
 }
@@ -55,7 +55,7 @@ void Peliculas::setDuracion(int duracion)
 
 // GET Y SET DE GENERO
 
-QString Peliculas::getGenero()
+QString Peliculas::getGenero() const
 {
     return Genero;
 }
@@ -66,7 +66,7 @@ void Peliculas::setGenero(QString genero)
 }
 
 // GET Y SET DE CLASIFICACION
-QString Peliculas::getClasificacion()
+QString Peliculas::getClasificacion() const
 {
     return Clasificacion;
 }
@@ -77,7 +77,7 @@ void Peliculas::setClasificacion(QString clasificacion)
 }
 
 // GET Y SET DE SINOPSIS
-QString Peliculas::getSinopsis()
+QString Peliculas::getSinopsis() const
 {
     return Sinopsis;
 }

@@ -22,13 +22,6 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="Boton_mostrar">
-         <property name="text">
-          <string>Mostrar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="Boton_cerrar">
          <property name="text">
           <string>Cerrar</string>

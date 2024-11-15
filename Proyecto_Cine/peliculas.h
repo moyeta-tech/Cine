@@ -22,15 +22,15 @@ public:
     explicit Peliculas(std::vector<Peliculas *> &vectorPeliculaRef, QWidget *parent = nullptr);
     ~Peliculas();
 
-    QString getTitulo();
+    QString getTitulo() const;
     void setTitulo(QString titulo);
-    int getDuracion();
+    int getDuracion() const;
     void setDuracion(int duracion);
-    QString getGenero();
+    QString getGenero() const;
     void setGenero(QString genero);
-    QString getClasificacion();
+    QString getClasificacion() const;
     void setClasificacion(QString clasificacion);
-    QString getSinopsis();
+    QString getSinopsis() const;
     void setSinopsis(QString sinopsis);
 
 private slots:
