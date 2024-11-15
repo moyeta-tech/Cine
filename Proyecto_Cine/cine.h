@@ -58,10 +58,10 @@ private slots:
     void procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis);
 
     // SLOT PARA AGREGAR UN CLIENTE AL VECTOR
-    void procesarClienteAgregado(string nombre, string apellido, int dni, int edad, int telefono, int idcliente);
+    void procesarClienteAgregado(int idcliente, QString nombre, QString apellido, int dni, int edad, int telefono);
 
     // SLOT PARA AGREGAR UN EMPLEADO
-    void procesarEmpleadoAgregado(QString nombre, QString apellido, int dni, int edad, int telefono, int idempleado, QString puesto);
+    void procesarEmpleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
 
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();

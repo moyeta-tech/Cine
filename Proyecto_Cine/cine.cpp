@@ -58,7 +58,7 @@ Cine::~Cine()
     // Liberar la memoria de los objetos almacenados en el vector
     for (Peliculas* p : vectorPelicula)
     {
-        delete p;  // Elimina el objeto al que apunta el puntero
+        delete p;  // Elimina el objeto al que apunta 'p'
     }
 }
 
@@ -117,25 +117,36 @@ void Cine::mostrarPeliculas()
 
 void Cine::agregarClientes()
 {
-    Clientes dialog(vectorClientes, this);
-    dialog.exec();
+    Clientes *dialog = new Clientes(this->vectorClientes, this);
+    connect(dialog, &Clientes::clienteAgregado, this, &Cine::procesarClienteAgregado);
+
+    dialog->exec();
 }
 
 void Cine::mostrarClientes()
 {
-    VerClientes dialog(this);
+    VerClientes dialog(vectorClientes, this);
+
+    // LLAMAMOS AL METODO PARA ACTUALIZAR LA TABLA CON LOS DATOS CARGADOS
+    dialog.actualizarTablaClientes(vectorClientes);
+
     dialog.exec();
 }
 
 void Cine::agregarEmpleados()
 {
-    Empleados dialog(vectorEmpleados, this);
-    dialog.exec();
+    Empleados *dialog = new Empleados(this->vectorEmpleados, this);
+    connect(dialog, &Empleados::empleadoAgregado, this, &Cine::procesarEmpleadoAgregado);
+    dialog->exec();
 }
 
 void Cine::mostrarEmpelados()
 {
-    VerEmpleados dialog(this);
+    VerEmpleados dialog(vectorEmpleados, this);
+
+    // LLAMAMOS AL METODO PARA INCLUIR Y ACTUALIZAR LOS DATOS A TABLA
+    dialog.actualizarTablaEmpleados(vectorEmpleados);
+
     dialog.exec();
 }
 
@@ -189,7 +200,7 @@ void Cine::procesarPeliAgregada(QString titulo, int duracion, QString genero, QS
 
 }
 
-void Cine::procesarClienteAgregado(string nombre, string apellido, int dni, int edad, int telefono, int idcliente){
+void Cine::procesarClienteAgregado(int idcliente, QString nombre, QString apellido, int dni, int edad, int telefono){
     Clientes *nuevoCliente = new Clientes(vectorClientes, this);
 
     nuevoCliente->setIDcliente(idcliente);
@@ -201,7 +212,7 @@ void Cine::procesarClienteAgregado(string nombre, string apellido, int dni, int 
 
 }
 
-void Cine::procesarEmpleadoAgregado(QString nombre, QString apellido, int dni, int edad, int telefono, int idempleado, QString puesto){
+void Cine::procesarEmpleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto){
     Empleados *nuevoEmpleado = new Empleados(vectorEmpleados, this);
 
     nuevoEmpleado->setIDempleado(idempleado);

@@ -1,9 +1,10 @@
 #include "verempleados.h"
 #include "ui_verempleados.h"
 
-VerEmpleados::VerEmpleados(QWidget *parent)
+VerEmpleados::VerEmpleados(std::vector<Empleados *> &vectorEmpleadosRef, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::VerEmpleados)
+    , vectorEmpleados(vectorEmpleadosRef)
 {
     ui->setupUi(this);
 
@@ -24,15 +25,29 @@ VerEmpleados::VerEmpleados(QWidget *parent)
 
     ui->tableWidget->setHorizontalHeaderLabels(encabezados);
 
-    //Conectamos los botones
-    connect(ui->Boton_mostrar, &QPushButton::clicked, this, &VerEmpleados::mostrarEmpleado);
-    connect(ui->Boton_cerrar, &QPushButton::clicked, this, &VerEmpleados::cerrarVentana);
 
 }
 
 VerEmpleados::~VerEmpleados()
 {
     delete ui;
+}
+
+void VerEmpleados::actualizarTablaEmpleados(std::vector<Empleados *> &vectorEmpleados){
+    ui->tableWidget->setRowCount(vectorEmpleados.size());
+
+    for(int i = 0; i < vectorEmpleados.size(); i++){
+        Empleados *empleado = vectorEmpleados[i];
+
+        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(empleado->getIDempleado())));
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(empleado->getNombre()));
+        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(empleado->getApellido()));
+        ui->tableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(empleado->getDni())));
+        ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(empleado->getEdad())));
+        ui->tableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(empleado->getTelefono())));
+        ui->tableWidget->setItem(i, 6, new QTableWidgetItem(empleado->getPuesto()));
+
+    }
 }
 
 void VerEmpleados::initstylesheet()
@@ -44,12 +59,10 @@ void VerEmpleados::initstylesheet()
     this->setStyleSheet(stringEstilo);
 }
 
-void VerEmpleados::mostrarEmpleado()
-{
 
+
+void VerEmpleados::on_Boton_cerrar_clicked()
+{
+    accept(); // METODO CREADO POR SI EL USUARIO PRESIONA CERRAR, SE CIERRA
 }
 
-void VerEmpleados::cerrarVentana()
-{
-
-}

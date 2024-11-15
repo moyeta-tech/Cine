@@ -22,15 +22,15 @@ public:
     ~Clientes();
 
 
-    Clientes (string nombre, string apellido, int dni, int edad, int telefono, int idcliente);
-    string getNombre();
-    void setNombre(string nombre);
+    Clientes (QString nombre, QString apellido, int dni, int edad, int telefono, int idcliente);
+    QString getNombre();
+    void setNombre(QString nombre);
 
     int getIDcliente();
     void setIDcliente(int idcliente);
 
-    string getApellido();
-    void setApellido(string apellido);
+    QString getApellido();
+    void setApellido(QString apellido);
 
     int getDni();
     void setDni(int dni);
@@ -54,13 +54,13 @@ private slots:
 
 
 signals:
-    void clienteAgregado(int idcliente, string nombre, string apellido, int dni,
+    void clienteAgregado(int idcliente, QString nombre, QString apellido, int dni,
                          int edad, int telefono);
 private:
     Ui::Clientes *ui;
 
-    string Nombre;
-    string Apellido;
+    QString Nombre;
+    QString Apellido;
     int Dni;
     int Edad;
     int Telefono;

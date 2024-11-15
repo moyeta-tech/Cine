@@ -50,3 +50,9 @@ void VerPeliculas::initstylesheet()
     QString stringEstilo = QString::fromLatin1(style.readAll());
     this->setStyleSheet(stringEstilo);
 }
+
+void VerPeliculas::on_Boton_cerrar_clicked()
+{
+    accept();
+}
+
