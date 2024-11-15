@@ -59,3 +59,23 @@ void VerClientes::on_Boton_cerrar_clicked()
     accept();
 }
 
+
+void VerClientes::on_pushButton_clicked()
+{
+    int FilaSeleccionada = ui->tableWidget->currentRow(); // OBTENEMOS EL NUMERO DE LAS FILA ACTUALES EN EL TABLEWIDGET
+
+    if(FilaSeleccionada == -1) { // SI NO HAY NINGUNA FILA SELECCIONADA Y SE APRETA EL BOTON DE ELIMINAR, SALE UN MENSAJE DE ERROR
+        QMessageBox::warning(this, "Advertencia", "Seleccione una fila por favor");
+        return; // DETENEMOS LA EJECUCION DEL METODO SI NO SE SELECCIONA UNA FILA
+    }
+    bool borrar = true;
+    if(borrar){
+        int res = QMessageBox::question(this, "Confirmar Selección", "¿Seguro quiere borrar esta fila?", QMessageBox::Yes | QMessageBox::Cancel);
+        if(res == QMessageBox::Yes){
+            vectorClientes.erase(vectorClientes.begin() + FilaSeleccionada); // ELIMINAMOS DEL VECTOR Y DE LA TABLA
+            ui->tableWidget->removeRow(FilaSeleccionada);
+        }
+
+    }
+}
+

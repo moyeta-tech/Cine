@@ -66,3 +66,22 @@ void VerEmpleados::on_Boton_cerrar_clicked()
     accept(); // METODO CREADO POR SI EL USUARIO PRESIONA CERRAR, SE CIERRA
 }
 
+
+void VerEmpleados::on_Boton_eliminar_clicked()
+{
+    int FilaSeleccionada = ui->tableWidget->currentRow(); // OBTENEMOS LA FILA
+
+    if(FilaSeleccionada == -1){
+        QMessageBox::warning(this, "Advertencia", "Por favor, seleccione una fila");
+        return; // SE DETIENE LA EJECUCION DEL METODO SI NO SE SELECCIONA UNA FILA
+    }
+    bool borrar = true;
+    if(borrar){ // SI BORRAR ES VERDADERO
+        int res = QMessageBox::question(this, "Confirmar Selección", "¿Seguro quiere borrar esta fila?", QMessageBox::Yes | QMessageBox::Cancel);
+        if(res == QMessageBox::Yes){
+            vectorEmpleados.erase(vectorEmpleados.begin() + FilaSeleccionada);
+            ui->tableWidget->removeRow(FilaSeleccionada);
+        }
+    }
+}
+

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include "clientes.h"
+#include "QMessageBox"
 
 namespace Ui {
 class VerClientes;
@@ -25,6 +26,8 @@ private slots:
     void initstylesheet();
 
     void on_Boton_cerrar_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::VerClientes *ui;

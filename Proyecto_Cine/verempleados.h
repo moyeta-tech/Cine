@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include "empleados.h"
+#include "QMessageBox"
 
 namespace Ui {
 class VerEmpleados;
@@ -25,6 +26,8 @@ private slots:
     void initstylesheet();
 
     void on_Boton_cerrar_clicked();
+
+    void on_Boton_eliminar_clicked();
 
 private:
     Ui::VerEmpleados *ui;
