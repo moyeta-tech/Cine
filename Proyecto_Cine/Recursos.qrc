@@ -3,6 +3,7 @@
         <file>src/stylesheet/stylesheet.css</file>
         <file>src/stylesheet/stylesheet-inicio.css</file>
         <file>src/stylesheet/stylesheet-ventanas.css</file>
+        <file>src/stylesheet/stylesheet-asientos.css</file>
     </qresource>
     <qresource prefix="/images">
         <file>src/icons/image cine.ico</file>

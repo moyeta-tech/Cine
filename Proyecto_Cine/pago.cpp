@@ -66,8 +66,7 @@ void Pago::setFecha(QString fecha)
 
 void Pago::finalizarCompra()
 {
-    Pago *finalizar = new Pago(Metodo, Monto, Fecha, this);
-    finalizar->accept();
+    this->accept();  // Cierra el diálogo y devuelve QDialog::Accepted
 }
 
 // HOJA DE ESTILOS

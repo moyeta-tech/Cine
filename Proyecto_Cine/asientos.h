@@ -32,12 +32,30 @@ private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
+    void seleccionarAsiento(); // Slot para manejar la selección de un asiento
+    void actualizarAsientoOcupado(int indice); // Actualiza un asiento a ocupado
+
 private:
     Ui::Asientos *ui;
 
     int Numero;
     bool Ocupado;
     QString Fila;
+
+    // Lista para almacenar los botones de los asientos
+    QList<QPushButton*> botonesAsientos;
+
+    // Lista para almacenar los asientos ocupados (por su índice)
+    QList<int> asientosOcupados;
+
+    // Función para inicializar y marcar los asientos ocupados
+    void marcarAsientosOcupados();
+
+    // Función para guardar los asientos ocupados en un archivo
+    void guardarAsientosOcupados();
+
+    // Función para cargar los asientos ocupados desde un archivo
+    void cargarAsientosOcupados();
 
 };
 

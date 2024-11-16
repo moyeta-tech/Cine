@@ -3,6 +3,9 @@
 
 #include "pago.h"
 
+#include <QDebug>
+#include <QTextStream>
+
 Asientos::Asientos(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Asientos)
@@ -17,6 +20,30 @@ Asientos::Asientos(QWidget *parent)
 
     //Conectamos el boton continuar para llegar a la ventana de pago
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Asientos::continuarPago);
+
+    // Inicializamos la lista de botones de los asientos
+    botonesAsientos = {
+        ui->A1, ui->A2, ui->A3, ui->A4, ui->A5, ui->A6, ui->A7, ui->A8,
+        ui->B1, ui->B2, ui->B3, ui->B4, ui->B5, ui->B6, ui->B7, ui->B8,
+        ui->C1, ui->C2, ui->C3, ui->C4, ui->C5, ui->C6, ui->C7, ui->C8,
+        ui->D5, ui->D6, ui->D7, ui->D8,
+        ui->E5, ui->E6, ui->E7, ui->E8,
+        ui->F1, ui->F2, ui->F5, ui->F6, ui->F7, ui->F8,
+        ui->G1, ui->G2, ui->G5, ui->G6, ui->G7, ui->G8,
+        ui->H1, ui->H2, ui->H5, ui->H6, ui->H7, ui->H8,
+        ui->I1, ui->I2, ui->I3, ui->I4, ui->I5, ui->I6, ui->I7, ui->I8
+    };
+
+    // Cargar los asientos ocupados desde un archivo
+    cargarAsientosOcupados();
+
+    // Llamamos al método para marcar los asientos ocupados
+    marcarAsientosOcupados();
+
+    // Conectamos los botones de los asientos disponibles para seleccionarlos
+    for (QPushButton* boton : botonesAsientos) {
+        connect(boton, &QPushButton::clicked, this, &Asientos::seleccionarAsiento);
+    }
 }
 
 Asientos::~Asientos()
@@ -62,10 +89,83 @@ void Asientos::continuarPago()
 // HOJA DE ESTILOS
 void Asientos::initstylesheet()
 {
-    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    QFile style(":/src/stylesheet/stylesheet-asientos.css");
     bool styleOK = style.open(QFile::ReadOnly);
     qDebug() << "Apertura de archivos: " <<styleOK;
     QString stringEstilo = QString::fromLatin1(style.readAll());
     this->setStyleSheet(stringEstilo);
 }
 
+// MÉTODO PARA INICIALIZAR Y MARCAR LOS ASIENTOS OCUPADOS
+void Asientos::marcarAsientosOcupados()
+{
+    // Recorrer todos los botones de la lista
+    for (int i = 0; i < botonesAsientos.size(); ++i) {
+        if (asientosOcupados.contains(i)) {
+            // Cambiar el estilo del botón a rojo para indicar ocupado
+            botonesAsientos[i]->setStyleSheet("background-color: red; color: white;");
+            botonesAsientos[i]->setEnabled(false); // Desactivar el botón
+        } else {
+            // Estilo por defecto para los asientos libres
+            botonesAsientos[i]->setStyleSheet("background-color: green; color: white;");
+            botonesAsientos[i]->setEnabled(true); // Activar el botón
+        }
+    }
+}
+
+// MÉTODO PARA SELECCIONAR UN ASIENTO
+void Asientos::seleccionarAsiento()
+{
+    QPushButton* boton = qobject_cast<QPushButton*>(sender());
+    if (boton) {
+        // Marca el asiento como seleccionado (cambia a color amarillo o cualquier color que desees)
+        boton->setStyleSheet("background-color: yellow; color: black;");
+
+        // Mostrar un mensaje o hacer alguna acción al seleccionar un asiento
+        qDebug() << "Asiento seleccionado: " << boton->text();
+
+        // Actualizar el asiento seleccionado como ocupado
+        int indice = botonesAsientos.indexOf(boton);
+        actualizarAsientoOcupado(indice);
+    }
+}
+
+// ACTUALIZAR UN ASIENTO A OCUPADO
+void Asientos::actualizarAsientoOcupado(int indice)
+{
+    if (!asientosOcupados.contains(indice)) {
+        asientosOcupados.append(indice);
+        // Guardar los asientos ocupados en un archivo
+        guardarAsientosOcupados();
+        // Marcar el asiento como ocupado (rojo)
+        botonesAsientos[indice]->setStyleSheet("background-color: red; color: white;");
+        botonesAsientos[indice]->setEnabled(false); // Desactivar el botón
+    }
+}
+
+// GUARDAR LOS ASIENTOS OCUPADOS EN UN ARCHIVO
+void Asientos::guardarAsientosOcupados()
+{
+    QFile archivo("asientos_ocupados.txt");
+    if (archivo.open(QFile::WriteOnly | QFile::Text)) {
+        QTextStream out(&archivo);
+        for (int i = 0; i < asientosOcupados.size(); ++i) {
+            out << asientosOcupados[i] << "\n";
+        }
+        archivo.close();
+    }
+}
+
+// CARGAR LOS ASIENTOS OCUPADOS DESDE UN ARCHIVO
+void Asientos::cargarAsientosOcupados()
+{
+    QFile archivo("asientos_ocupados.txt");
+    if (archivo.open(QFile::ReadOnly | QFile::Text)) {
+        QTextStream in(&archivo);
+        while (!in.atEnd()) {
+            int indice = in.readLine().toInt();
+            asientosOcupados.append(indice);
+        }
+        archivo.close();
+    }
+}
