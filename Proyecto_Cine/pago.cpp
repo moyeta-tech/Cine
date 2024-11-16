@@ -13,6 +13,12 @@ Pago::Pago(QString metodo, float monto, QString fecha, QWidget *parent)
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
+    // INTRODUCIMOS LOS METODOS DE PAGO EN EL COMBOBOX
+    ui->comboBox_medios->addItem("Efectivo");
+    ui->comboBox_medios->addItem("Tarjeta de crédito");
+    ui->comboBox_medios->addItem("Tarjeta de débito");
+
+
     //Conectamos los botones con los slots
     connect(ui->Boton_finalizar, &QPushButton::clicked, this, &Pago::finalizarCompra);
 }

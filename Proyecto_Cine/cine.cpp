@@ -181,7 +181,7 @@ void Cine::ventaBoletos()
     Pago pago(metodo, monto, fechaPago, this);  // Se pasan los parámetros requeridos
 
     // Crear la ventana de Venta
-    Venta ventaDialog(fecha, cantAsientos, &cliente, &horario, &pago, this);
+    Venta ventaDialog(vectorPelicula,fecha, cantAsientos, &cliente, &horario, &pago, this);
 
     // Mostrar el diálogo
     ventaDialog.exec();

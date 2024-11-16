@@ -18,7 +18,7 @@ class Venta : public QDialog
     Q_OBJECT
 
 public:
-    explicit Venta(QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent = nullptr);
+    explicit Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent = nullptr);
     ~Venta();
 
     QString getFecha();
@@ -51,6 +51,8 @@ private:
     Clientes *cliente;
     Horarios *horario;
     Pago *pago;
+
+    std::vector<Peliculas *> &VectorPeliculas;
 
 };
 

@@ -3,10 +3,16 @@
 
 #include "asientos.h"
 
-Venta::Venta(QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent)
+Venta::Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::Venta),
-    Fecha(fecha), cantAsientos(cantasientos), cliente(cliente), horario(horario), pago(pago)
+    , ui(new Ui::Venta)
+    ,
+    Fecha(fecha)
+    , cantAsientos(cantasientos)
+    , cliente(cliente)
+    , horario(horario)
+    , pago(pago)
+    , VectorPeliculas(VectorPeliculasRef)
 
 {
     ui->setupUi(this);
@@ -16,6 +22,11 @@ Venta::Venta(QString fecha, int cantasientos, Clientes *cliente, Horarios *horar
 
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
+
+    // ACTUALIZAMOS EL COMBOBOX DE PELICULAS PARA SELECCIONAR
+    for(const auto &peli : VectorPeliculas){
+       ui->comboBox_pelicula->addItem(peli->getTitulo());
+    }
 
     //Boton para seleccionar los asientos
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::seleccionAsientos);
@@ -97,7 +108,7 @@ void Venta::seleccionAsientos()
 
 void Venta::on_Boton_continuar_clicked()
 {
-    Venta *finalizar = new Venta(Fecha, cantAsientos, cliente, horario, pago, this);
+    Venta *finalizar = new Venta(VectorPeliculas,Fecha, cantAsientos, cliente, horario, pago, this);
     finalizar->accept();
 }
 

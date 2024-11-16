@@ -14,6 +14,7 @@ Horarios::Horarios(std::vector<Peliculas *> &VectorPeliculasRef, QWidget *parent
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
+    // AÑADIR AL COMBOBOX DE HORARIOS LA PELICULA
     for(const auto &peli : VectorPeliculas){
         ui->comboBox_peliculas->addItem(peli->getTitulo());
     }
