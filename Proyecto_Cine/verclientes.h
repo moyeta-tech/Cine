@@ -25,9 +25,9 @@ private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
-    void on_Boton_cerrar_clicked();
+    void cerrarVentana();
 
-    void on_pushButton_clicked();
+    void eliminarCliente();
 
 private:
     Ui::VerClientes *ui;

@@ -14,6 +14,10 @@ VerEmpleados::VerEmpleados(std::vector<Empleados *> &vectorEmpleadosRef, QWidget
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
+    //Conectamos los botones a los slots
+    connect(ui->Boton_eliminar, &QPushButton::clicked, this, &::VerEmpleados::eliminarEmpleado);
+    connect(ui->Boton_cerrar, &QPushButton::clicked, this, &VerEmpleados::cerrarVentana);
+
     // CONFIGURAMOS LA TABLA VERCLIENTES PARA 6 COLUMNAS
       ui->tableWidget->setColumnCount(6);
 
@@ -33,10 +37,12 @@ VerEmpleados::~VerEmpleados()
     delete ui;
 }
 
-void VerEmpleados::actualizarTablaEmpleados(std::vector<Empleados *> &vectorEmpleados){
+void VerEmpleados::actualizarTablaEmpleados(std::vector<Empleados *> &vectorEmpleados)
+{
     ui->tableWidget->setRowCount(vectorEmpleados.size());
 
-    for(int i = 0; i < vectorEmpleados.size(); i++){
+    for(int i = 0; i < vectorEmpleados.size(); i++)
+    {
         Empleados *empleado = vectorEmpleados[i];
 
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(empleado->getIDempleado())));
@@ -61,24 +67,27 @@ void VerEmpleados::initstylesheet()
 
 
 
-void VerEmpleados::on_Boton_cerrar_clicked()
+void VerEmpleados::cerrarVentana()
 {
     accept(); // METODO CREADO POR SI EL USUARIO PRESIONA CERRAR, SE CIERRA
 }
 
 
-void VerEmpleados::on_Boton_eliminar_clicked()
+void VerEmpleados::eliminarEmpleado()
 {
     int FilaSeleccionada = ui->tableWidget->currentRow(); // OBTENEMOS LA FILA
 
-    if(FilaSeleccionada == -1){
+    if(FilaSeleccionada == -1)
+    {
         QMessageBox::warning(this, "Advertencia", "Por favor, seleccione una fila");
         return; // SE DETIENE LA EJECUCION DEL METODO SI NO SE SELECCIONA UNA FILA
     }
     bool borrar = true;
-    if(borrar){ // SI BORRAR ES VERDADERO
+    if(borrar) // SI BORRAR ES VERDADERO
+    {
         int res = QMessageBox::question(this, "Confirmar Selección", "¿Seguro quiere borrar esta fila?", QMessageBox::Yes | QMessageBox::Cancel);
-        if(res == QMessageBox::Yes){
+        if(res == QMessageBox::Yes)
+        {
             vectorEmpleados.erase(vectorEmpleados.begin() + FilaSeleccionada);
             ui->tableWidget->removeRow(FilaSeleccionada);
         }

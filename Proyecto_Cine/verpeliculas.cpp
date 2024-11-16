@@ -11,6 +11,8 @@ VerPeliculas::VerPeliculas(std::vector<Peliculas *> &vectorPeliculaRef, QWidget 
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
+    connect(ui->Boton_cerrar, &QPushButton::clicked, this, &VerPeliculas::cerrarVentana);
+
     // CONFIGURAMOS LA TABLA VERCLIENTES PARA 5 COLUMNAS
     ui->tableWidget->setColumnCount(5);
 
@@ -28,11 +30,13 @@ VerPeliculas::~VerPeliculas()
     delete ui;
 }
 
-void VerPeliculas::actualizaPeliculasTabla(std::vector<Peliculas *> &vectorPelicula){
+void VerPeliculas::actualizaPeliculasTabla(std::vector<Peliculas *> &vectorPelicula)
+{
 
     ui->tableWidget->setRowCount(vectorPelicula.size());
 
-    for(int i = 0; i < vectorPelicula.size(); i++){
+    for(int i = 0; i < vectorPelicula.size(); i++)
+    {
         const Peliculas *peli = vectorPelicula[i]; // Accede a cada elemento como referencia
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(peli->getTitulo()));
         ui->tableWidget->setItem(i, 1, new QTableWidgetItem(QString::number(peli->getDuracion())));
@@ -51,7 +55,7 @@ void VerPeliculas::initstylesheet()
     this->setStyleSheet(stringEstilo);
 }
 
-void VerPeliculas::on_Boton_cerrar_clicked()
+void VerPeliculas::cerrarVentana()
 {
     accept();
 }

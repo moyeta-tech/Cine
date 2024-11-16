@@ -22,7 +22,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="Boton_eliminar">
          <property name="text">
           <string>Eliminar Cliente</string>
          </property>

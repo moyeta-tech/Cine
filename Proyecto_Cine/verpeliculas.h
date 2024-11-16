@@ -25,7 +25,7 @@ private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
-    void on_Boton_cerrar_clicked();
+    void cerrarVentana();
 
 private:
     Ui::VerPeliculas *ui;
