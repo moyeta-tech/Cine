@@ -33,6 +33,9 @@ public:
     Pago *getPago();
     void setPago(Pago *pago);
 
+    // METODO PARA APLICAR DESCUENTO
+    void aplicarDesc();
+
 
 private slots:
     void seleccionAsientos();
@@ -43,6 +46,9 @@ private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
+    // METODO PARA ACTUALIZAR COSTO
+    void actualizarCosto();
+
 private:
     Ui::Venta *ui;
 
@@ -51,6 +57,9 @@ private:
     Clientes *cliente;
     Horarios *horario;
     Pago *pago;
+    // ATRIBUTOS PARA REALIZAR UNA VENTA
+    double costoTotal = 0.0;
+    QString descuentoActivo = "";
 
     std::vector<Peliculas *> &VectorPeliculas;
 

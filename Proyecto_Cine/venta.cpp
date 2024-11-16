@@ -31,6 +31,10 @@ Venta::Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int ca
     //Boton para seleccionar los asientos
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::seleccionAsientos);
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::accept);
+
+    connect(ui->Boton_2x1, &QPushButton::clicked, this, &Venta::aplicarDesc);
+    connect(ui->Boton_25, &QPushButton::clicked, this, &Venta::aplicarDesc);
+    connect(ui->Boton_10, &QPushButton::clicked, this, &Venta::aplicarDesc);
 }
 
 Venta::~Venta()
@@ -110,6 +114,44 @@ void Venta::on_Boton_continuar_clicked()
 {
     Venta *finalizar = new Venta(VectorPeliculas,Fecha, cantAsientos, cliente, horario, pago, this);
     finalizar->accept();
+}
+
+void Venta::actualizarCosto(){
+    int cantidad2D = ui->spinBox_2d->value();
+    int cantidad3D = ui->spinBox_3d->value();
+
+    double precio2D = 2000; // PRECIO DE ENTRADA 2D
+    double precio3D = 2750; // PRECIO DE ENTRADA 3D
+
+    costoTotal = (cantidad2D * precio2D) + (cantidad3D * precio3D);
+
+    // APLICAMOS DESCUENTO O 2x1
+
+    if(descuentoActivo == "2x1"){
+        int cant2DPagadas = cantidad2D / 2 + cantidad2D % 2; // 2D PAGA LA MITAD
+        int cant3DPagadas = cantidad3D / 2 + cantidad3D % 2; // 3D PAGA LA MITAD
+        costoTotal = (cant2DPagadas * precio2D) + (cant3DPagadas * precio3D);
+    } else if(descuentoActivo == "Débito"){
+        costoTotal *= 0.90; // APLICA UN 10% DE DESCUENTO
+    } else if(descuentoActivo == "Crédito"){
+        costoTotal *= 0.75; // APLICA UN DESCUENTO DE 25%
+    }
+
+    ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
+}
+
+void Venta::aplicarDesc(){
+    QPushButton *botonPresionado = qobject_cast<QPushButton *>(sender());
+
+    if(botonPresionado == ui->Boton_2x1){
+        descuentoActivo = "2x1";
+    } else if(botonPresionado == ui->Boton_25){
+        descuentoActivo = "Crédito";
+    } else if(botonPresionado == ui->Boton_10){
+        descuentoActivo = "Débito";
+    }
+
+    actualizarCosto();
 }
 
 // HOJA DE ESTILOS
