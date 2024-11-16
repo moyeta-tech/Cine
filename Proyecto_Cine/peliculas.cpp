@@ -122,7 +122,6 @@ void Peliculas::agregarPelicula()
 
    emit peliAgregada(pelicula->getTitulo(), pelicula->getDuracion(), pelicula->getGenero(),
                       pelicula->getClasificacion(), pelicula->getSinopsis());
-
 }
 
     // BOTON PARA BUSCAR PELICULA

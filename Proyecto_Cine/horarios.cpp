@@ -1,9 +1,10 @@
 #include "horarios.h"
 #include "ui_horarios.h"
 
-Horarios::Horarios(QString hora, QString dia, QWidget *parent)
+Horarios::Horarios(std::vector<Peliculas *> &VectorPeliculasRef, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Horarios)
+    , VectorPeliculas(VectorPeliculasRef)
 {
     ui->setupUi(this);
 
@@ -12,6 +13,12 @@ Horarios::Horarios(QString hora, QString dia, QWidget *parent)
 
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();
+
+    for(const auto &peli : VectorPeliculas){
+        ui->comboBox_peliculas->addItem(peli->getTitulo());
+    }
+
+
 }
 
 Horarios::~Horarios()
@@ -41,6 +48,7 @@ void Horarios::setDia(QString dia)
 {
     Dia = dia;
 }
+
 
 // HOJA DE ESTILOS
 void Horarios::initstylesheet()

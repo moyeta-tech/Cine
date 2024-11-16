@@ -158,7 +158,7 @@ void Cine::mostrarPrecios()
 
 void Cine::mostrarHorarios()
 {
-    Horarios dialog(" ", " ");
+    Horarios dialog(vectorPelicula, this);
     dialog.exec();
 
 }
@@ -172,10 +172,8 @@ void Cine::ventaBoletos()
     int cantAsientos = 5;
 
     // Crear el cliente, horario y pago con los parámetros necesarios
-    Clientes cliente(vectorClientes);  // Cliente se crea con su constructor sin parámetros
-    QString hora = "12:00";
-    QString dia = "Lunes";
-    Horarios horario(hora, dia, this);  // Ahora pasamos los parámetros requeridos
+    Clientes cliente(vectorClientes, this);
+    Horarios horario(vectorPelicula, this);  // Ahora pasamos los parámetros requeridos
 
     QString metodo = "Tarjeta";
     float monto = 100.0;
