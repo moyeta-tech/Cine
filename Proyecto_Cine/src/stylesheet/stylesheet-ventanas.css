@@ -121,3 +121,24 @@ QMessageBox QLabel {
     font-weight: bold;
 }
 
+/* SpinBox */
+QDateTimeEdit {
+    background-color: #A7CCED;  /* Fondo del ComboBox */
+    color: #304D6D;             /* Texto en el ComboBox */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+    min-width: 150px;
+}
+
+/* ComboBox cuando se abre */
+QDateTimeEdit::drop-down {
+    background-color: #545E75;
+    border-radius: 4px;
+}
+
+/* Texto del ComboBox cuando se selecciona */
+QDateTimeEdit QAbstractItemView {
+    background-color: #E9F1F7;
+    color: #304D6D;
+}

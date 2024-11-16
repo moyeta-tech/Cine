@@ -40,9 +40,6 @@ public:
 private slots:
     void seleccionAsientos();
 
-
-    void on_Boton_continuar_clicked();
-
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 

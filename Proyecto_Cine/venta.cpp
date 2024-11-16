@@ -6,8 +6,7 @@
 Venta::Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Venta)
-    ,
-    Fecha(fecha)
+    , Fecha(fecha)
     , cantAsientos(cantasientos)
     , cliente(cliente)
     , horario(horario)
@@ -102,18 +101,16 @@ void Venta::setPago(Pago *pago)
     this->pago = pago;
 }
 
+// Método para seleccionar asientos
 void Venta::seleccionAsientos()
 {
+    // Abre el diálogo de asientos
     Asientos dialog(this);
     dialog.exec();
-}
 
-// AL PRESIONAR BOTON CONTINUAR, TERMINAR LA OPERACION DE VENTA Y MOSTRAR LA INFORMACION DEL CLIENTE HACIA EL MISMO, SE CERRARÁ
-
-void Venta::on_Boton_continuar_clicked()
-{
-    Venta *finalizar = new Venta(VectorPeliculas,Fecha, cantAsientos, cliente, horario, pago, this);
-    finalizar->accept();
+    // Después de seleccionar los asientos, continua con la venta
+    Venta *finalizar = new Venta(VectorPeliculas, Fecha, cantAsientos, cliente, horario, pago, this);
+    finalizar->accept();  // Termina la operación de venta y muestra la información
 }
 
 void Venta::actualizarCosto(){
