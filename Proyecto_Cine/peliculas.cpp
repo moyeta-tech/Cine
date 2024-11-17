@@ -31,8 +31,8 @@ Peliculas::~Peliculas()
     delete ui;
 }
 
-// GET Y SET DE TITULO
 
+// GET Y SET DE TITULO
 QString Peliculas::getTitulo() const {
     return Titulo;
 }
@@ -42,7 +42,6 @@ void Peliculas::setTitulo(QString titulo) {
 }
 
 // GET Y SET DE DURACION
-
 int Peliculas::getDuracion() const {
     return Duracion;
 }
@@ -52,7 +51,6 @@ void Peliculas::setDuracion(int duracion) {
 }
 
 // GET Y SET DE GENERO
-
 QString Peliculas::getGenero() const {
     return Genero;
 }
@@ -62,7 +60,6 @@ void Peliculas::setGenero(QString genero) {
 }
 
 // GET Y SET DE CLASIFICACION
-
 QString Peliculas::getClasificacion() const {
     return Clasificacion;
 }
@@ -72,7 +69,6 @@ void Peliculas::setClasificacion(QString clasificacion) {
 }
 
 // GET Y SET DE SINOPSIS
-
 QString Peliculas::getSinopsis() const {
     return Sinopsis;
 }
@@ -82,13 +78,12 @@ void Peliculas::setSinopsis(QString sinopsis) {
 }
 
 // Métodos para obtener el horario y el día
-
-QTime Peliculas::getHorario() const {
-    return horario;
+QList<QTime> Peliculas::getHorarios() const {
+    return horarios;
 }
 
-void Peliculas::setHorario(const QTime &h) {
-    horario = h;
+void Peliculas::setHorarios(const QList<QTime> &horarios) {
+    this->horarios = horarios;
 }
 
 QDate Peliculas::getDia() const {
@@ -108,7 +103,6 @@ void Peliculas::initstylesheet() {
 }
 
 // BOTON QUE AGREGA LA PELICULA AL VECTOR
-
 void Peliculas::agregarPelicula() {
     Peliculas *pelicula = new Peliculas(vectorPelicula, this);
 
@@ -118,7 +112,14 @@ void Peliculas::agregarPelicula() {
     pelicula->setClasificacion(ui->lineEdit_clasificacion->text());
     pelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText());
 
-    pelicula->setHorario(ui->timeEdit->time());
+    // Obtener los horarios de los 4 timeEdit
+    QList<QTime> horarios;
+    horarios.append(ui->timeEdit->time());
+    horarios.append(ui->timeEdit_2->time());
+    horarios.append(ui->timeEdit_3->time());
+    horarios.append(ui->timeEdit_4->time());
+
+    pelicula->setHorarios(horarios);
     pelicula->setDia(ui->dateEdit->date());
 
     vectorPelicula.push_back(pelicula);
@@ -129,17 +130,19 @@ void Peliculas::agregarPelicula() {
         qDebug() << "Género: " << p->getGenero();
         qDebug() << "Clasificación: " << p->getClasificacion();
         qDebug() << "Sinopsis: " << p->getSinopsis();
-        qDebug() << "Horario: " << p->getHorario().toString();
+        qDebug() << "Horarios: ";
+        for (const QTime &h : p->getHorarios()) {
+            qDebug() << h.toString();
+        }
         qDebug() << "Día: " << p->getDia().toString();
         qDebug() << "------";
     }
 
     emit peliAgregada(pelicula->getTitulo(), pelicula->getDuracion(), pelicula->getGenero(),
-                      pelicula->getClasificacion(), pelicula->getSinopsis(), pelicula->getHorario(), pelicula->getDia());
+                      pelicula->getClasificacion(), pelicula->getSinopsis(), pelicula->getHorarios(), pelicula->getDia());
 }
 
 // BOTON PARA BUSCAR PELICULA
-
 void Peliculas::buscarPelicula() {
     QString valor = ui->lineEdit_nombre->text();
     bool found = false;
@@ -153,7 +156,7 @@ void Peliculas::buscarPelicula() {
             qDebug() << "Género: " << pelicula->getGenero();
             qDebug() << "Clasificación: " << pelicula->getClasificacion();
             qDebug() << "Sinopsis: " << pelicula->getSinopsis();
-            qDebug() << "Horario: " << pelicula->getHorario().toString();
+            qDebug() << "Horarios: " << pelicula->getHorarios();
             qDebug() << "Día: " << pelicula->getDia().toString();
             break;
         }
@@ -167,7 +170,6 @@ void Peliculas::buscarPelicula() {
 }
 
 // BOTON QUE ELIMINA LA PELICULA
-
 void Peliculas::eliminarPelicula() {
     QString nombrePeli = ui->lineEdit_nombre->text();
     bool encontrado = false;
@@ -187,7 +189,6 @@ void Peliculas::eliminarPelicula() {
 }
 
 // Método que modifica la información de una película en el vector
-
 void Peliculas::modificarPelicula() {
     QString nombrePeli = ui->lineEdit_nombre->text();
     bool encontrado = false;
@@ -198,7 +199,12 @@ void Peliculas::modificarPelicula() {
             pelicula->setGenero(ui->lineEdit_genero->text());
             pelicula->setClasificacion(ui->lineEdit_clasificacion->text());
             pelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText());
-            pelicula->setHorario(ui->timeEdit->time());
+            QList<QTime> horarios;
+            horarios.append(ui->timeEdit->time());
+            horarios.append(ui->timeEdit_2->time());
+            horarios.append(ui->timeEdit_3->time());
+            horarios.append(ui->timeEdit_4->time());
+            pelicula->setHorarios(horarios);
             pelicula->setDia(ui->dateEdit->date());
 
             QMessageBox::information(this, "Éxito", "La película ha sido modificada correctamente");
@@ -212,24 +218,24 @@ void Peliculas::modificarPelicula() {
     }
 }
 
-// Método para cargar las películas desde un archivo de texto
-std::vector<Peliculas*> Peliculas::cargarPeliculas(const QString &archivo)
-{
-    QFile file(archivo);
-    std::vector<Peliculas*> peliculasList;  // Usamos std::vector aquí
+// Método estático para cargar películas desde un archivo
+std::vector<Peliculas*> Peliculas::cargarPeliculas(const QString &rutaArchivo) {
+    std::vector<Peliculas*> peliculasCargadas;
 
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&file);
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            QStringList parts = line.split(',');
-
-            Peliculas* p = new Peliculas(peliculasList);  // Ya no hay problemas de conversión
-
-            // Aquí puedes agregar el código para asignar los atributos a 'p' (nombre, género, etc.)
-            peliculasList.push_back(p);  // Agregar la película al vector
-        }
-        file.close();
+    QFile archivo(rutaArchivo);
+    if (!archivo.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "No se pudo abrir el archivo de películas.";
+        return peliculasCargadas;
     }
-    return peliculasList;  // Retornamos el vector
+
+    QTextStream entrada(&archivo);
+    while (!entrada.atEnd()) {
+        QString linea = entrada.readLine();
+        if (!linea.isEmpty()) {
+            peliculasCargadas.push_back(new Peliculas(peliculasCargadas)); // Usar el constructor existente
+        }
+    }
+    archivo.close();
+
+    return peliculasCargadas;
 }

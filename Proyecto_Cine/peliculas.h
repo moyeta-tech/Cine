@@ -10,6 +10,7 @@
 #include <QTime>
 #include <QDate>
 #include <QTextStream>
+#include <QList>
 
 namespace Ui {
 class Peliculas;
@@ -20,7 +21,7 @@ class Peliculas : public QDialog
     Q_OBJECT
 
 public:
-    explicit Peliculas(std::vector<Peliculas *> &vectorPeliculaRef, QWidget *parent = nullptr);
+    explicit Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent = nullptr);
     ~Peliculas();
 
     QString getTitulo() const;
@@ -38,14 +39,17 @@ public:
     QString getSinopsis() const;
     void setSinopsis(QString sinopsis);
 
-    QTime getHorario() const;
-    void setHorario(const QTime &hora);
+    // Métodos para obtener y establecer los horarios
+    QList<QTime> getHorarios() const;
+    void setHorarios(const QList<QTime> &horarios);
 
     QDate getDia() const;
     void setDia(const QDate &fecha);
 
     void guardarCambios(const QString &archivo);
-    static std::vector<Peliculas*> cargarPeliculas(const QString &archivo);
+
+    // Declaración de la función estática
+    static std::vector<Peliculas*> cargarPeliculas(const QString &rutaArchivo);
 
 private slots:
     void agregarPelicula();
@@ -56,8 +60,9 @@ private slots:
     void initstylesheet();
 
 signals:
-    void peliAgregada(QString titulo, int duracion, QString genero, QString clasificacion,
-                      QString sinopsis, QTime horario, QDate dia);
+    void peliAgregada(const QString &titulo, int duracion, const QString &genero,
+                      const QString &clasificacion, const QString &sinopsis,
+                      const QList<QTime> &horarios, const QDate &dia);
 
 private:
     Ui::Peliculas *ui;
@@ -66,7 +71,7 @@ private:
     QString Genero;
     QString Clasificacion;
     QString Sinopsis;
-    QTime horario;
+    QList<QTime> horarios;  // Ahora es una lista de horarios
     QDate dia;
     std::vector<Peliculas*> &vectorPelicula;
 };
