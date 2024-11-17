@@ -52,10 +52,10 @@ public:
     static std::vector<Peliculas*> cargarPeliculas(const QString &rutaArchivo);
 
 private slots:
-    void agregarPelicula();
     void modificarPelicula();
     void eliminarPelicula();
     void buscarPelicula();
+    void agregarPelicula();
 
     void initstylesheet();
 

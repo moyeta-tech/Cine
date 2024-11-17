@@ -103,13 +103,6 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="Boton_guardar">
-           <property name="text">
-            <string>Guardar</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item row="0" column="2">

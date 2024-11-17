@@ -5,6 +5,7 @@
 #include <QTextStream>
 #include <QStringList>
 #include <vector>
+#include <QMessageBox>
 
 Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent) :
     QDialog(parent),
@@ -12,9 +13,7 @@ Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent
     vectorPelicula(vectorPeliculaRef)
 {
     ui->setupUi(this);
-
     this->setWindowTitle("Peliculas");
-
     ui->spinBox_duracion->setMaximum(200);
 
     initstylesheet();
@@ -23,14 +22,12 @@ Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent
     connect(ui->Boton_agregar, &QPushButton::clicked, this, &Peliculas::agregarPelicula);
     connect(ui->Boton_modificar, &QPushButton::clicked, this, &Peliculas::modificarPelicula);
     connect(ui->Boton_eliimnar, &QPushButton::clicked, this, &Peliculas::eliminarPelicula);
-    connect(ui->Boton_guardar, &QPushButton::clicked, this, &Peliculas::agregarPelicula);
 }
 
 Peliculas::~Peliculas()
 {
     delete ui;
 }
-
 
 // GET Y SET DE TITULO
 QString Peliculas::getTitulo() const {
@@ -103,7 +100,8 @@ void Peliculas::initstylesheet() {
 }
 
 // BOTON QUE AGREGA LA PELICULA AL VECTOR
-void Peliculas::agregarPelicula() {
+void Peliculas::agregarPelicula()
+{
     Peliculas *pelicula = new Peliculas(vectorPelicula, this);
 
     pelicula->setTitulo(ui->lineEdit_nombre_completo->text());
@@ -124,6 +122,7 @@ void Peliculas::agregarPelicula() {
 
     vectorPelicula.push_back(pelicula);
 
+    // Imprimir los detalles de las películas en el vector
     for (Peliculas* p : vectorPelicula) {
         qDebug() << "Título: " << p->getTitulo();
         qDebug() << "Duración: " << p->getDuracion();
@@ -147,24 +146,44 @@ void Peliculas::buscarPelicula() {
     QString valor = ui->lineEdit_nombre->text();
     bool found = false;
 
+    // Limpiar los campos de la interfaz antes de la búsqueda
+    ui->lineEdit_genero->clear();
+    ui->lineEdit_clasificacion->clear();
+    ui->textEdit_sinopsis->clear();
+    ui->spinBox_duracion->setValue(0);
+    ui->timeEdit->clear();
+    ui->timeEdit_2->clear();
+    ui->timeEdit_3->clear();
+    ui->timeEdit_4->clear();
+    ui->dateEdit->clear();
+
     for (Peliculas *pelicula : vectorPelicula) {
         if (pelicula->getTitulo() == valor) {
             found = true;
-            qDebug() << "Película encontrada:";
-            qDebug() << "Título: " << pelicula->getTitulo();
-            qDebug() << "Duración: " << pelicula->getDuracion();
-            qDebug() << "Género: " << pelicula->getGenero();
-            qDebug() << "Clasificación: " << pelicula->getClasificacion();
-            qDebug() << "Sinopsis: " << pelicula->getSinopsis();
-            qDebug() << "Horarios: " << pelicula->getHorarios();
-            qDebug() << "Día: " << pelicula->getDia().toString();
+            // Mostrar la información de la película en los campos correspondientes
+            ui->lineEdit_genero->setText(pelicula->getGenero());
+            ui->lineEdit_clasificacion->setText(pelicula->getClasificacion());
+            ui->textEdit_sinopsis->setPlainText(pelicula->getSinopsis());
+            ui->spinBox_duracion->setValue(pelicula->getDuracion());
+
+            // Actualizar los horarios en los time edits
+            QList<QTime> horarios = pelicula->getHorarios();
+            if (horarios.size() >= 4) {
+                ui->timeEdit->setTime(horarios[0]);
+                ui->timeEdit_2->setTime(horarios[1]);
+                ui->timeEdit_3->setTime(horarios[2]);
+                ui->timeEdit_4->setTime(horarios[3]);
+            }
+
+            // Mostrar la fecha
+            ui->dateEdit->setDate(pelicula->getDia());
+
+            QMessageBox::information(this, "Aviso", "La Película se encuentra cargada");
             break;
         }
     }
 
-    if (found) {
-        QMessageBox::information(this, "Aviso", "La Película se encuentra cargada");
-    } else {
+    if (!found) {
         QMessageBox::warning(this, "Advertencia", "Película no encontrada");
     }
 }

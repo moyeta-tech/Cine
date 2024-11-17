@@ -23,6 +23,7 @@ public:
     QString getFecha();
     void setFecha(QString fecha);
 
+    void setAsientos(const QString& asientos); // Nuevo método para pasar asientos
 
 private slots:
     void finalizarCompra();
@@ -36,6 +37,8 @@ private:
     QString Metodo;
     float Monto;
     QString Fecha;
+
+    QString AsientosSeleccionados; // Variable para almacenar los asientos
 
 };
 

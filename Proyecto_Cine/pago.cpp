@@ -7,6 +7,10 @@ Pago::Pago(QString metodo, float monto, QString fecha, QWidget *parent)
 {
     ui->setupUi(this);
 
+    Metodo = metodo;
+    Monto = monto;
+    Fecha = fecha;
+
     //Establecemos el titulo de la ventana
     this->setWindowTitle("Paso 3: Seleccion metodo de pago");
 
@@ -28,41 +32,36 @@ Pago::~Pago()
     delete ui;
 }
 
-// GET Y SET DE METODO
+
 QString Pago::getMetodo()
 {
-    return Metodo;
+    return Metodo;  // Usamos 'Metodo' en lugar de 'metodoPago'
 }
 
 void Pago::setMetodo(QString metodo)
 {
-    Metodo = metodo;
+    Metodo = metodo;  // Usamos 'Metodo' en lugar de 'metodoPago'
 }
-
-// GET Y SET DE MONTO
 
 float Pago::getMonto()
 {
-    return Monto;
+    return Monto;  // Usamos 'Monto' en lugar de 'montoTotal'
 }
 
 void Pago::setMonto(float monto)
 {
-    Monto = monto;
+    Monto = monto;  // Usamos 'Monto' en lugar de 'montoTotal'
 }
-
-// GET Y SET DE FECHA
 
 QString Pago::getFecha()
 {
-    return Fecha;
+    return Fecha;  // Usamos 'Fecha' en lugar de 'fechaPago'
 }
 
 void Pago::setFecha(QString fecha)
 {
-    Fecha = fecha;
+    Fecha = fecha;  // Usamos 'Fecha' en lugar de 'fechaPago'
 }
-
 
 void Pago::finalizarCompra()
 {
@@ -77,4 +76,11 @@ void Pago::initstylesheet()
     qDebug() << "Apertura de archivos: " <<styleOK;
     QString stringEstilo = QString::fromLatin1(style.readAll());
     this->setStyleSheet(stringEstilo);
+}
+
+void Pago::setAsientos(const QString& asientos)
+{
+    AsientosSeleccionados = asientos;
+    ui->label_asiento->setText("Asientos seleccionados: " + asientos);
+
 }

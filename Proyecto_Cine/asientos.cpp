@@ -4,7 +4,6 @@
 #include "pago.h"
 
 #include <QDebug>
-#include <QTextStream>
 
 Asientos::Asientos(QWidget *parent)
     : QDialog(parent)
@@ -75,15 +74,29 @@ void Asientos::setFila(QString fila)
     Fila = fila;
 }
 
-// En asientos.cpp
-
 void Asientos::continuarPago()
 {
-    QString metodo = "Tarjeta"; // Puedes obtener este valor de alguna propiedad de Asientos
-    float monto = 100.0f; // Obtener monto de alguna propiedad de Asientos
-    QString fecha = "2024-11-11"; // Obtener fecha de alguna propiedad de Asientos
-    Pago dialog(metodo, monto, fecha, this); // Pasa los parámetros correctamente
+    // Recolectar los asientos seleccionados
+    QStringList asientosSeleccionados;
+    for (QPushButton* boton : botonesAsientos) {
+        if (boton->isChecked()) {
+            asientosSeleccionados.append(boton->text());
+        }
+    }
+
+    // Recolectar otros datos relevantes
+    QString metodo = "Tarjeta"; // Ejemplo: puedes obtenerlo desde otro lugar si es necesario
+    float monto = 100.0f;       // Monto total (puedes calcularlo según entradas seleccionadas)
+    QString fecha = "2024-11-11"; // Fecha actual o seleccionada
+
+    // Pasar los datos al diálogo de Pago
+    Pago dialog(metodo, monto, fecha, this);
+    dialog.setAsientos(asientosSeleccionados.join(", ")); // Método personalizado para los asientos
     dialog.exec();
+}
+
+QStringList Asientos::getAsientosSeleccionados() const {
+    return asientosSeleccionados; // Devuelve la lista de asientos seleccionados
 }
 
 // HOJA DE ESTILOS
@@ -131,7 +144,6 @@ void Asientos::seleccionarAsiento()
 }
 
 // ACTUALIZAR UN ASIENTO A OCUPADO
-
 void Asientos::actualizarAsientoOcupado(int indice)
 {
     if (!asientosOcupados.contains(indice)) {
@@ -145,31 +157,14 @@ void Asientos::actualizarAsientoOcupado(int indice)
 }
 
 // GUARDAR LOS ASIENTOS OCUPADOS EN UN ARCHIVO
-
-
 void Asientos::guardarAsientosOcupados()
 {
-    QFile archivo("asientos_ocupados.csv");
-    if (archivo.open(QFile::WriteOnly | QFile::Text)) {
-        QTextStream out(&archivo);
-        for (int i = 0; i < asientosOcupados.size(); ++i) {
-            out << asientosOcupados[i] << "\n";
-        }
-        archivo.close();
-    }
+
 }
 
 // CARGAR LOS ASIENTOS OCUPADOS DESDE UN ARCHIVO
 void Asientos::cargarAsientosOcupados()
 {
-    QFile archivo("asientos_ocupados.csv");
-    if (archivo.open(QFile::ReadOnly | QFile::Text)) {
-        QTextStream in(&archivo);
-        while (!in.atEnd()) {
-            int indice = in.readLine().toInt();
-            asientosOcupados.append(indice);
-        }
-        archivo.close();
-    }
+
 }
 

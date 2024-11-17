@@ -26,6 +26,8 @@ public:
     bool isOcupado();
     void setOcupado(bool ocupado);
 
+    QStringList getAsientosSeleccionados() const;
+
 private slots:
     void continuarPago();
 
@@ -56,6 +58,8 @@ private:
 
     // Función para cargar los asientos ocupados desde un archivo
     void cargarAsientosOcupados();
+
+    QStringList asientosSeleccionados;
 
 };
 

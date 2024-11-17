@@ -142,3 +142,24 @@ QDateTimeEdit QAbstractItemView {
     background-color: #E9F1F7;
     color: #304D6D;
 }
+
+/* QListWidget */
+QListWidget {
+    background-color: #A7CCED;  /* Fondo */
+    color: #304D6D;             /* Texto */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+    min-height: 100px;          /* Altura mínima */
+}
+
+/* Elementos dentro del QListWidget */
+QListWidget::item {
+    border: 1px solid #82A0BC;  /* Bordes de los elementos */
+    padding: 4px;
+}
+
+QListWidget::item:selected {
+    background-color: #63ADF2;  /* Fondo del elemento seleccionado */
+    color: #E9F1F7;             /* Color del texto del seleccionado */
+}
