@@ -35,7 +35,8 @@ void VerPeliculas::actualizaPeliculasTabla(std::vector<Peliculas *> &vectorPelic
 
     ui->tableWidget->setRowCount(vectorPelicula.size());
 
-    for(int i = 0; i < vectorPelicula.size(); i++)
+    for (size_t i = 0; i < vectorPelicula.size(); i++)
+
     {
         const Peliculas *peli = vectorPelicula[i]; // Accede a cada elemento como referencia
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(peli->getTitulo()));
