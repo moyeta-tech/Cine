@@ -31,9 +31,15 @@ Venta::Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int ca
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::seleccionAsientos);
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::accept);
 
+    // CONECTAR LOS SPINBOX A LA FUNCION DE ACTUALIZAR EL TOTAL
+    connect(ui->spinBox_2d, &QSpinBox::valueChanged, this, &Venta::actualizarCosto);
+    connect(ui->spinBox_3d, &QSpinBox::valueChanged, this, &Venta::actualizarCosto);
+
+    // BOTONES DE APLICAR DESCUENTO
     connect(ui->Boton_2x1, &QPushButton::clicked, this, &Venta::aplicarDesc);
     connect(ui->Boton_25, &QPushButton::clicked, this, &Venta::aplicarDesc);
     connect(ui->Boton_10, &QPushButton::clicked, this, &Venta::aplicarDesc);
+
 }
 
 Venta::~Venta()
@@ -104,6 +110,10 @@ void Venta::setPago(Pago *pago)
 // Método para seleccionar asientos
 void Venta::seleccionAsientos()
 {
+    if(ui->comboBox_pelicula->currentIndex() == -1 || ui->spinBox_2d->value() == 0 || ui->spinBox_3d == 0) { // SI NO SE SELECCIONA NINGUNA PELICULA DEL COMBOBOX
+        QMessageBox::warning(this, "Advertencia", "Complete los campos vacíos por favor.");
+        return; // DETENEMOS LA EJECUCION DEL METODO
+    }
     // Abre el diálogo de asientos
     Asientos dialog(this);
     dialog.exec();
@@ -138,7 +148,7 @@ void Venta::actualizarCosto(){
 }
 
 void Venta::aplicarDesc(){
-    QPushButton *botonPresionado = qobject_cast<QPushButton *>(sender());
+    QPushButton *botonPresionado = qobject_cast<QPushButton *>(sender()); // IDENTIFICA AUTOMATICAMENTE QUE BOTON APRETAMOS
 
     if(botonPresionado == ui->Boton_2x1){
         descuentoActivo = "2x1";
@@ -148,7 +158,7 @@ void Venta::aplicarDesc(){
         descuentoActivo = "Débito";
     }
 
-    actualizarCosto();
+    actualizarCosto(); // SE LLAMA A LA FUNCION DE ACTUALIZAR EL TOTAL
 }
 
 // HOJA DE ESTILOS
@@ -160,3 +170,9 @@ void Venta::initstylesheet()
     QString stringEstilo = QString::fromLatin1(style.readAll());
     this->setStyleSheet(stringEstilo);
 }
+
+void Venta::on_Boton_continuar_clicked()
+{
+
+}
+
