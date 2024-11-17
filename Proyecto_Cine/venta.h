@@ -46,6 +46,8 @@ private slots:
     // METODO PARA ACTUALIZAR COSTO
     void actualizarCosto();
 
+    void on_Boton_continuar_clicked();
+
 private:
     Ui::Venta *ui;
 

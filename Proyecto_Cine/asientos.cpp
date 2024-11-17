@@ -131,6 +131,7 @@ void Asientos::seleccionarAsiento()
 }
 
 // ACTUALIZAR UN ASIENTO A OCUPADO
+
 void Asientos::actualizarAsientoOcupado(int indice)
 {
     if (!asientosOcupados.contains(indice)) {
@@ -144,9 +145,11 @@ void Asientos::actualizarAsientoOcupado(int indice)
 }
 
 // GUARDAR LOS ASIENTOS OCUPADOS EN UN ARCHIVO
+
+
 void Asientos::guardarAsientosOcupados()
 {
-    QFile archivo("asientos_ocupados.txt");
+    QFile archivo("asientos_ocupados.csv");
     if (archivo.open(QFile::WriteOnly | QFile::Text)) {
         QTextStream out(&archivo);
         for (int i = 0; i < asientosOcupados.size(); ++i) {
@@ -159,7 +162,7 @@ void Asientos::guardarAsientosOcupados()
 // CARGAR LOS ASIENTOS OCUPADOS DESDE UN ARCHIVO
 void Asientos::cargarAsientosOcupados()
 {
-    QFile archivo("asientos_ocupados.txt");
+    QFile archivo("asientos_ocupados.csv");
     if (archivo.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream in(&archivo);
         while (!in.atEnd()) {
@@ -169,3 +172,4 @@ void Asientos::cargarAsientosOcupados()
         archivo.close();
     }
 }
+
