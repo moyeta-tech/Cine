@@ -2,9 +2,9 @@
 #define PELICULAS_H
 
 #include <QDialog>
+
 #include <vector>
 #include <QFile>
-#include <algorithm>
 #include <QMessageBox>
 #include <QDebug>
 #include <QTime>
@@ -39,17 +39,11 @@ public:
     QString getSinopsis() const;
     void setSinopsis(QString sinopsis);
 
-    // Métodos para obtener y establecer los horarios
     QList<QTime> getHorarios() const;
     void setHorarios(const QList<QTime> &horarios);
 
     QDate getDia() const;
     void setDia(const QDate &fecha);
-
-    void guardarCambios(const QString &archivo);
-
-    // Declaración de la función estática
-    static std::vector<Peliculas*> cargarPeliculas(const QString &rutaArchivo);
 
 private slots:
     void modificarPelicula();
@@ -71,7 +65,7 @@ private:
     QString Genero;
     QString Clasificacion;
     QString Sinopsis;
-    QList<QTime> horarios;  // Ahora es una lista de horarios
+    QList<QTime> horarios;
     QDate dia;
     std::vector<Peliculas*> &vectorPelicula;
 };

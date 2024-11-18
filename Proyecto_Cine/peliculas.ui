@@ -39,6 +39,9 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="8" column="2">
+        <widget class="QTimeEdit" name="timeEdit_2"/>
+       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
@@ -46,20 +49,13 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="lineEdit_clasificacion"/>
+       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Clasificacion</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QLineEdit" name="lineEdit_clasificacion"/>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Horarios</string>
          </property>
         </widget>
        </item>
@@ -70,15 +66,15 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_3">
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="lineEdit_genero"/>
+       </item>
+       <item row="5" column="0" rowspan="4">
+        <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Duracion</string>
+          <string>Horarios</string>
          </property>
         </widget>
-       </item>
-       <item row="8" column="2">
-        <widget class="QTimeEdit" name="timeEdit_2"/>
        </item>
        <item row="10" column="0" colspan="4">
         <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -105,27 +101,18 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="2">
-        <widget class="QLineEdit" name="lineEdit_nombre_completo"/>
+       <item row="1" column="2">
+        <widget class="QSpinBox" name="spinBox_duracion"/>
        </item>
-       <item row="7" column="2">
-        <widget class="QTimeEdit" name="timeEdit_3"/>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLineEdit" name="lineEdit_genero"/>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Duracion</string>
+         </property>
+        </widget>
        </item>
        <item row="5" column="2">
         <widget class="QTimeEdit" name="timeEdit"/>
-       </item>
-       <item row="4" column="2">
-        <widget class="QDateEdit" name="dateEdit"/>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Nombre completo</string>
-         </property>
-        </widget>
        </item>
        <item row="0" column="3">
         <widget class="QLabel" name="label_8">
@@ -134,14 +121,27 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <widget class="QSpinBox" name="spinBox_duracion"/>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Nombre completo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="lineEdit_nombre_completo"/>
        </item>
        <item row="1" column="3" rowspan="4">
         <widget class="QTextEdit" name="textEdit_sinopsis"/>
        </item>
        <item row="6" column="2">
         <widget class="QTimeEdit" name="timeEdit_4"/>
+       </item>
+       <item row="7" column="2">
+        <widget class="QTimeEdit" name="timeEdit_3"/>
+       </item>
+       <item row="4" column="2">
+        <widget class="QDateEdit" name="dateEdit"/>
        </item>
       </layout>
      </item>
