@@ -73,7 +73,7 @@ void Peliculas::setSinopsis(QString sinopsis) {
 }
 
 QList<QTime> Peliculas::getHorarios() const {
-    return horarios;
+    return this->horarios;
 }
 
 void Peliculas::setHorarios(const QList<QTime> &horarios) {
@@ -81,7 +81,7 @@ void Peliculas::setHorarios(const QList<QTime> &horarios) {
 }
 
 QDate Peliculas::getDia() const {
-    return dia;
+    return this->dia;
 }
 
 void Peliculas::setDia(const QDate &d) {

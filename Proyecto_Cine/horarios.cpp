@@ -20,8 +20,14 @@ Horarios::Horarios(std::vector<Peliculas*> &VectorPeliculasRef, QWidget *parent)
     }
 
     // Conectamos el evento de cambio en el QComboBox
-    connect(ui->comboBox_peliculas, QOverload<int>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBox_peliculas, &QComboBox::currentIndexChanged,
             this, &Horarios::mostrarHorariosYDia);
+
+    // SELECCIONA UN INDICE POR DEFECTO Y MOSTRAMOS LOS DATOS CON "mostrarHorariosYDia();"
+    if(!VectorPeliculas.empty()){
+        ui->comboBox_peliculas->setCurrentIndex(0);
+        mostrarHorariosYDia();
+    }
 }
 
 Horarios::~Horarios()
@@ -51,6 +57,7 @@ void Horarios::mostrarHorariosYDia()
 
     // Mostrar horarios en la lista
     for (const QTime &horario : horarios) {
+        qDebug() << "Agregando horario:" << horario.toString("hh:mm");
         ui->listWidget_horarios->addItem(horario.toString("hh:mm"));
     }
 
