@@ -2,7 +2,6 @@
 #include "ui_peliculas.h"
 
 #include <QFile>
-#include <QTextStream>
 #include <QStringList>
 #include <vector>
 #include <QMessageBox>
@@ -89,10 +88,6 @@ void Peliculas::setDia(const QDate &d) {
     dia = d;
 }
 
-//////////////////////////////////////////
-// INICIALIZACIÓN Y ESTILOS
-//////////////////////////////////////////
-
 void Peliculas::initstylesheet() {
     QFile style(":/src/stylesheet/stylesheet-ventanas.css");
     bool styleOK = style.open(QFile::ReadOnly);
@@ -101,35 +96,41 @@ void Peliculas::initstylesheet() {
     this->setStyleSheet(stringEstilo);
 }
 
-//////////////////////////////////////////
-// BOTONES Y FUNCIONALIDAD
-//////////////////////////////////////////
-
 void Peliculas::agregarPelicula()
 {
-    Peliculas *pelicula = new Peliculas(vectorPelicula, this);
-    pelicula->setTitulo(ui->lineEdit_nombre_completo->text());
-    pelicula->setDuracion(ui->spinBox_duracion->value());
-    pelicula->setGenero(ui->lineEdit_genero->text());
-    pelicula->setClasificacion(ui->lineEdit_clasificacion->text());
-    pelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText());
+    // Obtener los datos de la interfaz gráfica
+    QString titulo = ui->lineEdit_nombre_completo->text();
+    int duracion = ui->spinBox_duracion->value();
+    QString genero = ui->lineEdit_genero->text();
+    QString clasificacion = ui->lineEdit_clasificacion->text();
+    QString sinopsis = ui->textEdit_sinopsis->toPlainText();
+    QDate dia = ui->dateEdit->date();
 
+    // Obtener los horarios desde los QTimeEdit
     QList<QTime> horarios;
-    horarios.append(ui->timeEdit->time());
-    horarios.append(ui->timeEdit_2->time());
-    horarios.append(ui->timeEdit_3->time());
-    horarios.append(ui->timeEdit_4->time());
+    horarios.append(ui->timeEdit->time()); // QTimeEdit para el primer horario
+    horarios.append(ui->timeEdit_2->time()); // QTimeEdit para el segundo horario
+    horarios.append(ui->timeEdit_3->time()); // QTimeEdit para el tercer horario
+    horarios.append(ui->timeEdit_4->time()); // QTimeEdit para el cuarto horario
 
-    pelicula->setHorarios(horarios);
-    pelicula->setDia(ui->dateEdit->date());
+    // Crear la nueva película con los datos recogidos
+    Peliculas* nuevaPelicula = new Peliculas(vectorPelicula);
+    nuevaPelicula->setTitulo(titulo);
+    nuevaPelicula->setDuracion(duracion);
+    nuevaPelicula->setGenero(genero);
+    nuevaPelicula->setClasificacion(clasificacion);
+    nuevaPelicula->setSinopsis(sinopsis);
+    nuevaPelicula->setHorarios(horarios);
+    nuevaPelicula->setDia(dia);
 
-    vectorPelicula.push_back(pelicula);
+    // Agregar la nueva película al vector
+    vectorPelicula.push_back(nuevaPelicula);
 
-    emit peliAgregada(pelicula->getTitulo(), pelicula->getDuracion(),
-                      pelicula->getGenero(), pelicula->getClasificacion(),
-                      pelicula->getSinopsis(), pelicula->getHorarios(),
-                      pelicula->getDia());
+    // Mostrar un mensaje de éxito
+    QMessageBox::information(this, "Película Agregada", "La película se ha agregado correctamente.");
 }
+
+
 
 void Peliculas::buscarPelicula() {
     QString valor = ui->lineEdit_nombre->text();
@@ -221,3 +222,4 @@ void Peliculas::modificarPelicula() {
         QMessageBox::warning(this, "Error", "Película no encontrada");
     }
 }
+
