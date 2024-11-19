@@ -102,9 +102,16 @@
     <addaction name="actionRegistro_peliculas"/>
     <addaction name="actionVer_peliculas"/>
    </widget>
+   <widget class="QMenu" name="menuHistorial">
+    <property name="title">
+     <string>Historial</string>
+    </property>
+    <addaction name="actionVer_historial"/>
+   </widget>
    <addaction name="menuPersonal"/>
    <addaction name="menuClientes"/>
    <addaction name="menuPelicular"/>
+   <addaction name="menuHistorial"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionRegistro_cine">
@@ -170,6 +177,11 @@
   <action name="actionImprimir_4">
    <property name="text">
     <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionVer_historial">
+   <property name="text">
+    <string>Ver historial</string>
    </property>
   </action>
  </widget>

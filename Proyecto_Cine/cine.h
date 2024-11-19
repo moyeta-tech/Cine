@@ -13,10 +13,7 @@
 #include "clientes.h"
 #include "empleados.h"
 #include "peliculas.h"
-#include "sala.h"
-#include "map"
-#include "unordered_map"
-#include "verpeliculas.h"
+#include "verhistorial.h"
 
 namespace Ui {
 class Cine;
@@ -48,6 +45,8 @@ private slots:
     void agregarEmpleados();
     void mostrarEmpelados();
 
+    void mostrarHistorial();
+
     //Slots para los botones
     void mostrarPrecios();
     void mostrarHorarios();
@@ -63,6 +62,8 @@ private slots:
     // SLOT PARA AGREGAR UN EMPLEADO
     void procesarEmpleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
 
+    void agregarVenta(QString fecha, double monto);
+
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
@@ -73,11 +74,14 @@ private:
     QString Nombre;
     QString Ubicacion;
 
+
     // CONTENEDORES PARA EL MANEJO DE DATOS
 
     std::vector<Peliculas*> vectorPelicula;
     std::vector<Clientes*> vectorClientes;
     std::vector<Empleados* > vectorEmpleados;
+    std::vector<Venta* > vectorHistorial;
+
 };
 
 #endif // CINE_H

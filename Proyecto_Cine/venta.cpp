@@ -4,7 +4,7 @@
 #include "pago.h"
 #include "asientos.h"
 
-Venta::Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent)
+Venta::Venta(std::vector<Peliculas *> VectorPeliculasRef, QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Venta)
     , Fecha(fecha)
@@ -52,9 +52,27 @@ Venta::Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int ca
     }
 }
 
+Venta::Venta(){}
+
 Venta::~Venta()
 {
     delete ui;
+}
+
+QString Venta::getFecha(){  // GET Y SET DE FECHA
+    return Fecha;
+}
+
+void Venta::setFecha(QString fecha){
+    Fecha = fecha;
+}
+
+Pago *Venta::getPago(){
+    return pago;
+}
+
+void Venta::setPago(Pago *pago){
+    pago = pago;
 }
 
 void Venta::initstylesheet()
@@ -186,5 +204,14 @@ void Venta::resetearDescuento()
     descuentoAplicado = false;
     costoTotal = costoBase; // Restaura el precio base
     ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
+}
+
+
+void Venta::on_Boton_continuar_clicked()
+{
+    QString fecha = ui->label_dia->text();
+    double monto = ui->label_9->text().toDouble();
+
+    emit ventaConfirmada(fecha, monto);
 }
 

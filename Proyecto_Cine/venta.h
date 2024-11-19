@@ -18,9 +18,10 @@ class Venta : public QDialog
     Q_OBJECT
 
 public:
-    explicit Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent = nullptr);
+    explicit Venta(std::vector<Peliculas *> VectorPeliculasRef, QString fecha, int cantasientos, Clientes *cliente, Horarios *horario, Pago *pago, QWidget *parent = nullptr);
     ~Venta();
 
+    Venta();
     QString getFecha();
     void setFecha(QString fecha);
     int getcantAsientos();
@@ -51,6 +52,11 @@ private slots:
 
     void resetearDescuento();
 
+    void on_Boton_continuar_clicked();
+
+signals:
+    void ventaConfirmada(QString fecha, double monto);
+
 private:
     Ui::Venta *ui;
 
@@ -68,7 +74,7 @@ private:
     bool descuentoAplicado = false; // Para saber si ya se ha aplicado un descuento
 
     // Referencia al vector de películas
-    std::vector<Peliculas *> &VectorPeliculas;
+    std::vector<Peliculas *> VectorPeliculas;
 };
 
 #endif // VENTA_H

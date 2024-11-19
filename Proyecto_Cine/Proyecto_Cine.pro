@@ -26,6 +26,7 @@ SOURCES += \
     venta.cpp \
     verclientes.cpp \
     verempleados.cpp \
+    verhistorial.cpp \
     verpeliculas.cpp
 
 HEADERS += \
@@ -44,6 +45,7 @@ HEADERS += \
     venta.h \
     verclientes.h \
     verempleados.h \
+    verhistorial.h \
     verpeliculas.h
 
 FORMS += \
@@ -60,6 +62,7 @@ FORMS += \
     venta.ui \
     verclientes.ui \
     verempleados.ui \
+    verhistorial.ui \
     verpeliculas.ui
 
 # Default rules for deployment.

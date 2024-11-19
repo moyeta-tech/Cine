@@ -18,8 +18,8 @@ public:
 
     QString getMetodo();
     void setMetodo(QString metodo);
-    float getMonto();
-    void setMonto(float monto);
+    double &getMonto();
+    void setMonto(double monto);
     QString getFecha();
     void setFecha(QString fecha);
 
@@ -35,7 +35,7 @@ private:
     Ui::Pago *ui;
 
     QString Metodo;
-    float Monto;
+    double Monto;
     QString Fecha;
 
     QString AsientosSeleccionados; // Variable para almacenar los asientos

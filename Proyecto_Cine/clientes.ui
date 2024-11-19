@@ -76,13 +76,6 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QPushButton" name="Boton_historial">
-       <property name="text">
-        <string>Mostrar historial de compras</string>
-       </property>
-      </widget>
-     </item>
      <item row="6" column="1">
       <widget class="QLabel" name="label_historial">
        <property name="text">

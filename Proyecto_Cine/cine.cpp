@@ -23,6 +23,9 @@ Cine::Cine(QWidget *parent)
     ui->setupUi(this);
     qDebug() << "Interfaz de usuario cargada";
 
+
+
+
     //Establecemos el titulo de la ventana
     this->setWindowTitle("Inicio");
 
@@ -38,6 +41,8 @@ Cine::Cine(QWidget *parent)
 
     connect (ui->actionRegistrar_personal, &QAction::triggered, this, &Cine::agregarEmpleados);
     connect (ui->actionVer_personal, &QAction::triggered, this, &Cine::mostrarEmpelados);
+
+    connect(ui->actionVer_historial, &QAction::triggered, this, &Cine::mostrarHistorial);
 
     //Conetamos los botones a los slots correspondientes
     connect(ui->Boton_horario, &QPushButton::clicked, this, &Cine::mostrarHorarios);
@@ -150,6 +155,18 @@ void Cine::mostrarEmpelados()
     dialog.exec();
 }
 
+void Cine::mostrarHistorial(){
+    verHistorial dialog(vectorHistorial, this);
+
+    // Recorres el contenedor de ventas y las agregas a la tabla
+    for (const auto& venta : vectorHistorial) {
+        dialog.cargarDatosTabla(venta->getFecha(), venta->getPago()->getMonto()); // Usamos el método ya definido en `verHistorial`
+    }
+
+    dialog.exec();
+}
+
+
 void Cine::mostrarPrecios()
 {
     Precios dialog(" ", 0.0f, 0.0f);
@@ -221,3 +238,17 @@ void Cine::procesarEmpleadoAgregado(int idempleado, QString nombre, QString apel
     nuevoEmpleado->setTelefono(telefono);
     nuevoEmpleado->setPuesto(puesto);
 }
+
+void Cine::agregarVenta(QString fecha, double monto){
+
+    Venta *nuevaVenta = new Venta();
+    nuevaVenta->getFecha() = fecha;
+    if(nuevaVenta->getPago() != nullptr){
+        nuevaVenta->getPago()->getMonto() = monto;
+    }
+
+
+    vectorHistorial.push_back(nuevaVenta);
+
+}
+

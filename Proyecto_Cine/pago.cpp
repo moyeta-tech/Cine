@@ -43,12 +43,12 @@ void Pago::setMetodo(QString metodo)
     Metodo = metodo;  // Usamos 'Metodo' en lugar de 'metodoPago'
 }
 
-float Pago::getMonto()
+double& Pago::getMonto()
 {
     return Monto;  // Usamos 'Monto' en lugar de 'montoTotal'
 }
 
-void Pago::setMonto(float monto)
+void Pago::setMonto(double monto)
 {
     Monto = monto;  // Usamos 'Monto' en lugar de 'montoTotal'
 }
