@@ -2,8 +2,10 @@
 #define VENTA_H
 
 #include <QDialog>
-
 #include <QFile>
+#include <QRadioButton>
+#include <QSpinBox>
+#include <QMessageBox>
 
 #include "clientes.h"
 #include "horarios.h"
@@ -33,35 +35,36 @@ public:
     Pago *getPago();
     void setPago(Pago *pago);
 
-    // METODO PARA APLICAR DESCUENTO
+    // Método para aplicar descuento
     void aplicarDesc();
 
-
 private slots:
-    void seleccionAsientos();
-
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    // Inicialización del stylesheet
     void initstylesheet();
 
-    // METODO PARA ACTUALIZAR COSTO
+    // Métodos para actualizar costos y horarios
     void actualizarCosto();
-
     void actualizarHorarios();
+
+    // Método para gestionar la selección de asientos
+    void seleccionAsientos();
 
 private:
     Ui::Venta *ui;
 
+    // Atributos
     QString Fecha;
     int cantAsientos;
     Clientes *cliente;
     Horarios *horario;
     Pago *pago;
-    // ATRIBUTOS PARA REALIZAR UNA VENTA
+
+    // Atributos de la venta
     double costoTotal = 0.0;
     QString descuentoActivo = "";
 
+    // Referencia al vector de películas
     std::vector<Peliculas *> &VectorPeliculas;
-
 };
 
 #endif // VENTA_H
