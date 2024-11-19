@@ -1,10 +1,11 @@
 #include "asientos.h"
 #include "ui_asientos.h"
-
 #include "pago.h"
 
 #include <QDebug>
 #include <QMessageBox>
+#include <QFile>
+#include <QTextStream>
 
 Asientos::Asientos(QWidget *parent)
     : QDialog(parent)
@@ -12,13 +13,13 @@ Asientos::Asientos(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //Establecemos el titulo de la ventana
-    this->setWindowTitle("Paso 2: Seleccion de asiento");
+    // Establecemos el título de la ventana
+    this->setWindowTitle("Paso 2: Selección de asiento");
 
-    //Llamamos al slot para cargar el stylesheet
+    // Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
-    //Conectamos el boton continuar para llegar a la ventana de pago
+    // Conectamos el botón continuar para llegar a la ventana de pago
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Asientos::continuarPago);
 
     // Inicializamos la lista de botones de los asientos
@@ -33,6 +34,11 @@ Asientos::Asientos(QWidget *parent)
         ui->H1, ui->H2, ui->H5, ui->H6, ui->H7, ui->H8,
         ui->I1, ui->I2, ui->I3, ui->I4, ui->I5, ui->I6, ui->I7, ui->I8
     };
+
+    // Hacer que todos los botones sean checkable
+    for (QPushButton* boton : botonesAsientos) {
+        boton->setCheckable(true);
+    }
 
     // Cargar los asientos ocupados desde un archivo
     cargarAsientosOcupados();
@@ -52,7 +58,6 @@ Asientos::~Asientos()
 }
 
 // GET Y SET DE NUMERO
-
 int Asientos::getNumero()
 {
     return Numero;
@@ -63,12 +68,10 @@ void Asientos::setNumero(int numero)
 }
 
 // GET Y SET DE FILA
-
 QString Asientos::getFila()
 {
     return Fila;
 }
-
 
 void Asientos::setFila(QString fila)
 {
@@ -136,21 +139,22 @@ void Asientos::seleccionarAsiento() {
     QPushButton* boton = qobject_cast<QPushButton*>(sender());
     if (boton) {
         if (boton->isChecked()) {
-            // Si el asiento ya estaba seleccionado, desmarcar
-            boton->setChecked(false);
+            // Si el asiento estaba desmarcado, se marca
+            boton->setStyleSheet("background-color: yellow; color: black;");
+            seleccionados++;
+        } else {
+            // Si el asiento estaba marcado, se desmarca
             boton->setStyleSheet("background-color: green; color: white;");
             seleccionados--;
-        } else {
-            if (seleccionados < limiteAsientos) {
-                // Permitir seleccionar si no excede el límite
-                boton->setChecked(true);
-                boton->setStyleSheet("background-color: yellow; color: black;");
-                seleccionados++;
-            } else {
-                // Mostrar un mensaje si intenta seleccionar más de lo permitido
-                QMessageBox::warning(this, "Límite alcanzado",
-                                     "No puedes seleccionar más asientos que los indicados.");
-            }
+        }
+
+        // Asegurar que no exceda el límite de asientos
+        if (seleccionados > limiteAsientos) {
+            // Desmarcar el último asiento seleccionado
+            boton->setChecked(false);
+            seleccionados--;
+            QMessageBox::warning(this, "Límite alcanzado",
+                                 "No puedes seleccionar más asientos que los indicados.");
         }
     }
 }
@@ -171,12 +175,27 @@ void Asientos::actualizarAsientoOcupado(int indice)
 // GUARDAR LOS ASIENTOS OCUPADOS EN UN ARCHIVO
 void Asientos::guardarAsientosOcupados()
 {
-
+    QFile file("asientos_ocupados.txt");
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+        for (int i = 0; i < asientosOcupados.size(); ++i) {
+            out << asientosOcupados[i] << "\n";
+        }
+        file.close();
+    }
 }
 
 // CARGAR LOS ASIENTOS OCUPADOS DESDE UN ARCHIVO
 void Asientos::cargarAsientosOcupados()
 {
-
+    QFile file("asientos_ocupados.txt");
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        asientosOcupados.clear();
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            asientosOcupados.append(line.toInt());
+        }
+        file.close();
+    }
 }
-

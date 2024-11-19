@@ -2,7 +2,7 @@
 #define ASIENTOS_H
 
 #include <QDialog>
-#include <QPushButton>
+
 #include <QFile>
 #include <QStringList>
 #include <QMessageBox>
@@ -23,16 +23,15 @@ public:
     void setNumero(int numero);
     QString getFila();
     void setFila(QString fila);
-    bool isOcupado();
-    void setOcupado(bool ocupado);
 
+    // Método para obtener la lista de asientos seleccionados
     QStringList getAsientosSeleccionados() const;
 
     // Método para establecer el límite de asientos seleccionables
     void setLimiteAsientos(int limite);
 
 private slots:
-    void continuarPago();
+    void continuarPago();  // Slot para continuar al pago
 
     // Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
@@ -53,6 +52,9 @@ private:
     // Lista para almacenar los asientos ocupados (por su índice)
     QList<int> asientosOcupados;
 
+    // Lista de asientos seleccionados (cuando el usuario los selecciona)
+    QStringList asientosSeleccionados;
+
     // Función para inicializar y marcar los asientos ocupados
     void marcarAsientosOcupados();
 
@@ -62,10 +64,11 @@ private:
     // Función para cargar los asientos ocupados desde un archivo
     void cargarAsientosOcupados();
 
-    QStringList asientosSeleccionados; // Lista de asientos seleccionados
+    // Límite de asientos seleccionables
+    int limiteAsientos = 0;
 
-    int limiteAsientos = 0; // Límite de selección de asientos
-    int seleccionados = 0;  // Número de asientos actualmente seleccionados
+    // Número de asientos actualmente seleccionados
+    int seleccionados = 0;
 };
 
 #endif // ASIENTOS_H
