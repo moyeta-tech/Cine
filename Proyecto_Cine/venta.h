@@ -49,6 +49,8 @@ private slots:
     void aplicarDescuento25(); // Aplicar descuento del 25%
     void aplicarDescuento2x1(); // Aplicar descuento 2x1
 
+    void resetearDescuento();
+
 private:
     Ui::Venta *ui;
 
@@ -62,6 +64,8 @@ private:
     // Atributos de la venta
     double costoTotal = 0.0;
     QString descuentoActivo = "";
+    double costoBase = 0;  // Almacena el precio base sin descuentos
+    bool descuentoAplicado = false; // Para saber si ya se ha aplicado un descuento
 
     // Referencia al vector de películas
     std::vector<Peliculas *> &VectorPeliculas;

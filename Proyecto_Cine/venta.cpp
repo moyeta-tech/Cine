@@ -117,36 +117,74 @@ void Venta::actualizarCosto()
     double precio2D = 2000; // Precio 2D
     double precio3D = 2750; // Precio 3D
 
+    // Calcula el costo base
     if (ui->radioButton_2d->isChecked()) {
-        costoTotal = cantidad * precio2D;
+        costoBase = cantidad * precio2D;
     } else if (ui->radioButton_3d->isChecked()) {
-        costoTotal = cantidad * precio3D;
+        costoBase = cantidad * precio3D;
+    }
+
+    // Si no hay descuento aplicado, actualiza el costo total
+    if (!descuentoAplicado) {
+        costoTotal = costoBase;
     }
 
     ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
 }
 
+
 // Función para aplicar descuento del 10%
 void Venta::aplicarDescuento10()
 {
-    costoTotal *= 0.90;  // Aplica un descuento del 10%
+    // Si ya se había aplicado un descuento, restaura el costo base
+    if (descuentoAplicado) {
+        costoTotal = costoBase; // Restaura el precio base
+    }
+
+    // Aplica el descuento del 10%
+    costoTotal *= 0.90;
+    descuentoAplicado = true; // Marca que se ha aplicado el descuento
     ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
 }
+
 
 // Función para aplicar descuento del 25%
 void Venta::aplicarDescuento25()
 {
-    costoTotal *= 0.75;  // Aplica un descuento del 25%
+    // Si ya se había aplicado un descuento, restaura el costo base
+    if (descuentoAplicado) {
+        costoTotal = costoBase; // Restaura el precio base
+    }
+
+    // Aplica el descuento del 25%
+    costoTotal *= 0.75;
+    descuentoAplicado = true; // Marca que se ha aplicado el descuento
     ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
 }
+
 
 // Función para aplicar descuento 2x1
 void Venta::aplicarDescuento2x1()
 {
+    // Si ya se había aplicado un descuento, restaura el costo base
+    if (descuentoAplicado) {
+        costoTotal = costoBase; // Restaura el precio base
+    }
+
     int cantidad = ui->spinBox_cantidad->value();
     if (cantidad >= 2) {
         int cantidadDescuento = cantidad / 2 + (cantidad % 2); // Compra 2, obtén 1
         costoTotal = cantidadDescuento * (ui->radioButton_2d->isChecked() ? 2000 : 2750); // Asegúrate de que el precio esté actualizado
     }
+    descuentoAplicado = true; // Marca que se ha aplicado el descuento
     ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
 }
+
+
+void Venta::resetearDescuento()
+{
+    descuentoAplicado = false;
+    costoTotal = costoBase; // Restaura el precio base
+    ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
+}
+
