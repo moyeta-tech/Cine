@@ -3,8 +3,6 @@
 
 #include <QDialog>
 #include <QFile>
-#include <QRadioButton>
-#include <QSpinBox>
 #include <QMessageBox>
 
 #include "clientes.h"
@@ -35,9 +33,6 @@ public:
     Pago *getPago();
     void setPago(Pago *pago);
 
-    // Método para aplicar descuento
-    void aplicarDesc();
-
 private slots:
     // Inicialización del stylesheet
     void initstylesheet();
@@ -48,6 +43,11 @@ private slots:
 
     // Método para gestionar la selección de asientos
     void seleccionAsientos();
+
+    // Métodos para aplicar descuentos
+    void aplicarDescuento10(); // Aplicar descuento del 10%
+    void aplicarDescuento25(); // Aplicar descuento del 25%
+    void aplicarDescuento2x1(); // Aplicar descuento 2x1
 
 private:
     Ui::Venta *ui;

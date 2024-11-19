@@ -36,6 +36,11 @@ Venta::Venta(std::vector<Peliculas *> &VectorPeliculasRef, QString fecha, int ca
     connect(ui->radioButton_3d, &QRadioButton::toggled, this, &Venta::actualizarCosto);
     connect(ui->spinBox_cantidad, SIGNAL(valueChanged(int)), this, SLOT(actualizarCosto()));
 
+    // Conectar botones de descuento
+    connect(ui->Boton_10, &QPushButton::clicked, this, &Venta::aplicarDescuento10);
+    connect(ui->Boton_25, &QPushButton::clicked, this, &Venta::aplicarDescuento25);
+    connect(ui->Boton_2x1, &QPushButton::clicked, this, &Venta::aplicarDescuento2x1);
+
     // Inicializar valores
     ui->radioButton_2d->setChecked(true); // Por defecto, selecciona 2D
     ui->spinBox_cantidad->setValue(1); // Cantidad inicial
@@ -118,5 +123,30 @@ void Venta::actualizarCosto()
         costoTotal = cantidad * precio3D;
     }
 
+    ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
+}
+
+// Función para aplicar descuento del 10%
+void Venta::aplicarDescuento10()
+{
+    costoTotal *= 0.90;  // Aplica un descuento del 10%
+    ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
+}
+
+// Función para aplicar descuento del 25%
+void Venta::aplicarDescuento25()
+{
+    costoTotal *= 0.75;  // Aplica un descuento del 25%
+    ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
+}
+
+// Función para aplicar descuento 2x1
+void Venta::aplicarDescuento2x1()
+{
+    int cantidad = ui->spinBox_cantidad->value();
+    if (cantidad >= 2) {
+        int cantidadDescuento = cantidad / 2 + (cantidad % 2); // Compra 2, obtén 1
+        costoTotal = cantidadDescuento * (ui->radioButton_2d->isChecked() ? 2000 : 2750); // Asegúrate de que el precio esté actualizado
+    }
     ui->label_9->setText(QString("Total: $%1").arg(QString::number(costoTotal, 'f', 2)));
 }
