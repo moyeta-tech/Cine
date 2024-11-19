@@ -4,6 +4,7 @@
 #include "pago.h"
 
 #include <QDebug>
+#include <QMessageBox>
 
 Asientos::Asientos(QWidget *parent)
     : QDialog(parent)
@@ -126,20 +127,31 @@ void Asientos::marcarAsientosOcupados()
     }
 }
 
+void Asientos::setLimiteAsientos(int limite) {
+    limiteAsientos = limite;
+}
+
 // MÉTODO PARA SELECCIONAR UN ASIENTO
-void Asientos::seleccionarAsiento()
-{
+void Asientos::seleccionarAsiento() {
     QPushButton* boton = qobject_cast<QPushButton*>(sender());
     if (boton) {
-        // Marca el asiento como seleccionado (cambia a color amarillo o cualquier color que desees)
-        boton->setStyleSheet("background-color: yellow; color: black;");
-
-        // Mostrar un mensaje o hacer alguna acción al seleccionar un asiento
-        qDebug() << "Asiento seleccionado: " << boton->text();
-
-        // Actualizar el asiento seleccionado como ocupado
-        int indice = botonesAsientos.indexOf(boton);
-        actualizarAsientoOcupado(indice);
+        if (boton->isChecked()) {
+            // Si el asiento ya estaba seleccionado, desmarcar
+            boton->setChecked(false);
+            boton->setStyleSheet("background-color: green; color: white;");
+            seleccionados--;
+        } else {
+            if (seleccionados < limiteAsientos) {
+                // Permitir seleccionar si no excede el límite
+                boton->setChecked(true);
+                boton->setStyleSheet("background-color: yellow; color: black;");
+                seleccionados++;
+            } else {
+                // Mostrar un mensaje si intenta seleccionar más de lo permitido
+                QMessageBox::warning(this, "Límite alcanzado",
+                                     "No puedes seleccionar más asientos que los indicados.");
+            }
+        }
     }
 }
 

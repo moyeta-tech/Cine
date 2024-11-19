@@ -80,9 +80,11 @@ void Venta::actualizarHorarios()
     ui->label_dia->setText("Día: " + dia.toString("dd/MM/yyyy"));
 }
 
-void Venta::seleccionAsientos()
-{
-    if (ui->comboBox_pelicula->currentIndex() == -1 || ui->spinBox_cantidad->value() == 0 || ui->label_dia->text().isEmpty() || ui->listWidget_horarios->selectedItems().isEmpty()) {
+void Venta::seleccionAsientos() {
+    if (ui->comboBox_pelicula->currentIndex() == -1 ||
+        ui->spinBox_cantidad->value() == 0 ||
+        ui->label_dia->text().isEmpty() ||
+        ui->listWidget_horarios->selectedItems().isEmpty()) {
         QMessageBox::warning(this, "Advertencia", "Complete los campos vacíos por favor.");
         return;
     }
@@ -92,6 +94,7 @@ void Venta::seleccionAsientos()
     Fecha = diaSeleccionado + " " + horaSeleccionada;
 
     Asientos asientosDialog(this);
+    asientosDialog.setLimiteAsientos(ui->spinBox_cantidad->value()); // Pasa el límite
     if (asientosDialog.exec() == QDialog::Accepted) {
         QString metodo = "Tarjeta";
         float monto = costoTotal;
@@ -101,6 +104,7 @@ void Venta::seleccionAsientos()
         pagoDialog.exec();
     }
 }
+
 
 void Venta::actualizarCosto()
 {
