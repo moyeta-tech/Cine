@@ -53,17 +53,16 @@ void Venta::initstylesheet()
     QString stringEstilo = QString::fromLatin1(style.readAll());
     this->setStyleSheet(stringEstilo);
 }
-
 // Método para seleccionar asientos
 void Venta::seleccionAsientos()
 {
-    if (ui->comboBox_pelicula->currentIndex() == -1 || ui->spinBox_2d->value() == 0 || ui->spinBox_3d->value() == 0 || ui->comboBox_dia->currentIndex() == -1 || ui->listWidget_horarios->selectedItems().isEmpty()) {
+    if (ui->comboBox_pelicula->currentIndex() == -1 || ui->spinBox_2d->value() == 0 || ui->spinBox_3d->value() == 0 || ui->label_dia->text().isEmpty() || ui->listWidget_horarios->selectedItems().isEmpty()) {
         QMessageBox::warning(this, "Advertencia", "Complete los campos vacíos por favor.");
         return;
     }
 
     // Obtener la fecha y hora seleccionadas
-    QString diaSeleccionado = ui->comboBox_dia->currentText();
+    QString diaSeleccionado = ui->label_dia->text(); // Ahora obtenemos el texto del QLabel
     QString horaSeleccionada = ui->listWidget_horarios->selectedItems().first()->text();
     Fecha = diaSeleccionado + " " + horaSeleccionada;
 

@@ -16,108 +16,45 @@
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Fecha</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_sucursal">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_horario">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLabel" name="label_cantidad">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <widget class="QPushButton" name="Boton_finalizar">
-       <property name="text">
-        <string>Finalizar</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLabel" name="label_asiento">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QComboBox" name="comboBox_medios"/>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLabel" name="label_tipo">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label_pelicula">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="label_fecha">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Pelicula</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>Entradas</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="label_17">
        <property name="text">
         <string>Medio de pago</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
-      <widget class="QLabel" name="label_total">
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_dia">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="7" column="0">
+     <item row="4" column="1">
+      <widget class="QLabel" name="label_asiento">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>Asiento</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
       <widget class="QLabel" name="label_11">
        <property name="text">
         <string>Total</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="7" column="1">
+      <widget class="QComboBox" name="comboBox_medios"/>
+     </item>
+     <item row="2" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Horario</string>
@@ -125,20 +62,69 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Complejo</string>
+        <string>Pelicula</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_pelicula">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QPushButton" name="Boton_finalizar">
+       <property name="text">
+        <string>Finalizar</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLabel" name="label_cantidad">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QLabel" name="label_15">
+      <widget class="QLabel" name="label_10">
        <property name="text">
-        <string>Asiento</string>
+        <string>Cantidad de entradas</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_tipo">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLabel" name="label_total">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_horario">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Dia</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
       <widget class="QLabel" name="label_16">
        <property name="text">
         <string>Tipo de ticket</string>
