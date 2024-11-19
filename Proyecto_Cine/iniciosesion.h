@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QFile>
+#include <QSet>  // Para almacenar los IDs de los empleados
 #include <QDebug>
 
 namespace Ui {
@@ -20,15 +21,21 @@ public:
 private slots:
     void iniciarSesion();
     void salirVentana();
-    void recuperarPassword();
 
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    // Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
 private:
     Ui::InicioSesion *ui;
 
-    bool validarCredenciales(const QString &usuario, const QString &password);
+    // Función que valida si el ID de empleado existe en el conjunto de empleados
+    bool validarCredenciales(const QString &usuario);
+
+    // Conjunto estático para almacenar los IDs de los empleados
+    static QSet<QString> empleadosIDs;
+
+    // Carga los IDs de los empleados desde el archivo CSV
+    void cargarEmpleados();
 };
 
 #endif // INICIOSESION_H

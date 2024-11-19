@@ -19,9 +19,7 @@ SOURCES += \
     main.cpp \
     pago.cpp \
     peliculas.cpp \
-    persona.cpp \
     precios.cpp \
-    recuperarpassw.cpp \
     sala.cpp \
     venta.cpp \
     verclientes.cpp \
@@ -38,9 +36,7 @@ HEADERS += \
     iniciosesion.h \
     pago.h \
     peliculas.h \
-    persona.h \
     precios.h \
-    recuperarpassw.h \
     sala.h \
     venta.h \
     verclientes.h \
@@ -58,7 +54,6 @@ FORMS += \
     pago.ui \
     peliculas.ui \
     precios.ui \
-    recuperarpassw.ui \
     venta.ui \
     verclientes.ui \
     verempleados.ui \

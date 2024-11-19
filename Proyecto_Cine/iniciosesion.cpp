@@ -1,10 +1,13 @@
 #include "iniciosesion.h"
 #include "ui_iniciosesion.h"
 
-#include "recuperarpassw.h"
-
 #include <QMessageBox>
 #include <QIcon>
+#include <QFile>
+#include <QTextStream>
+#include <QSet>
+#include <QDir>
+#include <QDebug>
 
 InicioSesion::InicioSesion(QWidget *parent)
     : QDialog(parent)
@@ -12,23 +15,24 @@ InicioSesion::InicioSesion(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //Establecemos el titulo de la ventana
-    this->setWindowTitle("Iniciar sesion");
+    // Establecemos el título de la ventana
+    this->setWindowTitle("Iniciar sesión");
 
-    //Establecemos el icono de la ventana
+    // Establecemos el icono de la ventana
     setWindowIcon(QIcon(":/images/src/icons/image cine.ico"));
 
-    //Llamamos al slot para cargar el stylesheet
+    // Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
-    //Conectamos los botones con lso slots correspondientes
+    // Conectamos los botones con los slots correspondientes
     connect(ui->Boton_iniciar, &QPushButton::clicked, this, &InicioSesion::iniciarSesion);
     connect(ui->Boton_salir, &QPushButton::clicked, this, &InicioSesion::salirVentana);
-    connect(ui->Boton_olvide, &QPushButton::clicked, this, &InicioSesion::recuperarPassword);
 
-    //Establecemos un inicono de inicio de sesion
+    // Establecemos un icono de inicio de sesión
     ui->label->setPixmap(QPixmap(":/images/src/icons/login.png").scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
+    // Cargar los ID de empleados desde el archivo CSV
+    cargarEmpleados();
 }
 
 InicioSesion::~InicioSesion()
@@ -36,36 +40,55 @@ InicioSesion::~InicioSesion()
     delete ui;
 }
 
-bool InicioSesion::validarCredenciales(const QString &usuario, const QString &password)
+QSet<QString> InicioSesion::empleadosIDs;  // Set estático para almacenar los ID de empleados
+
+void InicioSesion::cargarEmpleados()
 {
-    // Validamos con datos estaticos para el ejemplo.
-    if (usuario == "empleado" && password == "1234")
-    {
-        return true;
+    // Ruta absoluta del archivo CSV (puedes cambiarla a relativa si prefieres)
+    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecyo_Cine/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/empleados.csv";
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "Error", "No se pudo abrir el archivo de empleados.");
+        return;
     }
-    return false;
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList columns = line.split(",");  // Suponiendo que el archivo CSV usa comas como delimitador
+        if (!columns.isEmpty()) {
+            QString idEmpleado = columns[0].trimmed();  // Obtenemos solo el primer valor (ID)
+            empleadosIDs.insert(idEmpleado);  // Insertamos el ID en el set
+        }
+    }
+}
+
+bool InicioSesion::validarCredenciales(const QString &usuario)
+{
+    // Validamos si el ID de empleado existe en el set
+    return empleadosIDs.contains(usuario);
 }
 
 void InicioSesion::iniciarSesion()
 {
     QString usuario = ui->lineEdit_id->text();
-    QString password = ui->lineEdit_contrasena->text();
 
-    if (usuario.isEmpty() || password.isEmpty())
+    if (usuario.isEmpty())
     {
-        QMessageBox::warning(this, "Campos Vacios", "Por favor, ingresa un usuario y una contraseña");
+        QMessageBox::warning(this, "Campo Vacío", "Por favor, ingresa un ID de empleado.");
         return;
     }
 
-    if (validarCredenciales(usuario, password))
+    if (validarCredenciales(usuario))
     {
-        //Si las credenciales son correctas, se acepta el login y se cierra la ventana de login
+        // Si el ID es correcto, se acepta el login y se cierra la ventana de login
         accept();
     }
     else
     {
         ui->label->setPixmap(QPixmap(":/images/src/icons/wrongpass.png").scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-        QMessageBox::warning(this, "Credenciales Incorrectas", "El usuario o la contraseña son incorrectos.");
+        QMessageBox::warning(this, "ID Incorrecto", "El ID de empleado no es válido.");
     }
 }
 
@@ -74,20 +97,11 @@ void InicioSesion::salirVentana()
     this->close();  // Cierra solo la ventana actual (InicioSesion)
 }
 
-
-void InicioSesion::recuperarPassword()
-{
-    // Abrimos la ventana de recuperación de contraseña
-    RecuperarPassw recupDialog;
-    recupDialog.exec();
-}
-
 void InicioSesion::initstylesheet()
 {
     QFile style(":/src/stylesheet/stylesheet-inicio.css");
     bool styleOK = style.open(QFile::ReadOnly);
-    qDebug() << "Apertura de archivos: " <<styleOK;
+    qDebug() << "Apertura de archivo: " << styleOK;
     QString stringEstilo = QString::fromLatin1(style.readAll());
     this->setStyleSheet(stringEstilo);
 }
-

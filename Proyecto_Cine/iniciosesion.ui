@@ -34,26 +34,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_contrasena">
-       <property name="text">
-        <string>contraseña</string>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::EchoMode::Password</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="Boton_iniciar">
        <property name="text">
         <string>Iniciar sesion</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Boton_olvide">
-       <property name="text">
-        <string>Olvide contraseña</string>
        </property>
       </widget>
      </item>

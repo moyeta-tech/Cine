@@ -43,7 +43,9 @@ private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
-    void on_buttonBox_accepted();
+    void registrarEmpleado();
+
+    void leerEmpleadosDesdeArchivo();
 
 signals:
     void empleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
