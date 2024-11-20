@@ -22,7 +22,7 @@ public:
     ~Venta();
 
     Venta();
-    QString getFecha();
+    QString getFecha() const;
     void setFecha(QString fecha);
     int getcantAsientos();
     void setcantAsientos(int cantasientos);
@@ -55,7 +55,7 @@ private slots:
     void on_Boton_continuar_clicked();
 
 signals:
-    void ventaConfirmada(QString fecha, double monto);
+    void ventaConfirmada(const QString &fecha, double monto);
 
 private:
     Ui::Venta *ui;

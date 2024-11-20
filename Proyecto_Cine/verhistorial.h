@@ -18,17 +18,22 @@ class verHistorial : public QDialog
     Q_OBJECT
 
 public:
-    explicit verHistorial(std::vector<Venta* > &vectorHistorialRef, QWidget *parent = nullptr);
+    explicit verHistorial(std::vector<Pago* > &vectorPagoRef, std::vector<Venta* > &vectorHistorialRef, QWidget *parent = nullptr);
     ~verHistorial();
 
-    void cargarDatosTabla(const QString &fecha, double monto);
+    void cargarDatosTabla();
 
 private slots:
     void initstylesheet();
 
+    void on_boton_cerrar_clicked();
+
+    void on_boton_eliminar_clicked();
+
 private:
     Ui::verHistorial *ui;
     std::vector<Venta* > &vectorHistorial;
+    std::vector<Pago* > &vectorPago;
 };
 
 #endif // VERHISTORIAL_H

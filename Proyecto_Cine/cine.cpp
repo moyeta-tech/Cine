@@ -38,7 +38,9 @@ Cine::Cine(QWidget *parent)
     connect (ui->actionRegistrar_personal, &QAction::triggered, this, &Cine::agregarEmpleados);
     connect (ui->actionVer_personal, &QAction::triggered, this, &Cine::mostrarEmpelados);
 
-    connect(ui->actionVer_historial, &QAction::triggered, this, &Cine::mostrarHistorial);
+
+
+    connect (ui->actionVer_historial, &QAction::triggered, this, &Cine::mostrarHistorial);
 
     //Conetamos los botones a los slots correspondientes
     connect(ui->Boton_horario, &QPushButton::clicked, this, &Cine::mostrarHorarios);
@@ -152,15 +154,12 @@ void Cine::mostrarEmpelados()
 }
 
 void Cine::mostrarHistorial(){
-    verHistorial dialog(vectorHistorial, this);
 
-    // Recorres el contenedor de ventas y las agregas a la tabla
-    for (const auto& venta : vectorHistorial) {
-        dialog.cargarDatosTabla(venta->getFecha(), venta->getPago()->getMonto()); // Usamos el método ya definido en `verHistorial`
-    }
+    verHistorial *ventanaHistorial = new verHistorial(vectorPago, vectorHistorial, this);
 
-    dialog.exec();
-}
+    ventanaHistorial->exec();
+
+ }
 
 
 void Cine::mostrarPrecios()
@@ -196,6 +195,7 @@ void Cine::ventaBoletos()
     // Crear la ventana de Venta
     Venta ventaDialog(vectorPelicula,fecha, cantAsientos, &cliente, &horario, &pago, this);
 
+    connect(&ventaDialog, &Venta::ventaConfirmada, this ,&Cine::agregarVenta);
     // Mostrar el diálogo
     ventaDialog.exec();
 }
@@ -237,14 +237,15 @@ void Cine::procesarEmpleadoAgregado(int idempleado, QString nombre, QString apel
 
 void Cine::agregarVenta(QString fecha, double monto){
 
-    Venta *nuevaVenta = new Venta();
-    nuevaVenta->getFecha() = fecha;
-    if(nuevaVenta->getPago() != nullptr){
-        nuevaVenta->getPago()->getMonto() = monto;
-    }
+    Pago *nuevoPago = new Pago();
+    nuevoPago->setMonto(monto);
 
+    Venta *nuevaVenta = new Venta();
+    nuevaVenta->setFecha(fecha);
+    nuevaVenta->setPago(nuevoPago);
 
     vectorHistorial.push_back(nuevaVenta);
+    vectorPago.push_back(nuevoPago);
 
 }
 

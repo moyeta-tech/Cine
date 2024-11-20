@@ -16,9 +16,10 @@ public:
     explicit Pago(QString metodo, float monto, QString fecha,QWidget *parent = nullptr);
     ~Pago();
 
+    Pago();
     QString getMetodo();
     void setMetodo(QString metodo);
-    double &getMonto();
+    double getMonto() const;
     void setMonto(double monto);
     QString getFecha();
     void setFecha(QString fecha);

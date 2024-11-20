@@ -1,9 +1,10 @@
 #include "verhistorial.h"
 #include "ui_verhistorial.h"
 
-verHistorial::verHistorial(std::vector<Venta *> &vectorHistorialRef, QWidget *parent)
+verHistorial::verHistorial(std::vector<Pago* > &vectorPagoRef, std::vector<Venta *> &vectorHistorialRef, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::verHistorial)
+    , vectorPago(vectorPagoRef)
     , vectorHistorial(vectorHistorialRef)
 {
     ui->setupUi(this);
@@ -20,9 +21,10 @@ verHistorial::verHistorial(std::vector<Venta *> &vectorHistorialRef, QWidget *pa
 
     QStringList encabezados;
 
-    encabezados << "Tipo de Entrada" << "Total";
+    encabezados << "Fecha" << "Monto";
 
     ui->tableWidget->setHorizontalHeaderLabels(encabezados);
+    cargarDatosTabla();
 }
 
 verHistorial::~verHistorial()
@@ -38,11 +40,49 @@ void verHistorial::initstylesheet(){
     this->setStyleSheet(stringEstilo);
 }
 
-void verHistorial::cargarDatosTabla(const QString &fecha, double monto){
-    int row = ui->tableWidget->rowCount();
+void verHistorial::cargarDatosTabla(){
+     ui->tableWidget->setRowCount(0);
+
+
+    for(int i = 0; i < vectorHistorial.size(); i++){
+        Venta *venta = vectorHistorial[i];
+        Pago *pago = vectorPago[i];
+
+
+        int row = ui->tableWidget->rowCount();
         ui->tableWidget->insertRow(row);
 
-        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(fecha));
-        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(QString::number(monto)));
+        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(venta->getFecha()));
+        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(QString::number(pago->getMonto(), 'f', 2)));
     }
+
+
+}
+
+
+void verHistorial::on_boton_cerrar_clicked()
+{
+    accept();
+}
+
+
+void verHistorial::on_boton_eliminar_clicked()
+{
+    int filaseleccionada = ui->tableWidget->currentRow();
+
+    if(filaseleccionada == -1){
+        QMessageBox::warning(this, "Advertencia", "Por favor, seleccione una fila");
+        return;
+    }
+    bool borrar = true;
+    if(borrar){
+        int res = QMessageBox::question(this, "Confirmar Selección", "¿Seguro quiere borrar esta fila?", QMessageBox::Yes | QMessageBox::Cancel);
+        if(res == QMessageBox::Yes){
+            vectorHistorial.erase(vectorHistorial.begin() + filaseleccionada);
+            vectorPago.erase(vectorPago.begin() + filaseleccionada);
+            ui->tableWidget->removeRow(filaseleccionada);
+
+        }
+    }
+}
 

@@ -59,7 +59,7 @@ Venta::~Venta()
     delete ui;
 }
 
-QString Venta::getFecha(){  // GET Y SET DE FECHA
+QString Venta::getFecha() const{  // GET Y SET DE FECHA
     return Fecha;
 }
 
@@ -210,7 +210,8 @@ void Venta::resetearDescuento()
 void Venta::on_Boton_continuar_clicked()
 {
     QString fecha = ui->label_dia->text();
-    double monto = ui->label_9->text().toDouble();
+    QString total = ui->label_9->text().remove("Total: $");
+    double monto = total.toDouble();
 
     emit ventaConfirmada(fecha, monto);
 }

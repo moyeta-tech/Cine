@@ -73,6 +73,7 @@ private:
     // ATRIBUTOS
     QString Nombre;
     QString Ubicacion;
+    verHistorial *historialventana = nullptr;
 
 
     // CONTENEDORES PARA EL MANEJO DE DATOS
@@ -81,6 +82,7 @@ private:
     std::vector<Clientes*> vectorClientes;
     std::vector<Empleados* > vectorEmpleados;
     std::vector<Venta* > vectorHistorial;
+    std::vector<Pago* > vectorPago;
 
 };
 

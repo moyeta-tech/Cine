@@ -26,6 +26,9 @@ Pago::Pago(QString metodo, float monto, QString fecha, QWidget *parent)
     //Conectamos los botones con los slots
     connect(ui->Boton_finalizar, &QPushButton::clicked, this, &Pago::finalizarCompra);
 }
+Pago::Pago(){
+
+}
 
 Pago::~Pago()
 {
@@ -43,7 +46,7 @@ void Pago::setMetodo(QString metodo)
     Metodo = metodo;  // Usamos 'Metodo' en lugar de 'metodoPago'
 }
 
-double& Pago::getMonto()
+double Pago::getMonto() const
 {
     return Monto;  // Usamos 'Monto' en lugar de 'montoTotal'
 }
