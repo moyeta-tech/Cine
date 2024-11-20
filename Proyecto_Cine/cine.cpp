@@ -23,11 +23,7 @@ Cine::Cine(QWidget *parent)
     ui->setupUi(this);
     qDebug() << "Interfaz de usuario cargada";
 
-
-
-
-    //Establecemos el titulo de la ventana
-    this->setWindowTitle("Inicio");
+    this->setWindowIcon((QIcon(":/images/src/icons/image cine.ico")) );
 
     //Llamamos al slot para cargar el stylesheet
     initstylesheet();

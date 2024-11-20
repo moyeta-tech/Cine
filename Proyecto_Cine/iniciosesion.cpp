@@ -1,6 +1,8 @@
 #include "iniciosesion.h"
 #include "ui_iniciosesion.h"
 
+#include "cine.h"
+
 #include <QMessageBox>
 #include <QIcon>
 #include <QFile>
@@ -82,8 +84,20 @@ void InicioSesion::iniciarSesion()
 
     if (validarCredenciales(usuario))
     {
-        // Si el ID es correcto, se acepta el login y se cierra la ventana de login
-        accept();
+        // Obtener el nombre del empleado con el ID
+        QString nombreEmpleado = obtenerNombreEmpleado(usuario);
+
+        // Crear la ventana de Cine
+        Cine* cineWindow = new Cine();
+
+        // Establecer el título con el nombre del empleado
+        cineWindow->setWindowTitle("Bienvenido, " + nombreEmpleado);
+
+        // Mostrar la ventana de Cine
+        cineWindow->show();
+
+        // Cerrar la ventana de inicio de sesión
+        this->accept();
     }
     else
     {
@@ -91,6 +105,27 @@ void InicioSesion::iniciarSesion()
         QMessageBox::warning(this, "ID Incorrecto", "El ID de empleado no es válido.");
     }
 }
+
+
+QString InicioSesion::obtenerNombreEmpleado(const QString &idEmpleado)
+{
+    QFile file("C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "Error", "No se pudo abrir el archivo de empleados.");
+        return "";
+    }
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList columns = line.split(",");
+        if (!columns.isEmpty() && columns[0].trimmed() == idEmpleado) {
+            return columns[1].trimmed();  // Supongamos que el nombre está en la segunda columna
+        }
+    }
+    return "";  // Si no se encuentra el empleado
+}
+
 
 void InicioSesion::salirVentana()
 {

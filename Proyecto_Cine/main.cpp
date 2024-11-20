@@ -1,24 +1,24 @@
-#include "cine.h"
-
+#include "iniciosesion.h"  // Incluir la clase de la ventana de inicio de sesión
 #include <QApplication>
-
-#include "iniciosesion.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    //Crear e iniciar el diálogo de inicio de sesión
+    // Crear la ventana de inicio de sesión
     InicioSesion loginDialog;
-    if (loginDialog.exec() == QDialog::Accepted)
-    {
-        //Si las credenciales son correctas, mostramos la ventana principal del cine
-        Cine w;
-        a.setWindowIcon(QIcon(":/images/src/icons/image cine.ico")); //Icono de la aplicación
-        w.show();
+
+    // Mostrar la ventana de inicio de sesión
+    if (loginDialog.exec() == QDialog::Accepted) {
+        // Si el inicio de sesión es exitoso, ejecuta el resto de la aplicación o muestra la siguiente ventana
+        // Por ejemplo, puedes iniciar una ventana principal aquí:
+        // MainWindow w;
+        // w.show();
+
+        // Si no quieres mostrar otra ventana, simplemente finalizas la aplicación
         return a.exec();
     }
 
-    //Si el inicio de sesión es cancelado o incorrecto, se termina la aplicación
+    // Si el inicio de sesión falla o se cancela, se termina la aplicación
     return 0;
 }

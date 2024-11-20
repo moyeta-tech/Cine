@@ -36,6 +36,9 @@ private:
 
     // Carga los IDs de los empleados desde el archivo CSV
     void cargarEmpleados();
+
+    // Función para obtener el nombre del empleado desde el archivo CSV
+    QString obtenerNombreEmpleado(const QString &idEmpleado);
 };
 
 #endif // INICIOSESION_H
