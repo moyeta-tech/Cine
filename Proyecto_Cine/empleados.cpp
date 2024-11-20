@@ -104,19 +104,25 @@ void Empleados::setPuesto(QString puesto){
     Puesto = puesto;
 }
 
+void Empleados::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    bool styleOK = style.open(QFile::ReadOnly);
+    qDebug() << "Apertura de archivos: " << styleOK;
+    QString stringEstilo = QString::fromLatin1(style.readAll());
+    this->setStyleSheet(stringEstilo);
+}
+
 void Empleados::registrarEmpleado()
 {
-    // Validar que todos los campos estén completos
-    if (ui->lineEdit->text().isEmpty() || ui->lineEdit_2->text().isEmpty() || ui->lineEdit_3->text().isEmpty() ||
-        ui->lineEdit_4->text().isEmpty() || ui->lineEdit_5->text().isEmpty() || ui->lineEdit_6->text().isEmpty()) {
+    if (ui->lineEdit->text().isEmpty() || ui->lineEdit_2->text().isEmpty() ||
+        ui->lineEdit_3->text().isEmpty() || ui->lineEdit_4->text().isEmpty() ||
+        ui->lineEdit_5->text().isEmpty() || ui->lineEdit_6->text().isEmpty()) {
         QMessageBox::warning(this, "Advertencia", "Todos los campos deben ser completados.");
-        return;  // No continuar si falta algún campo
+        return;
     }
 
-    // Crear nuevo empleado
     Empleados *empleado = new Empleados(vectorEmpleados, this);
-
-    // Establecer los valores del empleado desde el formulario
     empleado->setIDempleado(ui->lineEdit->text().toInt());
     empleado->setNombre(ui->lineEdit_2->text());
     empleado->setApellido(ui->lineEdit_3->text());
@@ -124,31 +130,50 @@ void Empleados::registrarEmpleado()
     empleado->setEdad(ui->spinBox->value());
     empleado->setTelefono(ui->lineEdit_5->text().toInt());
     empleado->setPuesto(ui->lineEdit_6->text());
-
-    // Añadir el empleado al vector
     vectorEmpleados.push_back(empleado);
 
-    // Ruta fija para el archivo CSV
-    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv";
+    // Obtener la ruta del directorio actual y el archivo CSV
+    QString filePath = QDir::currentPath() + "/empleados.csv";
+    qDebug() << "Ruta donde se intenta guardar el archivo:" << filePath;
 
-    // Abrir archivo CSV y guardar los datos
     QFile file(filePath);
-    if (file.open(QIODevice::Append | QIODevice::Text)) {
+
+    // Crear el archivo si no existe
+    if (!file.exists()) {
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            qDebug() << "Error al crear el archivo:" << file.errorString();
+            QMessageBox::critical(this, "Error", "No se pudo crear el archivo CSV:\n" + file.errorString());
+            return;
+        }
         QTextStream out(&file);
-        out << empleado->getIDempleado() << ","
-            << empleado->getNombre() << ","
-            << empleado->getApellido() << ","
-            << empleado->getDni() << ","
-            << empleado->getEdad() << ","
-            << empleado->getTelefono() << ","
-            << empleado->getPuesto() << "\n";
+        out << "ID,NOMBRE,APELLIDO,DNI,EDAD,TELEFONO,PUESTO\n"; // Cabecera del archivo
         file.close();
-        qDebug() << "Empleado guardado en el archivo: " << filePath;
-    } else {
-        qDebug() << "No se pudo abrir el archivo para guardar el empleado en: " << filePath;
+        qDebug() << "Archivo creado exitosamente con cabeceras.";
     }
 
-    // Emitir señal de empleado agregado
+    // Abrir el archivo para agregar el nuevo empleado
+    if (!file.open(QIODevice::Append | QIODevice::Text)) {
+        qDebug() << "Error al abrir el archivo:" << file.errorString();
+        QMessageBox::critical(this, "Error", "No se pudo abrir el archivo CSV:\n" + file.errorString());
+        return;
+    }
+
+    QTextStream out(&file);
+    out << empleado->getIDempleado() << ","
+        << empleado->getNombre() << ","
+        << empleado->getApellido() << ","
+        << empleado->getDni() << ","
+        << empleado->getEdad() << ","
+        << empleado->getTelefono() << ","
+        << empleado->getPuesto() << "\n";
+
+    file.close();
+
+    qDebug() << "Empleado guardado correctamente en el archivo.";
+    QMessageBox::information(this, "Empleado guardado",
+                             "El empleado ha sido registrado con éxito.\n"
+                             "Los datos se guardaron en:\n" + filePath);
+
     emit empleadoAgregado(empleado->getIDempleado(), empleado->getNombre(),
                           empleado->getApellido(), empleado->getDni(),
                           empleado->getEdad(), empleado->getTelefono(),
@@ -158,8 +183,8 @@ void Empleados::registrarEmpleado()
 
 void Empleados::leerEmpleadosDesdeArchivo()
 {
-    // Ruta fija para el archivo CSV
-    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv";
+    // Obtener la ruta del archivo CSV
+    QString filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/empleados.csv";
 
     QFile file(filePath);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -187,14 +212,4 @@ void Empleados::leerEmpleadosDesdeArchivo()
     } else {
         qDebug() << "No se pudo abrir el archivo para leer los empleados desde: " << filePath;
     }
-}
-
-
-void Empleados::initstylesheet()
-{
-    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
-    bool styleOK = style.open(QFile::ReadOnly);
-    qDebug() << "Apertura de archivos: " << styleOK;
-    QString stringEstilo = QString::fromLatin1(style.readAll());
-    this->setStyleSheet(stringEstilo);
 }

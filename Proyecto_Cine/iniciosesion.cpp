@@ -1,6 +1,5 @@
 #include "iniciosesion.h"
 #include "ui_iniciosesion.h"
-
 #include "cine.h"
 
 #include <QMessageBox>
@@ -46,8 +45,9 @@ QSet<QString> InicioSesion::empleadosIDs;  // Set estático para almacenar los I
 
 void InicioSesion::cargarEmpleados()
 {
-    // Ruta fija para el archivo CSV (actualiza la ruta con la que mencionas)
-    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv";
+    // Ruta del archivo CSV en la carpeta del proyecto
+    QString filePath = QDir::currentPath() + "/empleados.csv";
+    qDebug() << "Ruta del archivo de empleados:" << filePath;
 
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -106,10 +106,10 @@ void InicioSesion::iniciarSesion()
     }
 }
 
-
 QString InicioSesion::obtenerNombreEmpleado(const QString &idEmpleado)
 {
-    QFile file("C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv");
+    QString filePath = QDir::currentPath() + "/empleados.csv";  // Ruta relativa al proyecto
+    QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::critical(this, "Error", "No se pudo abrir el archivo de empleados.");
         return "";
@@ -125,7 +125,6 @@ QString InicioSesion::obtenerNombreEmpleado(const QString &idEmpleado)
     }
     return "";  // Si no se encuentra el empleado
 }
-
 
 void InicioSesion::salirVentana()
 {
