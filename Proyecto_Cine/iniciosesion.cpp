@@ -44,8 +44,8 @@ QSet<QString> InicioSesion::empleadosIDs;  // Set estático para almacenar los I
 
 void InicioSesion::cargarEmpleados()
 {
-    // Ruta absoluta del archivo CSV (puedes cambiarla a relativa si prefieres)
-    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecyo_Cine/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/empleados.csv";
+    // Ruta fija para el archivo CSV (actualiza la ruta con la que mencionas)
+    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv";
 
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {

@@ -128,13 +128,8 @@ void Empleados::registrarEmpleado()
     // Añadir el empleado al vector
     vectorEmpleados.push_back(empleado);
 
-    // Obtener la ruta del directorio raíz de tu proyecto
-    QString projectDir = QCoreApplication::applicationDirPath();
-    projectDir = QDir(projectDir).dirName();  // Nos aseguramos de que esté en el directorio correcto.
-
-    // Modificar la ruta a la raíz del proyecto (fuera del directorio build)
-    QString filePath = QDir(projectDir).filePath("../empleados.csv");
-    filePath = QDir(filePath).absolutePath();  // Obtener la ruta absoluta
+    // Ruta fija para el archivo CSV
+    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv";
 
     // Abrir archivo CSV y guardar los datos
     QFile file(filePath);
@@ -163,9 +158,8 @@ void Empleados::registrarEmpleado()
 
 void Empleados::leerEmpleadosDesdeArchivo()
 {
-    // Obtener la ruta al directorio del proyecto y la ruta al archivo
-    QString filePath = QDir(QCoreApplication::applicationDirPath()).path() + "/../empleados.csv";
-    filePath = QDir(filePath).absolutePath(); // Obtener la ruta absoluta
+    // Ruta fija para el archivo CSV
+    QString filePath = "C:/Users/anitg/OneDrive/Documents/GitHub/Cine/Proyecto_Cine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/empleados.csv";
 
     QFile file(filePath);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -194,6 +188,7 @@ void Empleados::leerEmpleadosDesdeArchivo()
         qDebug() << "No se pudo abrir el archivo para leer los empleados desde: " << filePath;
     }
 }
+
 
 void Empleados::initstylesheet()
 {
