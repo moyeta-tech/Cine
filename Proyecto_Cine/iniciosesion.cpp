@@ -46,6 +46,7 @@ QSet<QString> InicioSesion::empleadosIDs;  // Set estático para almacenar los I
 void InicioSesion::cargarEmpleados()
 {
     // Ruta del archivo CSV en la carpeta del proyecto
+    qDebug () << QDir::currentPath();
     QString filePath = QDir::currentPath() + "/empleados.csv";
     qDebug() << "Ruta del archivo de empleados:" << filePath;
 
@@ -74,6 +75,8 @@ bool InicioSesion::validarCredenciales(const QString &usuario)
 
 void InicioSesion::iniciarSesion()
 {
+    qDebug () << "Iniciar sesion";
+
     QString usuario = ui->lineEdit_id->text();
 
     if (usuario.isEmpty())
@@ -90,6 +93,7 @@ void InicioSesion::iniciarSesion()
         // Crear la ventana de Cine
         Cine* cineWindow = new Cine();
 
+        qDebug () << nombreEmpleado;
         // Establecer el título con el nombre del empleado
         cineWindow->setWindowTitle("Bienvenido, " + nombreEmpleado);
 
