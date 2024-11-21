@@ -43,9 +43,6 @@ public:
 
     std::vector<QString> getHistorial();
 
-    //void agregarHistorial(reserva *Reserva);
-    void mostrarHistorial();
-
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
