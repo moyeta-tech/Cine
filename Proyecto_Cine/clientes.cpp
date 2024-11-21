@@ -80,23 +80,6 @@ void Clientes::setTelefono(int telefono){
     Telefono = telefono;
 }
 
-// GET DE HISTORIAL
-/*
-std::vector<QString> Clientes::getHistorial(){
-    return Historial;
-}
-
-void Clientes::agregarHistorial(reserva *Reserva){
-    this->Reserva = Reserva;
-}
-*/
-
-/*
-void Clientes::mostrarHistorial(){
-    cout << "Historial: " << Historial << endl;
-}
-*/
-
 void Clientes::initstylesheet()
 {
     QFile style(":/src/stylesheet/stylesheet-ventanas.css");
