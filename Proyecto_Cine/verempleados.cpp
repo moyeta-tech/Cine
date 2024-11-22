@@ -1,5 +1,6 @@
 #include "verempleados.h"
 #include "ui_verempleados.h"
+#include "QDir"
 
 VerEmpleados::VerEmpleados(std::vector<Empleados *> &vectorEmpleadosRef, QWidget *parent)
     : QDialog(parent)
@@ -43,8 +44,11 @@ void VerEmpleados::actualizarTablaEmpleados(std::vector<Empleados *> &vectorEmpl
 
     for(int i = 0; i < vectorEmpleados.size(); i++)
     {
+        if(vectorEmpleados[i] == nullptr){
+            qDebug() << "Empleado nulo en el vector";
+            continue;
+        }
         Empleados *empleado = vectorEmpleados[i];
-
 
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(empleado->getIDempleado())));
         ui->tableWidget->setItem(i, 1, new QTableWidgetItem(empleado->getNombre()));
@@ -53,6 +57,7 @@ void VerEmpleados::actualizarTablaEmpleados(std::vector<Empleados *> &vectorEmpl
         ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(empleado->getEdad())));
         ui->tableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(empleado->getTelefono())));
         ui->tableWidget->setItem(i, 6, new QTableWidgetItem(empleado->getPuesto()));
+
 
     }
 }
@@ -78,20 +83,91 @@ void VerEmpleados::eliminarEmpleado()
 {
     int FilaSeleccionada = ui->tableWidget->currentRow(); // OBTENEMOS LA FILA
 
+    qDebug() << "Fila seleccionada: " << FilaSeleccionada;
+    qDebug() << "Tamano del vector empleados: " << vectorEmpleados.size();
+
     if(FilaSeleccionada == -1)
     {
         QMessageBox::warning(this, "Advertencia", "Por favor, seleccione una fila");
         return; // SE DETIENE LA EJECUCION DEL METODO SI NO SE SELECCIONA UNA FILA
     }
-    bool borrar = true;
-    if(borrar) // SI BORRAR ES VERDADERO
-    {
-        int res = QMessageBox::question(this, "Confirmar Selección", "¿Seguro quiere borrar esta fila?", QMessageBox::Yes | QMessageBox::Cancel);
-        if(res == QMessageBox::Yes)
-        {
-            vectorEmpleados.erase(vectorEmpleados.begin() + FilaSeleccionada);
-            ui->tableWidget->removeRow(FilaSeleccionada);
+
+    if(FilaSeleccionada < 0 || FilaSeleccionada >= vectorEmpleados.size()){
+        QMessageBox::critical(this, "Error", "El indice seleccionado no es valido");
+        return;
+    }
+
+    int res = QMessageBox::question(this, "Confirmar selección", "¿Seguro quiere borrar esta fila?", QMessageBox::Yes | QMessageBox::Cancel);
+
+    if(res == QMessageBox::Yes){
+        vectorEmpleados.erase(vectorEmpleados.begin() + FilaSeleccionada);
+
+        ui->tableWidget->removeRow(FilaSeleccionada);
+        QMessageBox::information(this, "Aviso", "Fila Eliminada correctamente");
+    }
+}
+/*
+void VerEmpleados::escribirArchivo(QString Archivo, int id, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto){
+    QString linea = QString::number(id) + ',' + nombre + ',' + apellido + ',' + QString::number(dni) + ',' + QString::number(edad) + ',' + QString::number(telefono) + ',' + puesto + '\n';
+    qDebug() << "Linea" << linea;
+
+    QFile file(Archivo);
+    if(file.open(QIODevice::Append) | QIODevice::Text){
+        file.write(linea.toUtf8());
+        file.close();
+        qDebug() << "Archivo escrito correctamente: ";
+    } else {
+        qDebug() << "Error al abrir el archivo: ";
+    }
+
+}
+*/
+void VerEmpleados::leerArchivo(QString Archivo){
+  //  Archivo = QDir::currentPath() + "/empleados.csv";
+
+    QFile file(Archivo);
+    QString Contenido;
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        Contenido = file.readAll();
+        file.close();
+        lineasLeidas = Contenido.split('\n', Qt::SkipEmptyParts);
+
+        QSet<QString> lineasUnicas;
+                                        // ESTO SE REALIZA PARA QUE SE AGREGUEN SOLO FILAS UNICAS A LA TABLA
+
+        for (const QString& linea : lineasLeidas) {
+            lineasUnicas.insert(linea); // Solo agrega líneas únicas
         }
+
+        lineasLeidas = QStringList(lineasUnicas.begin(), lineasUnicas.end());
+        qDebug() << "lineas leidas: " << lineasLeidas;
+
+        vectorEmpleados.clear();
+
+
+    } else {
+        qDebug() << "no se pudo abrir el archivo";
     }
 }
 
+void VerEmpleados::escribirTabla(){
+    int row = 0;
+    QStringList campos;
+
+    ui->tableWidget->setRowCount(0);
+    for(QString &linea : lineasLeidas){
+        campos = linea.split(',');
+        if(campos.size() == 7){
+            ui->tableWidget->insertRow(row);
+
+            ui->tableWidget->setItem(row, 0, new QTableWidgetItem(campos[0]));
+            ui->tableWidget->setItem(row, 1, new QTableWidgetItem(campos[1]));
+            ui->tableWidget->setItem(row, 2, new QTableWidgetItem(campos[2]));
+            ui->tableWidget->setItem(row, 3, new QTableWidgetItem(campos[3]));
+            ui->tableWidget->setItem(row, 4, new QTableWidgetItem(campos[4]));
+            ui->tableWidget->setItem(row, 5, new QTableWidgetItem(campos[5]));
+            ui->tableWidget->setItem(row, 6, new QTableWidgetItem(campos[6]));
+            row++;
+        }
+    }
+}

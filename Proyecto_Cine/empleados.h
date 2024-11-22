@@ -39,15 +39,15 @@ public:
     QString getPuesto();
     void setPuesto(QString puesto);
 public slots:
-    void leerEmpleadosDesdeArchivo();
+   // void leerEmpleadosDesdeArchivo();
 
+   // void agregarEmpleadoVectorArchivo(Empleados *empleado);
 
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
     void registrarEmpleado();
-
 
 signals:
     void empleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);

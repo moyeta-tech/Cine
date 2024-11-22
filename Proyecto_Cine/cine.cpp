@@ -63,6 +63,7 @@ Cine::~Cine()
     {
         delete p;  // Elimina el objeto al que apunta 'p'
     }
+
 }
 
 // HOJA DE ESTILOS
@@ -145,13 +146,19 @@ void Cine::agregarEmpleados()
 
 void Cine::mostrarEmpelados()
 {
-    Empleados gestorEmpleados(this->vectorEmpleados, this);
-    gestorEmpleados.leerEmpleadosDesdeArchivo();
+    /*
+    if(vectorEmpleados.empty()){
+        Empleados gestorEmpleados(vectorEmpleados, this);
+        gestorEmpleados.leerEmpleadosDesdeArchivo();
+    }
+    */
+    VerEmpleados dialog(vectorEmpleados, this);
 
-    VerEmpleados dialog(this->vectorEmpleados, this);
-
+    dialog.leerArchivo("empleados.csv");
     // LLAMAMOS AL METODO PARA INCLUIR Y ACTUALIZAR LOS DATOS A TABLA
-    dialog.actualizarTablaEmpleados(this->vectorEmpleados);
+    dialog.actualizarTablaEmpleados(vectorEmpleados);
+    dialog.escribirTabla();
+
 
     dialog.exec();
 }

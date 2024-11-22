@@ -5,6 +5,7 @@
 #include <QFile>
 #include "empleados.h"
 #include "QMessageBox"
+#include "QStringList"
 
 namespace Ui {
 class VerEmpleados;
@@ -21,6 +22,13 @@ public:
     // METODO PARA ACTUALIZAR TABLA Y CARGARLA
     void actualizarTablaEmpleados(std::vector<Empleados* > &vectorEmpleados);
 
+public slots:
+  //  void escribirArchivo(QString Archivo, int id, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
+
+    void leerArchivo(QString Archivo);
+
+    void escribirTabla();
+
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
@@ -29,9 +37,12 @@ private slots:
 
     void eliminarEmpleado();
 
+
+
 private:
     Ui::VerEmpleados *ui;
     std::vector<Empleados* > &vectorEmpleados;
+    QStringList lineasLeidas;
 };
 
 #endif // VEREMPLEADOS_H
