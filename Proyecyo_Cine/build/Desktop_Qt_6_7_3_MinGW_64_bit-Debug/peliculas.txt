@@ -1,8 +1,0 @@
-Título: Titanic
-Duración: 195
-Género: Romance
-Clasificación: PG-13
-Sinopsis: 
-Fecha: 2024-11-21
-Horarios: 10:00, 23:00, 12:00, 04:00
--------------------------------------
