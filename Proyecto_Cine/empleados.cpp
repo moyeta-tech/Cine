@@ -204,6 +204,7 @@ void Empleados::leerEmpleadosDesdeArchivo()
 
                 // Añadir el empleado al vector de empleados
                 vectorEmpleados.push_back(empleado);
+                qDebug() << "Empleado agregado" << fields;
             } else {
                 qDebug() << "Formato de línea incorrecto en el archivo.";
             }

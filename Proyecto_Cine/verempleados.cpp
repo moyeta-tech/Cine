@@ -45,6 +45,7 @@ void VerEmpleados::actualizarTablaEmpleados(std::vector<Empleados *> &vectorEmpl
     {
         Empleados *empleado = vectorEmpleados[i];
 
+
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(empleado->getIDempleado())));
         ui->tableWidget->setItem(i, 1, new QTableWidgetItem(empleado->getNombre()));
         ui->tableWidget->setItem(i, 2, new QTableWidgetItem(empleado->getApellido()));

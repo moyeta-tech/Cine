@@ -145,10 +145,13 @@ void Cine::agregarEmpleados()
 
 void Cine::mostrarEmpelados()
 {
-    VerEmpleados dialog(vectorEmpleados, this);
+    Empleados gestorEmpleados(this->vectorEmpleados, this);
+    gestorEmpleados.leerEmpleadosDesdeArchivo();
+
+    VerEmpleados dialog(this->vectorEmpleados, this);
 
     // LLAMAMOS AL METODO PARA INCLUIR Y ACTUALIZAR LOS DATOS A TABLA
-    dialog.actualizarTablaEmpleados(vectorEmpleados);
+    dialog.actualizarTablaEmpleados(this->vectorEmpleados);
 
     dialog.exec();
 }
