@@ -2,10 +2,9 @@
 #define VEREMPLEADOS_H
 
 #include <QDialog>
-#include <QFile>
+#include <QTableWidget>
+#include <vector>
 #include "empleados.h"
-#include "QMessageBox"
-#include "QStringList"
 
 namespace Ui {
 class VerEmpleados;
@@ -16,26 +15,17 @@ class VerEmpleados : public QDialog
     Q_OBJECT
 
 public:
-    explicit VerEmpleados(std::vector<Empleados* > &vectorEmpleadosRef, QWidget *parent = nullptr);
+    explicit VerEmpleados(std::vector<Empleados*>& empleados, QWidget *parent = nullptr);
     ~VerEmpleados();
-
-    // METODO PARA ACTUALIZAR TABLA Y CARGARLA
-    void actualizarTablaEmpleados(std::vector<Empleados* > &vectorEmpleados);
-
-private slots:
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
-    void initstylesheet();
-
-    void cerrarVentana();
-
-    void eliminarEmpleado();
-
-
 
 private:
     Ui::VerEmpleados *ui;
-    std::vector<Empleados* > &vectorEmpleados;
-    QStringList lineasLeidas;
+    std::vector<Empleados*>& empleados;
+
+    // Declarar funciones
+    void cargarEmpleadosDesdeCSV(const QString &archivo);
+    void agregarEmpleadoATabla(int id, const QString &nombre, const QString &apellido,
+                               int dni, int edad, int telefono, const QString &puesto);
 };
 
 #endif // VEREMPLEADOS_H

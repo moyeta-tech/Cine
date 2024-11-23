@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QFile>
+#include <QString>
+#include <vector>
 
 namespace Ui {
 class Empleados;
@@ -13,49 +15,39 @@ class Empleados : public QDialog
     Q_OBJECT
 
 public:
-    explicit Empleados(std::vector<Empleados* > &vectorEmpleadosRef, QWidget *parent = nullptr);
+    explicit Empleados(std::vector<Empleados*> &vectorEmpleadosRef, QWidget *parent = nullptr);
     ~Empleados();
 
-
-    Empleados (std::vector<Empleados* > &vectorEmpleadosRef, int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
-    int getIDempleado();
+    // Getters y Setters
+    int getIDempleado() const;
     void setIDempleado(int idempleado);
-
-    QString getNombre();
-    void setNombre(QString nombre);
-
-    QString getApellido();
-    void setApellido(QString apellido);
-
-    int getDni();
+    QString getNombre() const;
+    void setNombre(const QString &nombre);
+    QString getApellido() const;
+    void setApellido(const QString &apellido);
+    int getDni() const;
     void setDni(int dni);
-
-    int getEdad();
+    int getEdad() const;
     void setEdad(int edad);
-
-    int getTelefono();
+    int getTelefono() const;
     void setTelefono(int telefono);
+    QString getPuesto() const;
+    void setPuesto(const QString &puesto);
 
-    QString getPuesto();
-    void setPuesto(QString puesto);
 public slots:
-    void leerEmpleadosDesdeArchivo();
+    void leerEmpleadosDesdeArchivo(); // Leer empleados desde un archivo CSV
+    void registrarEmpleado();         // Registrar un nuevo empleado y guardarlo en el CSV
 
-   // void agregarEmpleadoVectorArchivo(Empleados *empleado);
-
-    void registrarEmpleado();
 private slots:
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
-    void initstylesheet();
-
-
-
+    void initstylesheet(); // Inicializar hoja de estilos para el widget
 
 signals:
     void empleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
 
 private:
     Ui::Empleados *ui;
+
+    // Atributos del empleado
     int idEmpleado;
     QString Nombre;
     QString Apellido;
@@ -64,9 +56,12 @@ private:
     int Telefono;
     QString Puesto;
 
-    std::vector<Empleados* > &vectorEmpleados;
-
-
+    // Referencia al vector global de empleados
+    std::vector<Empleados*> &vectorEmpleados;
 };
+
+// Funciones auxiliares para manejo de CSV
+void guardarEmpleadoEnCSV(const QString &archivo, const Empleados &empleado);
+void inicializarCSV(const QString &archivo);
 
 #endif // EMPLEADOS_H

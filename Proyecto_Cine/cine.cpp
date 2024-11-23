@@ -38,8 +38,6 @@ Cine::Cine(QWidget *parent)
     connect (ui->actionRegistrar_personal, &QAction::triggered, this, &Cine::agregarEmpleados);
     connect (ui->actionVer_personal, &QAction::triggered, this, &Cine::mostrarEmpelados);
 
-
-
     connect (ui->actionVer_historial, &QAction::triggered, this, &Cine::mostrarHistorial);
 
     //Conetamos los botones a los slots correspondientes
@@ -140,18 +138,18 @@ void Cine::mostrarClientes()
 void Cine::agregarEmpleados()
 {
     Empleados *dialog = new Empleados(this->vectorEmpleados, this);
-    connect(dialog, &Empleados::empleadoAgregado, this, &Cine::procesarEmpleadoAgregado);
+    // Si se usa la señal de empleado agregado
     dialog->exec();
 }
 
+
 void Cine::mostrarEmpelados()
 {
-    Empleados empleado(vectorEmpleados, this);
-    empleado.leerEmpleadosDesdeArchivo();
-
-    VerEmpleados dialog(vectorEmpleados, this);
-    dialog.exec();
+    VerEmpleados *verEmpleadosDialog = new VerEmpleados(vectorEmpleados, this);
+    verEmpleadosDialog->exec();  // Muestra la ventana de empleados
 }
+
+
 
 void Cine::mostrarHistorial(){
 
