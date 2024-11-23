@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 
-#include <array>
 #include <QDebug>
 #include <QMenuBar>
 #include <QAction>

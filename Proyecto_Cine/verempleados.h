@@ -22,13 +22,6 @@ public:
     // METODO PARA ACTUALIZAR TABLA Y CARGARLA
     void actualizarTablaEmpleados(std::vector<Empleados* > &vectorEmpleados);
 
-public slots:
-  //  void escribirArchivo(QString Archivo, int id, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
-
-  //  void leerArchivo(QString Archivo);
-
-  //  void escribirTabla();
-
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
