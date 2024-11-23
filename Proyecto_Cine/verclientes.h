@@ -3,8 +3,9 @@
 
 #include <QDialog>
 #include <QFile>
+#include <QTableWidget>
+#include <vector>
 #include "clientes.h"
-#include "QMessageBox"
 
 namespace Ui {
 class VerClientes;
@@ -15,23 +16,18 @@ class VerClientes : public QDialog
     Q_OBJECT
 
 public:
-    explicit VerClientes(std::vector<Clientes*> &vectorClientesRef, QWidget *parent = nullptr);
+    explicit VerClientes(const std::vector<Clientes*> &vectorClientesRef, QWidget *parent = nullptr);
     ~VerClientes();
 
-    // METODO PARA ACTUALIZAR LA TABLA DE CLIENTES
-    void actualizarTablaClientes(std::vector<Clientes*> &vectorClientes);
-
 private slots:
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    // Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
-
-    void cerrarVentana();
-
-    void eliminarCliente();
+    // Slot para cargar la información de los clientes en la tabla
+    void cargarClientes();
 
 private:
     Ui::VerClientes *ui;
-    std::vector<Clientes*> &vectorClientes;
+    const std::vector<Clientes*> &vectorClientes;
 };
 
 #endif // VERCLIENTES_H

@@ -1,29 +1,23 @@
 #include "verclientes.h"
 #include "ui_verclientes.h"
 
-VerClientes::VerClientes(std::vector<Clientes *> &vectorClientesRef, QWidget *parent)
+VerClientes::VerClientes(const std::vector<Clientes*> &vectorClientesRef, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::VerClientes)
     , vectorClientes(vectorClientesRef)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Lista de Clientes");
 
-    //Llamamos al slot para cargar el stylesheet
+    // Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
-    //Conectamos los botones a los slots
-    connect(ui->Boton_eliminar, &QPushButton::clicked, this, &VerClientes::eliminarCliente);
-    connect(ui->Boton_cerrar, &QPushButton::clicked, this, &VerClientes::cerrarVentana);
+    // Configurar encabezados de la tabla
+    ui->tableWidget->setColumnCount(6); // Número de columnas
+    ui->tableWidget->setHorizontalHeaderLabels({"ID", "Nombre", "Apellido", "DNI", "Edad", "Teléfono"});
 
-    // CONFIGURAMOS LA TABLA VERCLIENTES PARA 6 COLUMNAS
-    ui->tableWidget->setColumnCount(6);
-
-    // DECLARAMOS QSTRINGLIST PARA LAS COLUMNAS
-    QStringList encabezados;
-
-    encabezados << "IDcliente" << "Nombre" << "Apellido" << "Dni" << "Edad" << "Telefono";
-
-    ui->tableWidget->setHorizontalHeaderLabels(encabezados);
+    // Cargar datos en la tabla
+    cargarClientes();
 }
 
 VerClientes::~VerClientes()
@@ -31,59 +25,36 @@ VerClientes::~VerClientes()
     delete ui;
 }
 
-void VerClientes::actualizarTablaClientes(std::vector<Clientes *> &vectorClientes)
+void VerClientes::initstylesheet()
 {
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    if (style.open(QFile::ReadOnly)) {
+        QString stringEstilo = QString::fromLatin1(style.readAll());
+        this->setStyleSheet(stringEstilo);
+    } else {
+        qDebug() << "No se pudo cargar el archivo de estilo.";
+    }
+}
 
-    ui->tableWidget->setRowCount(vectorClientes.size());
+void VerClientes::cargarClientes()
+{
+    ui->tableWidget->setRowCount(0); // Limpiar cualquier contenido previo
 
-    for(int i = 0; i < vectorClientes.size(); i++)
-    {
+    for (size_t i = 0; i < vectorClientes.size(); ++i) {
         Clientes *cliente = vectorClientes[i];
 
+        // Crear una nueva fila en la tabla
+        ui->tableWidget->insertRow(i);
+
+        // Insertar los datos del cliente en las celdas correspondientes
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(cliente->getIDcliente())));
-        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(cliente->getNombre())); // CONVERTIMOS A QSTRING
-        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(cliente->getApellido())); // CONVERTIMOS A QSTRING
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(cliente->getNombre()));
+        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(cliente->getApellido()));
         ui->tableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(cliente->getDni())));
         ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(cliente->getEdad())));
         ui->tableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(cliente->getTelefono())));
     }
 
+    // Ajustar automáticamente el tamaño de las columnas
+    ui->tableWidget->resizeColumnsToContents();
 }
-
-void VerClientes::initstylesheet()
-{
-    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
-    bool styleOK = style.open(QFile::ReadOnly);
-    qDebug() << "Apertura de archivos: " <<styleOK;
-    QString stringEstilo = QString::fromLatin1(style.readAll());
-    this->setStyleSheet(stringEstilo);
-}
-
-void VerClientes::cerrarVentana()
-{
-    accept();
-}
-
-
-void VerClientes::eliminarCliente()
-{
-    int FilaSeleccionada = ui->tableWidget->currentRow(); // OBTENEMOS EL NUMERO DE LAS FILA ACTUALES EN EL TABLEWIDGET
-
-    if(FilaSeleccionada == -1) // SI NO HAY NINGUNA FILA SELECCIONADA Y SE APRETA EL BOTON DE ELIMINAR, SALE UN MENSAJE DE ERROR
-    {
-        QMessageBox::warning(this, "Advertencia", "Seleccione una fila por favor");
-        return; // DETENEMOS LA EJECUCION DEL METODO SI NO SE SELECCIONA UNA FILA
-    }
-    bool borrar = true;
-    if(borrar)
-    {
-        int res = QMessageBox::question(this, "Confirmar Selección", "¿Seguro quiere borrar esta fila?", QMessageBox::Yes | QMessageBox::Cancel);
-        if(res == QMessageBox::Yes)
-        {
-            vectorClientes.erase(vectorClientes.begin() + FilaSeleccionada); // ELIMINAMOS DEL VECTOR Y DE LA TABLA
-            ui->tableWidget->removeRow(FilaSeleccionada);
-        }
-
-    }
-}
-

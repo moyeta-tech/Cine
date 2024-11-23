@@ -127,13 +127,13 @@ void Cine::agregarClientes()
 
 void Cine::mostrarClientes()
 {
+    // Crear una instancia del diálogo VerClientes y pasar el vector de clientes
     VerClientes dialog(vectorClientes, this);
 
-    // LLAMAMOS AL METODO PARA ACTUALIZAR LA TABLA CON LOS DATOS CARGADOS
-    dialog.actualizarTablaClientes(vectorClientes);
-
+    // Ejecutar el diálogo; la tabla se llenará automáticamente
     dialog.exec();
 }
+
 
 void Cine::agregarEmpleados()
 {

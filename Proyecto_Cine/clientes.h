@@ -2,12 +2,12 @@
 #define CLIENTES_H
 
 #include <QDialog>
-
 #include <vector>
 #include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QDir>
 #include <QDebug>
-
-using namespace std;
 
 namespace Ui {
 class Clientes;
@@ -21,51 +21,45 @@ public:
     explicit Clientes(std::vector<Clientes*> &vectorClientesRef, QWidget *parent = nullptr);
     ~Clientes();
 
-
-    Clientes (QString nombre, QString apellido, int dni, int edad, int telefono, int idcliente);
-    QString getNombre();
-    void setNombre(QString nombre);
-
-    int getIDcliente();
+    // Getters y Setters
+    int getIDcliente() const;
     void setIDcliente(int idcliente);
-
-    QString getApellido();
-    void setApellido(QString apellido);
-
-    int getDni();
+    QString getNombre() const;
+    void setNombre(const QString &nombre);
+    QString getApellido() const;
+    void setApellido(const QString &apellido);
+    int getDni() const;
     void setDni(int dni);
-
-    int getEdad();
+    int getEdad() const;
     void setEdad(int edad);
-
-    int getTelefono();
+    int getTelefono() const;
     void setTelefono(int telefono);
 
-    std::vector<QString> getHistorial();
+    // Métodos para manejo de datos
+    static void guardarClienteEnCSV(const QString &archivo, const Clientes &cliente);
+    static void inicializarCSV(const QString &archivo);
+    void leerClientesDesdeArchivo();
 
 private slots:
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
-    void initstylesheet();
-
-    void on_buttonBox_accepted();
-
+    void initstylesheet(); // Inicializa la hoja de estilo
+    void registrarCliente(); // Registra un nuevo cliente
 
 signals:
-    void clienteAgregado(int idcliente, QString nombre, QString apellido, int dni,
-                         int edad, int telefono);
+    void clienteAgregado(int idcliente, QString nombre, QString apellido, int dni, int edad, int telefono);
+
 private:
     Ui::Clientes *ui;
 
+    // Atributos del cliente
+    int idCliente;
     QString Nombre;
     QString Apellido;
     int Dni;
     int Edad;
     int Telefono;
-    int idCliente;
-    std::vector<QString> Historial;
-    std::vector<Clientes*> &vectorClientes;
-//    reserva *Reserva;
 
+    // Referencia al vector global de clientes
+    std::vector<Clientes*> &vectorClientes;
 };
 
 #endif // CLIENTES_H

@@ -7,13 +7,10 @@ Clientes::Clientes(std::vector<Clientes *> &vectorClientesRef, QWidget *parent)
     , vectorClientes(vectorClientesRef)
 {
     ui->setupUi(this);
-
-    //Establecemos el titul ode la ventana
     this->setWindowTitle("Formulario de clientes");
-
-    //Llamamos al slot para cargar el stylesheet
     initstylesheet();
 
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &Clientes::registrarCliente);
 }
 
 Clientes::~Clientes()
@@ -21,80 +18,43 @@ Clientes::~Clientes()
     delete ui;
 }
 
-// GET Y SET DE IDCLIENTE
-
-int Clientes::getIDcliente(){
-    return idCliente;
-}
-void Clientes::setIDcliente(int idcliente){
-    idCliente = idcliente;
-}
-
-// GET Y SET DE NOMBRE
-
-QString Clientes::getNombre(){
-    return Nombre;
-}
-
-void Clientes::setNombre(QString nombre){
-    Nombre = nombre;
-}
-
-// GET Y SET DE APELLIDO
-
-QString Clientes::getApellido(){
-    return Apellido;
-}
-
-void Clientes::setApellido(QString apellido){
-    Apellido = apellido;
-}
-
-// GET Y SET DE DNI
-
-int Clientes::getDni(){
-    return Dni;
-}
-
-void Clientes::setDni(int dni){
-    Dni = dni;
-}
-
-// GET Y SET DE EDAD
-
-int Clientes::getEdad(){
-    return Edad;
-}
-
-void Clientes::setEdad(int edad){
-    Edad = edad;
-}
-
-// GET Y SET DE TELEFONO
-
-int Clientes::getTelefono(){
-    return Telefono;
-}
-
-void Clientes::setTelefono(int telefono){
-    Telefono = telefono;
-}
+// Getters y Setters
+int Clientes::getIDcliente() const { return idCliente; }
+void Clientes::setIDcliente(int idcliente) { idCliente = idcliente; }
+QString Clientes::getNombre() const { return Nombre; }
+void Clientes::setNombre(const QString &nombre) { Nombre = nombre; }
+QString Clientes::getApellido() const { return Apellido; }
+void Clientes::setApellido(const QString &apellido) { Apellido = apellido; }
+int Clientes::getDni() const { return Dni; }
+void Clientes::setDni(int dni) { Dni = dni; }
+int Clientes::getEdad() const { return Edad; }
+void Clientes::setEdad(int edad) { Edad = edad; }
+int Clientes::getTelefono() const { return Telefono; }
+void Clientes::setTelefono(int telefono) { Telefono = telefono; }
 
 void Clientes::initstylesheet()
 {
     QFile style(":/src/stylesheet/stylesheet-ventanas.css");
-    bool styleOK = style.open(QFile::ReadOnly);
-    qDebug() << "Apertura de archivos: " <<styleOK;
-    QString stringEstilo = QString::fromLatin1(style.readAll());
-    this->setStyleSheet(stringEstilo);
+    if (style.open(QFile::ReadOnly)) {
+        QString stringEstilo = QString::fromLatin1(style.readAll());
+        this->setStyleSheet(stringEstilo);
+    } else {
+        qDebug() << "No se pudo cargar el archivo de estilo.";
+    }
 }
 
-
-
-void Clientes::on_buttonBox_accepted()
+void Clientes::registrarCliente()
 {
-    Clientes *cliente = new Clientes(vectorClientes, this);
+    QString filePath = QDir::currentPath() + "/clientes.csv";
 
+    if (ui->lineEdit->text().isEmpty() || ui->lineEdit_2->text().isEmpty() ||
+        ui->lineEdit_3->text().isEmpty() || ui->lineEdit_4->text().isEmpty() ||
+        ui->lineEdit_5->text().isEmpty()) {
+        QMessageBox::warning(this, "Advertencia", "Todos los campos deben ser completados.");
+        return;
+    }
+
+    Clientes *cliente = new Clientes(vectorClientes, this);
     cliente->setIDcliente(ui->lineEdit->text().toInt());
     cliente->setNombre(ui->lineEdit_2->text());
     cliente->setApellido(ui->lineEdit_3->text());
@@ -102,24 +62,71 @@ void Clientes::on_buttonBox_accepted()
     cliente->setEdad(ui->spinBox->value());
     cliente->setTelefono(ui->lineEdit_5->text().toInt());
 
-    vectorClientes.push_back(cliente); // INTRODUCIMOS LOS DATOS
+    vectorClientes.push_back(cliente);
+    guardarClienteEnCSV(filePath, *cliente);
+    QMessageBox::information(this, "Cliente guardado", "Cliente registrado correctamente.");
 
-     // Usar qDebug() para verificar si los datos se están ingresando
+    emit clienteAgregado(cliente->getIDcliente(), cliente->getNombre(), cliente->getApellido(),
+                         cliente->getDni(), cliente->getEdad(), cliente->getTelefono());
+}
 
-    for(Clientes *c : vectorClientes)
-    {
-        qDebug() << "IdCliente: " << c->getIDcliente();
-        qDebug() << "Nombre: " << c->getNombre();
-        qDebug() << "Apellido: " << c->getApellido();
-        qDebug() << "Dni: " << c->getDni();
-        qDebug() << "Edad: " << c->getEdad();
-        qDebug() << "Telefono: " << c->getTelefono();
+void Clientes::leerClientesDesdeArchivo()
+{
+    QString filePath = QDir::currentPath() + "/clientes.csv";
+    QFile file(filePath);
 
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Error al abrir el archivo:" << file.errorString();
+        return;
     }
 
-    emit clienteAgregado(cliente->getIDcliente(),
-                         (cliente->getNombre()),
-                         (cliente->getApellido()),
-                         cliente->getDni(),
-                         cliente->getEdad(), cliente->getTelefono());
+    QTextStream in(&file);
+    vectorClientes.clear();
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList fields = line.split(',');
+        if (fields.size() == 6) {
+            Clientes *cliente = new Clientes(vectorClientes, this);
+            cliente->setIDcliente(fields[0].toInt());
+            cliente->setNombre(fields[1]);
+            cliente->setApellido(fields[2]);
+            cliente->setDni(fields[3].toInt());
+            cliente->setEdad(fields[4].toInt());
+            cliente->setTelefono(fields[5].toInt());
+            vectorClientes.push_back(cliente);
+        }
+    }
+    file.close();
+}
+
+void Clientes::guardarClienteEnCSV(const QString &archivo, const Clientes &cliente)
+{
+    QFile file(archivo);
+    if (!file.open(QIODevice::Append | QIODevice::Text)) {
+        qDebug() << "Error al abrir el archivo:" << file.errorString();
+        return;
+    }
+
+    QTextStream out(&file);
+    out << cliente.getIDcliente() << ","
+        << cliente.getNombre() << ","
+        << cliente.getApellido() << ","
+        << cliente.getDni() << ","
+        << cliente.getEdad() << ","
+        << cliente.getTelefono() << "\n";
+    file.close();
+}
+
+void Clientes::inicializarCSV(const QString &archivo)
+{
+    QFile file(archivo);
+    if (!file.exists()) {
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&file);
+            out << "ID,Nombre,Apellido,DNI,Edad,Telefono\n";
+            file.close();
+        } else {
+            qDebug() << "No se pudo inicializar el archivo:" << file.errorString();
+        }
+    }
 }
