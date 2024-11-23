@@ -28,6 +28,16 @@ Empleados::Empleados(std::vector<Empleados *> &vectorEmpleadosRef, QWidget *pare
 
 }
 
+Empleados::Empleados(std::vector<Empleados *> &vectorEmpleadosRef, int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto)
+    : vectorEmpleados(vectorEmpleadosRef)
+    , idEmpleado(idempleado)
+    , Nombre(nombre)
+    , Apellido(apellido)
+    , Dni(dni)
+    , Edad(edad)
+    , Telefono(telefono)
+    , Puesto(puesto)
+{}
 
 Empleados::~Empleados()
 {
@@ -152,7 +162,7 @@ void Empleados::registrarEmpleado()
                           empleado->getPuesto());
 }
 
-/*
+
 void Empleados::leerEmpleadosDesdeArchivo()
 {
     // Limpiar el vector antes de cargar empleados
@@ -247,4 +257,4 @@ void Empleados::agregarEmpleadoVectorArchivo(Empleados *empleado){
                              "El empleado ha sido registrado con éxito.\n"
                              "Los datos se guardaron en:\n" + filePath);
 }
-*/
+

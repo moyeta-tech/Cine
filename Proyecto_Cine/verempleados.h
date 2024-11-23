@@ -25,9 +25,9 @@ public:
 public slots:
   //  void escribirArchivo(QString Archivo, int id, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
 
-    void leerArchivo(QString Archivo);
+  //  void leerArchivo(QString Archivo);
 
-    void escribirTabla();
+  //  void escribirTabla();
 
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget

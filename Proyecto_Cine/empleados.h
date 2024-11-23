@@ -17,7 +17,7 @@ public:
     ~Empleados();
 
 
-    Empleados (int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
+    Empleados (std::vector<Empleados* > &vectorEmpleadosRef, int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
     int getIDempleado();
     void setIDempleado(int idempleado);
 
@@ -39,15 +39,16 @@ public:
     QString getPuesto();
     void setPuesto(QString puesto);
 public slots:
-   // void leerEmpleadosDesdeArchivo();
+    void leerEmpleadosDesdeArchivo();
 
-   // void agregarEmpleadoVectorArchivo(Empleados *empleado);
+    void agregarEmpleadoVectorArchivo(Empleados *empleado);
 
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
     void registrarEmpleado();
+
 
 signals:
     void empleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);

@@ -29,12 +29,11 @@ VerEmpleados::VerEmpleados(std::vector<Empleados *> &vectorEmpleadosRef, QWidget
     encabezados << "IDempleado" << "Nombre" << "Apellido" << "Dni" << "Edad" << "Telefono";
 
     ui->tableWidget->setHorizontalHeaderLabels(encabezados);
-
-
 }
 
 VerEmpleados::~VerEmpleados()
 {
+
     delete ui;
 }
 
@@ -112,16 +111,20 @@ void VerEmpleados::escribirArchivo(QString Archivo, int id, QString nombre, QStr
     qDebug() << "Linea" << linea;
 
     QFile file(Archivo);
-    if(file.open(QIODevice::Append) | QIODevice::Text){
-        file.write(linea.toUtf8());
+    if(file.open(QIODevice::Append | QIODevice::Text)){
+        QTextStream out(&file);
+        out << linea;
         file.close();
         qDebug() << "Archivo escrito correctamente: ";
     } else {
         qDebug() << "Error al abrir el archivo: ";
     }
 
+    actualizarTablaEmpleados(vectorEmpleados);
 }
 */
+
+/*
 void VerEmpleados::leerArchivo(QString Archivo){
   //  Archivo = QDir::currentPath() + "/empleados.csv";
 
@@ -144,12 +147,39 @@ void VerEmpleados::leerArchivo(QString Archivo){
 
         vectorEmpleados.clear();
 
+        for(const QString& linea : lineasLeidas){
+            QStringList campos = linea.split(',');
+            if(campos.size() == 7){
+                Empleados *empleado = new Empleados(
+                    vectorEmpleados,
+                    campos[0].toInt(),
+                    campos[1],
+                    campos[2],
+                    campos[3].toInt(),
+                    campos[4].toInt(),
+                    campos[5].toInt(),
+                    campos[6]
 
+                );
+                vectorEmpleados.push_back(empleado);
+                escribirArchivo("empleados.csv",
+                                empleado->getIDempleado(),
+                                empleado->getNombre(),
+                                empleado->getApellido(),
+                                empleado->getDni(),
+                                empleado->getEdad(),
+                                empleado->getTelefono(),
+                                empleado->getPuesto()
+                                );
+            }
+        }
+         escribirTabla();
     } else {
         qDebug() << "no se pudo abrir el archivo";
     }
 }
-
+*/
+/*
 void VerEmpleados::escribirTabla(){
     int row = 0;
     QStringList campos;
@@ -171,3 +201,4 @@ void VerEmpleados::escribirTabla(){
         }
     }
 }
+*/

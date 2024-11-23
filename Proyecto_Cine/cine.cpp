@@ -146,20 +146,10 @@ void Cine::agregarEmpleados()
 
 void Cine::mostrarEmpelados()
 {
-    /*
-    if(vectorEmpleados.empty()){
-        Empleados gestorEmpleados(vectorEmpleados, this);
-        gestorEmpleados.leerEmpleadosDesdeArchivo();
-    }
-    */
+    Empleados empleado(vectorEmpleados, this);
+    empleado.leerEmpleadosDesdeArchivo();
+
     VerEmpleados dialog(vectorEmpleados, this);
-
-    dialog.leerArchivo("empleados.csv");
-    // LLAMAMOS AL METODO PARA INCLUIR Y ACTUALIZAR LOS DATOS A TABLA
-    dialog.actualizarTablaEmpleados(vectorEmpleados);
-    dialog.escribirTabla();
-
-
     dialog.exec();
 }
 
