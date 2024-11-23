@@ -20,14 +20,15 @@ public:
     ~VerClientes();
 
 private slots:
-    // Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
-    // Slot para cargar la información de los clientes en la tabla
     void cargarClientes();
+    void cargarClientesDesdeCSV(const QString &archivo);  // Nuevo método para cargar CSV
 
 private:
     Ui::VerClientes *ui;
-    const std::vector<Clientes*> &vectorClientes;
+    std::vector<Clientes*> vectorClientes;
+
+    void agregarClienteATabla(int id, const QString &nombre, const QString &apellido, int dni, int edad, int telefono);  // Método para agregar clientes a la tabla
 };
 
 #endif // VERCLIENTES_H

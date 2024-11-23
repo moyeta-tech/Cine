@@ -127,10 +127,11 @@ void Cine::agregarClientes()
 
 void Cine::mostrarClientes()
 {
-    // Crear una instancia del diálogo VerClientes y pasar el vector de clientes
-    VerClientes dialog(vectorClientes, this);
+    // Suponiendo que en cine.cpp tienes un vector de punteros a clientes:
+    std::vector<Clientes*> vectorClientes;  // Asegúrate de tener este vector correctamente poblado
 
-    // Ejecutar el diálogo; la tabla se llenará automáticamente
+    // Ahora al mostrar los clientes, pasas este vector
+    VerClientes dialog(vectorClientes, this);
     dialog.exec();
 }
 

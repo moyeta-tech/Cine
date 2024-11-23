@@ -47,6 +47,7 @@ void Clientes::registrarCliente()
 {
     QString filePath = QDir::currentPath() + "/clientes.csv";
 
+    // Validar que todos los campos estén completos
     if (ui->lineEdit->text().isEmpty() || ui->lineEdit_2->text().isEmpty() ||
         ui->lineEdit_3->text().isEmpty() || ui->lineEdit_4->text().isEmpty() ||
         ui->lineEdit_5->text().isEmpty()) {
@@ -54,6 +55,7 @@ void Clientes::registrarCliente()
         return;
     }
 
+    // Crear un nuevo cliente con los datos del formulario
     Clientes *cliente = new Clientes(vectorClientes, this);
     cliente->setIDcliente(ui->lineEdit->text().toInt());
     cliente->setNombre(ui->lineEdit_2->text());
@@ -62,10 +64,16 @@ void Clientes::registrarCliente()
     cliente->setEdad(ui->spinBox->value());
     cliente->setTelefono(ui->lineEdit_5->text().toInt());
 
+    // Agregar el cliente al vector
     vectorClientes.push_back(cliente);
+
+    // Guardar el cliente en el archivo CSV
     guardarClienteEnCSV(filePath, *cliente);
+
+    // Mostrar mensaje de confirmación
     QMessageBox::information(this, "Cliente guardado", "Cliente registrado correctamente.");
 
+    // Emitir señal para notificar que se ha agregado un nuevo cliente
     emit clienteAgregado(cliente->getIDcliente(), cliente->getNombre(), cliente->getApellido(),
                          cliente->getDni(), cliente->getEdad(), cliente->getTelefono());
 }
@@ -81,10 +89,14 @@ void Clientes::leerClientesDesdeArchivo()
     }
 
     QTextStream in(&file);
-    vectorClientes.clear();
+    vectorClientes.clear(); // Limpiar el vector antes de agregar los nuevos datos
+
+    // Leer el archivo línea por línea y crear clientes
     while (!in.atEnd()) {
         QString line = in.readLine();
         QStringList fields = line.split(',');
+
+        // Verificar que la línea tenga el número correcto de campos
         if (fields.size() == 6) {
             Clientes *cliente = new Clientes(vectorClientes, this);
             cliente->setIDcliente(fields[0].toInt());
@@ -93,12 +105,15 @@ void Clientes::leerClientesDesdeArchivo()
             cliente->setDni(fields[3].toInt());
             cliente->setEdad(fields[4].toInt());
             cliente->setTelefono(fields[5].toInt());
-            vectorClientes.push_back(cliente);
+
+            vectorClientes.push_back(cliente); // Agregar al vector
         }
     }
+
     file.close();
 }
 
+// Función para guardar un cliente en el archivo CSV
 void Clientes::guardarClienteEnCSV(const QString &archivo, const Clientes &cliente)
 {
     QFile file(archivo);
@@ -114,16 +129,18 @@ void Clientes::guardarClienteEnCSV(const QString &archivo, const Clientes &clien
         << cliente.getDni() << ","
         << cliente.getEdad() << ","
         << cliente.getTelefono() << "\n";
+
     file.close();
 }
 
+// Función para inicializar el archivo CSV con encabezados si no existe
 void Clientes::inicializarCSV(const QString &archivo)
 {
     QFile file(archivo);
     if (!file.exists()) {
         if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QTextStream out(&file);
-            out << "ID,Nombre,Apellido,DNI,Edad,Telefono\n";
+            out << "ID,Nombre,Apellido,DNI,Edad,Telefono\n"; // Encabezados
             file.close();
         } else {
             qDebug() << "No se pudo inicializar el archivo:" << file.errorString();

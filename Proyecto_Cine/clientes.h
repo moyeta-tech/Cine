@@ -2,12 +2,13 @@
 #define CLIENTES_H
 
 #include <QDialog>
-#include <vector>
+#include <QString>
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
 #include <QDir>
-#include <QDebug>
+#include <QSpinBox>
+#include <vector>
 
 namespace Ui {
 class Clientes;
@@ -35,31 +36,27 @@ public:
     int getTelefono() const;
     void setTelefono(int telefono);
 
-    // Métodos para manejo de datos
-    static void guardarClienteEnCSV(const QString &archivo, const Clientes &cliente);
-    static void inicializarCSV(const QString &archivo);
+public slots:
+    void registrarCliente();
     void leerClientesDesdeArchivo();
 
-private slots:
-    void initstylesheet(); // Inicializa la hoja de estilo
-    void registrarCliente(); // Registra un nuevo cliente
-
 signals:
-    void clienteAgregado(int idcliente, QString nombre, QString apellido, int dni, int edad, int telefono);
+    void clienteAgregado(int id, const QString &nombre, const QString &apellido, int dni, int edad, int telefono);
 
 private:
-    Ui::Clientes *ui;
+    void initstylesheet();
+    void guardarClienteEnCSV(const QString &archivo, const Clientes &cliente);
+    void inicializarCSV(const QString &archivo);
 
-    // Atributos del cliente
+    Ui::Clientes *ui;
+    std::vector<Clientes*> &vectorClientes;
+
     int idCliente;
     QString Nombre;
     QString Apellido;
     int Dni;
     int Edad;
     int Telefono;
-
-    // Referencia al vector global de clientes
-    std::vector<Clientes*> &vectorClientes;
 };
 
 #endif // CLIENTES_H
