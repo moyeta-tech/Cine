@@ -102,6 +102,7 @@ void VerEmpleados::eliminarEmpleado()
         vectorEmpleados.erase(vectorEmpleados.begin() + FilaSeleccionada);
 
         ui->tableWidget->removeRow(FilaSeleccionada);
+        actualizarTablaEmpleados(vectorEmpleados);
         QMessageBox::information(this, "Aviso", "Fila Eliminada correctamente");
     }
 }

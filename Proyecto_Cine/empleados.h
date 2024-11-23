@@ -41,13 +41,14 @@ public:
 public slots:
     void leerEmpleadosDesdeArchivo();
 
-    void agregarEmpleadoVectorArchivo(Empleados *empleado);
+   // void agregarEmpleadoVectorArchivo(Empleados *empleado);
 
+    void registrarEmpleado();
 private slots:
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
-    void registrarEmpleado();
+
 
 
 signals:
