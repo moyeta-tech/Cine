@@ -26,7 +26,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_nombre"/>
+        <widget class="QLineEdit" name="lineEdit_buscar"/>
        </item>
        <item>
         <widget class="QPushButton" name="Boton_buscar">
@@ -129,7 +129,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QLineEdit" name="lineEdit_nombre_completo"/>
+        <widget class="QLineEdit" name="lineEdit_nombre"/>
        </item>
        <item row="1" column="3" rowspan="4">
         <widget class="QTextEdit" name="textEdit_sinopsis"/>
