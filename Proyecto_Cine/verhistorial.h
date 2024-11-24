@@ -21,14 +21,8 @@ public:
     explicit verHistorial(std::vector<Pago* > &vectorPagoRef, std::vector<Venta* > &vectorHistorialRef, QWidget *parent = nullptr);
     ~verHistorial();
 
-    void cargarDatosTabla();
-
 private slots:
     void initstylesheet();
-
-    void on_boton_cerrar_clicked();
-
-    void on_boton_eliminar_clicked();
 
 private:
     Ui::verHistorial *ui;
