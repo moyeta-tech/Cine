@@ -18,6 +18,9 @@ public:
     explicit VerEmpleados(std::vector<Empleados*>& empleados, QWidget *parent = nullptr);
     ~VerEmpleados();
 
+private slots:
+    void initstylesheet();
+
 private:
     Ui::VerEmpleados *ui;
     std::vector<Empleados*>& empleados;

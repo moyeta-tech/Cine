@@ -20,22 +20,7 @@
       <widget class="QTableWidget" name="tableWidget"/>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="Boton_eliminar">
-         <property name="text">
-          <string>Eliminar Empleado</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="Boton_cerrar">
-         <property name="text">
-          <string>Cerrar</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QHBoxLayout" name="horizontalLayout"/>
      </item>
     </layout>
    </item>

@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <vector>
 #include <QMessageBox>
+#include <QDebug>
 
 Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent) :
     QDialog(parent),
@@ -94,15 +95,20 @@ void Peliculas::setDia(const QDate &d) {
 void Peliculas::initstylesheet() {
     QFile style(":/src/stylesheet/stylesheet-ventanas.css");
     bool styleOK = style.open(QFile::ReadOnly);
-    qDebug() << "Apertura de archivos: " << styleOK;
-    QString stringEstilo = QString::fromLatin1(style.readAll());
-    this->setStyleSheet(stringEstilo);
+    qDebug() << "Apertura de archivo de estilo: " << styleOK;
+    if (styleOK) {
+        QString stringEstilo = QString::fromLatin1(style.readAll());
+        this->setStyleSheet(stringEstilo);
+    } else {
+        qDebug() << "No se pudo abrir el archivo de estilo.";
+    }
 }
 
 // Función para guardar las películas en un archivo CSV
 void Peliculas::guardarPeliculasEnCSV(const QString &filename) {
     QFile file(filename);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Error al intentar abrir el archivo para guardar.";
         QMessageBox::warning(this, "Error", "No se pudo abrir el archivo para guardar.");
         return;
     }
@@ -127,6 +133,7 @@ void Peliculas::guardarPeliculasEnCSV(const QString &filename) {
     }
 
     file.close();
+    qDebug() << "Películas guardadas correctamente en el archivo.";
     QMessageBox::information(this, "Éxito", "Películas guardadas correctamente.");
 }
 
@@ -139,6 +146,7 @@ void Peliculas::cargarPeliculasDesdeCSV(const QString &filename) {
         qDebug() << "El archivo no existe, creando uno nuevo.";
         // Si el archivo no existe, podemos crearlo vacío
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            qDebug() << "No se pudo crear el archivo.";
             QMessageBox::warning(this, "Error", "No se pudo crear el archivo.");
             return;
         }
@@ -147,6 +155,7 @@ void Peliculas::cargarPeliculasDesdeCSV(const QString &filename) {
     }
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Error al intentar abrir el archivo CSV.";
         QMessageBox::warning(this, "Error", "No se pudo abrir el archivo para cargar.");
         return;
     }
@@ -179,6 +188,7 @@ void Peliculas::cargarPeliculasDesdeCSV(const QString &filename) {
     }
 
     file.close();
+    qDebug() << "Películas cargadas correctamente desde el archivo.";
     QMessageBox::information(this, "Éxito", "Películas cargadas correctamente.");
 }
 
@@ -197,6 +207,11 @@ void Peliculas::agregarPelicula() {
     horarios.append(ui->timeEdit_3->time());
     horarios.append(ui->timeEdit_4->time());
 
+    qDebug() << "Título ingresado:" << titulo;
+    qDebug() << "Duración ingresada:" << duracion;
+    qDebug() << "Género ingresado:" << genero;
+    qDebug() << "Clasificación ingresada:" << clasificacion;
+
     Peliculas* nuevaPelicula = new Peliculas(vectorPelicula);
     nuevaPelicula->setTitulo(titulo);
     nuevaPelicula->setDuracion(duracion);
@@ -210,6 +225,7 @@ void Peliculas::agregarPelicula() {
 
     guardarPeliculasEnCSV(archivoCSV);  // Guardar el archivo después de agregar la película
 
+    qDebug() << "Película agregada correctamente.";
     QMessageBox::information(this, "Película Agregada", "La película se ha agregado correctamente.");
 }
 
@@ -233,56 +249,26 @@ void Peliculas::buscarPelicula() {
             found = true;
             ui->lineEdit_genero->setText(pelicula->getGenero());
             ui->lineEdit_clasificacion->setText(pelicula->getClasificacion());
-            ui->textEdit_sinopsis->setText(pelicula->getSinopsis());
+            ui->textEdit_sinopsis->setPlainText(pelicula->getSinopsis());
             ui->spinBox_duracion->setValue(pelicula->getDuracion());
-            ui->timeEdit->setTime(pelicula->getHorarios().at(0));
-            ui->timeEdit_2->setTime(pelicula->getHorarios().at(1));
-            ui->timeEdit_3->setTime(pelicula->getHorarios().at(2));
-            ui->timeEdit_4->setTime(pelicula->getHorarios().at(3));
+            ui->timeEdit->setTime(pelicula->getHorarios()[0]);
+            ui->timeEdit_2->setTime(pelicula->getHorarios()[1]);
+            ui->timeEdit_3->setTime(pelicula->getHorarios()[2]);
+            ui->timeEdit_4->setTime(pelicula->getHorarios()[3]);
             ui->dateEdit->setDate(pelicula->getDia());
+
+            qDebug() << "Película encontrada: " << valor;
             break;
         }
     }
 
     if (!found) {
-        QMessageBox::information(this, "No Encontrado", "No se encontró la película.");
+        qDebug() << "Película no encontrada con el título:" << valor;
+        QMessageBox::warning(this, "Película no encontrada", "No se encontró la película.");
     }
 }
 
-void Peliculas::modificarPelicula() {
-    QString valor = ui->lineEdit_nombre->text();
-    bool found = false;
-
-    for (Peliculas *pelicula : vectorPelicula) {
-        if (pelicula->getTitulo() == valor) {
-            found = true;
-
-            // Modificar los datos
-            pelicula->setDuracion(ui->spinBox_duracion->value());
-            pelicula->setGenero(ui->lineEdit_genero->text());
-            pelicula->setClasificacion(ui->lineEdit_clasificacion->text());
-            pelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText());
-            pelicula->setDia(ui->dateEdit->date());
-
-            QList<QTime> horarios;
-            horarios.append(ui->timeEdit->time());
-            horarios.append(ui->timeEdit_2->time());
-            horarios.append(ui->timeEdit_3->time());
-            horarios.append(ui->timeEdit_4->time());
-            pelicula->setHorarios(horarios);
-
-            guardarPeliculasEnCSV(archivoCSV);  // Guardar el archivo después de modificar
-
-            QMessageBox::information(this, "Película Modificada", "La película ha sido modificada.");
-            break;
-        }
-    }
-
-    if (!found) {
-        QMessageBox::information(this, "No Encontrada", "No se encontró la película.");
-    }
-}
-
+// Función para eliminar una película
 void Peliculas::eliminarPelicula() {
     QString valor = ui->lineEdit_nombre->text();
     bool found = false;
@@ -292,13 +278,75 @@ void Peliculas::eliminarPelicula() {
             found = true;
             delete *it;
             vectorPelicula.erase(it);
-            guardarPeliculasEnCSV(archivoCSV);  // Guardar el archivo después de eliminar
-            QMessageBox::information(this, "Película Eliminada", "La película ha sido eliminada.");
+            qDebug() << "Película eliminada:" << valor;
             break;
         }
     }
 
+    if (found) {
+        guardarPeliculasEnCSV(archivoCSV);  // Guardar el archivo después de eliminar la película
+        QMessageBox::information(this, "Película Eliminada", "La película se ha eliminado correctamente.");
+    } else {
+        qDebug() << "No se encontró la película para eliminar:" << valor;
+        QMessageBox::warning(this, "Película no encontrada", "No se encontró la película para eliminar.");
+    }
+}
+
+// Función para modificar una película
+void Peliculas::modificarPelicula() {
+    QString tituloBuscado = ui->lineEdit_nombre->text();  // Título que se busca modificar
+    bool found = false;
+
+    // Limpiar campos de entrada antes de la búsqueda
+    ui->lineEdit_genero->clear();
+    ui->lineEdit_clasificacion->clear();
+    ui->textEdit_sinopsis->clear();
+    ui->spinBox_duracion->setValue(0);
+    ui->timeEdit->clear();
+    ui->timeEdit_2->clear();
+    ui->timeEdit_3->clear();
+    ui->timeEdit_4->clear();
+    ui->dateEdit->clear();
+
+    // Buscar la película en el vector
+    for (Peliculas *pelicula : vectorPelicula) {
+        if (pelicula->getTitulo() == tituloBuscado) {
+            found = true;
+            // Actualizar los datos de la película con los nuevos valores ingresados
+            QString nuevoTitulo = ui->lineEdit_nombre_completo->text();
+            int nuevaDuracion = ui->spinBox_duracion->value();
+            QString nuevoGenero = ui->lineEdit_genero->text();
+            QString nuevaClasificacion = ui->lineEdit_clasificacion->text();
+            QString nuevaSinopsis = ui->textEdit_sinopsis->toPlainText();
+            QDate nuevoDia = ui->dateEdit->date();
+
+            QList<QTime> nuevosHorarios;
+            nuevosHorarios.append(ui->timeEdit->time());
+            nuevosHorarios.append(ui->timeEdit_2->time());
+            nuevosHorarios.append(ui->timeEdit_3->time());
+            nuevosHorarios.append(ui->timeEdit_4->time());
+
+            // Asignar los nuevos valores a la película
+            pelicula->setTitulo(nuevoTitulo);
+            pelicula->setDuracion(nuevaDuracion);
+            pelicula->setGenero(nuevoGenero);
+            pelicula->setClasificacion(nuevaClasificacion);
+            pelicula->setSinopsis(nuevaSinopsis);
+            pelicula->setDia(nuevoDia);
+            pelicula->setHorarios(nuevosHorarios);
+
+            qDebug() << "Película modificada:" << nuevoTitulo;
+            break;
+        }
+    }
+
+    // Si la película no se encuentra, mostrar un mensaje de error
     if (!found) {
-        QMessageBox::information(this, "No Encontrada", "No se encontró la película.");
+        qDebug() << "No se encontró la película con el título:" << tituloBuscado;
+        QMessageBox::warning(this, "Película no encontrada", "No se encontró la película para modificar.");
+    } else {
+        // Guardar los cambios en el archivo CSV
+        guardarPeliculasEnCSV(archivoCSV);
+        QMessageBox::information(this, "Película Modificada", "La película se ha modificado correctamente.");
     }
 }

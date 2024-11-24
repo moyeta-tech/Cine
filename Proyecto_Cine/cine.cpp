@@ -99,6 +99,7 @@ void Cine::setUbicacion(QString ubicacion){
 void Cine::agregarPelicula()
 {
     Peliculas *dialog = new Peliculas(this->vectorPelicula, this);
+
     connect(dialog, &Peliculas::peliAgregada, this, &Cine::procesarPeliAgregada);
 
     dialog->exec();

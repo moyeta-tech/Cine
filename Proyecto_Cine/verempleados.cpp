@@ -13,6 +13,9 @@ VerEmpleados::VerEmpleados(std::vector<Empleados*>& empleados, QWidget *parent) 
 {
     ui->setupUi(this);
 
+    // Llamamos al slot para cargar el stylesheet
+    initstylesheet();
+
     // Configurar el QTableWidget
     ui->tableWidget->setColumnCount(7);
     ui->tableWidget->setHorizontalHeaderLabels({"ID", "Nombre", "Apellido", "DNI", "Edad", "Teléfono", "Puesto"});
@@ -29,6 +32,18 @@ VerEmpleados::~VerEmpleados()
 {
     delete ui;
 }
+
+void VerEmpleados::initstylesheet()
+{
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
+    if (style.open(QFile::ReadOnly)) {
+        QString stringEstilo = QString::fromLatin1(style.readAll());
+        this->setStyleSheet(stringEstilo);
+    } else {
+        qDebug() << "No se pudo cargar el archivo de estilo.";
+    }
+}
+
 
 void VerEmpleados::cargarEmpleadosDesdeCSV(const QString &archivo)
 {
