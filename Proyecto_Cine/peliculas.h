@@ -2,7 +2,6 @@
 #define PELICULAS_H
 
 #include <QDialog>
-
 #include <vector>
 #include <QFile>
 #include <QMessageBox>
@@ -45,6 +44,9 @@ public:
     QDate getDia() const;
     void setDia(const QDate &fecha);
 
+    void guardarPeliculasEnCSV(const QString &filename);
+    void cargarPeliculasDesdeCSV(const QString &filename);
+
 private slots:
     void modificarPelicula();
     void eliminarPelicula();
@@ -68,6 +70,7 @@ private:
     QList<QTime> horarios;
     QDate dia;
     std::vector<Peliculas*> &vectorPelicula;
+    QString archivoCSV;  // Ruta del archivo CSV
 };
 
 #endif // PELICULAS_H
