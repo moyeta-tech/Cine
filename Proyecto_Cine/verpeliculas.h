@@ -2,7 +2,9 @@
 #define VERPELICULAS_H
 
 #include <QDialog>
-#include <QFile>
+#include <QTableWidget>
+#include <vector>
+#include "peliculas.h"  // Incluye la clase Peliculas
 
 namespace Ui {
 class VerPeliculas;
@@ -13,15 +15,22 @@ class VerPeliculas : public QDialog
     Q_OBJECT
 
 public:
-    explicit VerPeliculas(QWidget *parent = nullptr);
+    explicit VerPeliculas(std::vector<Peliculas*>& peliculas, QWidget *parent = nullptr);
     ~VerPeliculas();
 
 private slots:
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
+    // Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();
 
 private:
     Ui::VerPeliculas *ui;
+    std::vector<Peliculas*>& peliculas;
+
+    // Declarar funciones
+    void cargarPeliculasDesdeCSV(const QString &archivo);
+    void agregarPeliculaATabla(const QString &titulo, int duracion, const QString &genero,
+                               const QString &clasificacion, const QString &fecha, const QString &horarios,
+                               const QString &sinopsis);
 };
 
 #endif // VERPELICULAS_H

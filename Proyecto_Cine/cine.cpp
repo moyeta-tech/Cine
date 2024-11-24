@@ -11,7 +11,7 @@
 #include "pago.h"
 #include "verclientes.h"
 #include "verempleados.h"
-//#include "verpeliculas.h"
+#include "verpeliculas.h"
 
 
 Cine::Cine(QWidget *parent)
@@ -30,7 +30,7 @@ Cine::Cine(QWidget *parent)
 
     //Conectamos el menu a los slots correspondientes
     connect(ui->actionRegistro_peliculas, &QAction::triggered, this, &Cine::agregarPelicula);
-    //connect (ui->actionVer_peliculas, &QAction::triggered, this, &Cine::mostrarPeliculas);
+    connect (ui->actionVer_peliculas, &QAction::triggered, this, &Cine::mostrarPeliculas);
 
     connect (ui->actionRegistrar_clientes, &QAction::triggered, this, &Cine::agregarClientes);
     connect (ui->actionVer_clientes, &QAction::triggered, this, &Cine::mostrarClientes);
@@ -104,14 +104,14 @@ void Cine::agregarPelicula()
     dialog->exec();
 }
 
-/*
+
 void Cine::mostrarPeliculas()
 {
 
     VerPeliculas dialog(vectorPelicula,this);
     dialog.exec();
 }
-*/
+
 
 void Cine::agregarClientes()
 {
