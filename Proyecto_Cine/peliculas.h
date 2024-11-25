@@ -48,7 +48,7 @@ public:
     void cargarPeliculasDesdeCSV(const QString &filename);
 
 private slots:
-    void modificarPelicula();
+   // void modificarPelicula();
     void eliminarPelicula();
     void buscarPelicula();
     void agregarPelicula();

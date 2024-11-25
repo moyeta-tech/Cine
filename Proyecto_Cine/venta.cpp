@@ -28,7 +28,7 @@ Venta::Venta(std::vector<Peliculas *> VectorPeliculasRef, QString fecha, int can
     }
 
     // Conectar eventos
-    connect(ui->comboBox_pelicula, SIGNAL(currentIndexChanged(int)), this, SLOT(actualizarHorarios()));
+    connect(ui->comboBox_pelicula, &QComboBox::currentIndexChanged, this, &Venta::actualizarHorarios);
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::seleccionAsientos);
     connect(ui->Boton_continuar, &QPushButton::clicked, this, &Venta::accept);
 
@@ -86,21 +86,31 @@ void Venta::initstylesheet()
 void Venta::actualizarHorarios()
 {
     int indice = ui->comboBox_pelicula->currentIndex();
+    qDebug() << "Indice: " << indice;
     if (indice < 0 || indice >= static_cast<int>(VectorPeliculas.size())) {
+        qDebug() << "El indice esta fuera de rango";
         QMessageBox::warning(this, "Error", "Película no válida seleccionada.");
         return;
     }
 
     Peliculas *peliculaSeleccionada = VectorPeliculas[indice];
-    QList<QTime> horarios = peliculaSeleccionada->getHorarios();
-    QDate dia = peliculaSeleccionada->getDia();
+    QList <QTime> horarios = peliculaSeleccionada->getHorarios();
+    qDebug() << "Horarios dispo: " << horarios;
 
     ui->listWidget_horarios->clear();
-    for (const QTime &horario : horarios) {
-        ui->listWidget_horarios->addItem(horario.toString("hh:mm"));
+
+
+    if(horarios.isEmpty()){
+        QMessageBox::information(this, "Aviso", "No hay horarios disponibles");
+        return;
     }
 
-    ui->label_dia->setText("Día: " + dia.toString("dd/MM/yyyy"));
+    for (const QTime &horario : horarios) {
+            ui->listWidget_horarios->addItem(horario.toString("HH:mm"));
+    }
+
+            QDate dia = peliculaSeleccionada->getDia();
+            ui->label_dia->setText("Día: " + dia.toString("dd/MM/yyyy"));
 }
 
 void Venta::seleccionAsientos() {
@@ -215,4 +225,6 @@ void Venta::on_Boton_continuar_clicked()
 
     emit ventaConfirmada(fecha, monto);
 }
+
+
 

@@ -12,6 +12,7 @@
 #include "verclientes.h"
 #include "verempleados.h"
 #include "verpeliculas.h"
+#include "asientos.h"
 
 
 Cine::Cine(QWidget *parent)
@@ -108,8 +109,11 @@ void Cine::agregarPelicula()
 
 void Cine::mostrarPeliculas()
 {
+    Peliculas cargarPeli(vectorPelicula, this);
+    cargarPeli.cargarPeliculasDesdeCSV("peliculas.csv");
 
     VerPeliculas dialog(vectorPelicula,this);
+    dialog.cargarPeliculasDesdeCSV("peliculas.csv");
     dialog.exec();
 }
 
@@ -153,7 +157,9 @@ void Cine::mostrarHistorial(){
 
     verHistorial *ventanaHistorial = new verHistorial(vectorPago, vectorHistorial, this);
 
+    ventanaHistorial->mostrarDatosHistorial();
     ventanaHistorial->exec();
+
 
  }
 
@@ -191,9 +197,12 @@ void Cine::ventaBoletos()
     // Crear la ventana de Venta
     Venta ventaDialog(vectorPelicula,fecha, cantAsientos, &cliente, &horario, &pago, this);
 
+
     connect(&ventaDialog, &Venta::ventaConfirmada, this ,&Cine::agregarVenta);
+
     // Mostrar el diálogo
     ventaDialog.exec();
+
 }
 
 void Cine::procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis){

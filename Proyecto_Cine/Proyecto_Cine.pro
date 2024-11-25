@@ -20,7 +20,6 @@ SOURCES += \
     pago.cpp \
     peliculas.cpp \
     precios.cpp \
-    sala.cpp \
     venta.cpp \
     verclientes.cpp \
     verempleados.cpp \
@@ -37,7 +36,6 @@ HEADERS += \
     pago.h \
     peliculas.h \
     precios.h \
-    sala.h \
     venta.h \
     verclientes.h \
     verempleados.h \

@@ -86,13 +86,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="Boton_modificar">
-           <property name="text">
-            <string>Modificar pelicula</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="Boton_eliimnar">
            <property name="text">
             <string>Eliminar pelicula</string>

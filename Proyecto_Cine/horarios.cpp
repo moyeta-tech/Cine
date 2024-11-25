@@ -47,7 +47,6 @@ void Horarios::mostrarHorariosYDia()
 
     // Obtener la película seleccionada
     Peliculas *peliculaSeleccionada = VectorPeliculas[indice];
-
     // Obtener horarios y días
     QList<QTime> horarios = peliculaSeleccionada->getHorarios();
     QDate dia = peliculaSeleccionada->getDia();
@@ -57,8 +56,8 @@ void Horarios::mostrarHorariosYDia()
 
     // Mostrar horarios en la lista
     for (const QTime &horario : horarios) {
-        qDebug() << "Agregando horario:" << horario.toString("hh:mm");
-        ui->listWidget_horarios->addItem(horario.toString("hh:mm"));
+        qDebug() << "Agregando horario:" << horario.toString("HH:mm");
+        ui->listWidget_horarios->addItem(horario.toString("HH:mm"));
     }
 
     // Mostrar día

@@ -20,6 +20,7 @@ class verHistorial : public QDialog
 public:
     explicit verHistorial(std::vector<Pago* > &vectorPagoRef, std::vector<Venta* > &vectorHistorialRef, QWidget *parent = nullptr);
     ~verHistorial();
+    void mostrarDatosHistorial();
 
 private slots:
     void initstylesheet();

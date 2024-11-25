@@ -26,8 +26,9 @@ public:
 
     void setAsientos(const QString& asientos); // Nuevo método para pasar asientos
 
+    bool finalizarCompra();
+
 private slots:
-    void finalizarCompra();
 
     //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
     void initstylesheet();

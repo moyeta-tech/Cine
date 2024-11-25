@@ -26,11 +26,11 @@ private:
     Ui::VerPeliculas *ui;
     std::vector<Peliculas*>& peliculas;
 
+public slots:
     // Declarar funciones
     void cargarPeliculasDesdeCSV(const QString &archivo);
     void agregarPeliculaATabla(const QString &titulo, int duracion, const QString &genero,
-                               const QString &clasificacion, const QString &fecha, const QString &horarios,
-                               const QString &sinopsis);
+                               const QString &clasificacion, const QString &dias, const QString &horarios, const QString &sinopsis);
 };
 
 #endif // VERPELICULAS_H

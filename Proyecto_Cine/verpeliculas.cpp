@@ -16,9 +16,9 @@ VerPeliculas::VerPeliculas(std::vector<Peliculas*>& peliculas, QWidget *parent) 
 
     // Configurar el QTableWidget con 7 columnas
     ui->tableWidget->setColumnCount(7);
-    ui->tableWidget->setHorizontalHeaderLabels({"Título", "Duración", "Género", "Clasificación", "Días", "Horarios", "Sinopsis"});
+    ui->tableWidget->setHorizontalHeaderLabels({"Título", "Duración", "Género", "Clasificación", "Sinopsis", "Días", "Horas"});
 
-    // Asegúrate de que la tabla sea visible
+    // Asegurarse de que la tabla sea visible
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);  // Evitar edición
 
@@ -27,7 +27,7 @@ VerPeliculas::VerPeliculas(std::vector<Peliculas*>& peliculas, QWidget *parent) 
     qDebug() << "Ruta para cargar archivo: " << rutaArchivo;
 
     // Cargar películas desde el archivo CSV
-    cargarPeliculasDesdeCSV(rutaArchivo);
+   // cargarPeliculasDesdeCSV(rutaArchivo);
 
     // Llamamos al slot para cargar el stylesheet
     initstylesheet();
@@ -69,10 +69,9 @@ void VerPeliculas::cargarPeliculasDesdeCSV(const QString &archivo)
             int duracion = campos[1].toInt();  // El segundo campo es la duración
             QString genero = campos[2];  // El tercer campo es el género
             QString clasificacion = campos[3];  // El cuarto campo es la clasificación
-            QString fecha = campos[4];  // El quinto campo es la fecha
-            QString dias = campos[5];  // El sexto campo es "Días"
-            QString horarios = campos.size() > 6 ? campos[6] : "";  // El séptimo campo es "Horarios"
-            QString sinopsis = campos.size() > 7 ? campos[7] : "Sinopsis no disponible";  // El octavo campo es "Sinopsis"
+            QString dias = campos[4];  // El quinto campo es "Días"
+            QString horarios = campos.size() > 5 ? campos[5] : "";  // El sexto campo es "Horarios"
+            QString sinopsis = campos.size() > 6 ? campos[6] : "Sinopsis no disponible";  // El septimo campo es "Sinopsis"
 
             // Dividir horarios por tabuladores si están presentes
             QStringList horariosList = horarios.split('\t');

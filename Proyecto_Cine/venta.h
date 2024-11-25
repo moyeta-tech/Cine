@@ -54,6 +54,8 @@ private slots:
 
     void on_Boton_continuar_clicked();
 
+public slots:
+
 signals:
     void ventaConfirmada(const QString &fecha, double monto);
 

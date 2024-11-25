@@ -50,6 +50,7 @@ Asientos::Asientos(QWidget *parent)
     for (QPushButton* boton : botonesAsientos) {
         connect(boton, &QPushButton::clicked, this, &Asientos::seleccionarAsiento);
     }
+
 }
 
 Asientos::~Asientos()
@@ -97,6 +98,7 @@ void Asientos::continuarPago()
     Pago dialog(metodo, monto, fecha, this);
     dialog.setAsientos(asientosSeleccionados.join(", ")); // Método personalizado para los asientos
     dialog.exec();
+
 }
 
 QStringList Asientos::getAsientosSeleccionados() const {

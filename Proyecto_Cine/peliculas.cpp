@@ -25,11 +25,9 @@ Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent
 
     connect(ui->Boton_buscar, &QPushButton::clicked, this, &Peliculas::buscarPelicula);
     connect(ui->Boton_agregar, &QPushButton::clicked, this, &Peliculas::agregarPelicula);
-    connect(ui->Boton_modificar, &QPushButton::clicked, this, &Peliculas::modificarPelicula);
+  //  connect(ui->Boton_modificar, &QPushButton::clicked, this, &Peliculas::modificarPelicula);
     connect(ui->Boton_eliimnar, &QPushButton::clicked, this, &Peliculas::eliminarPelicula);
 
-    cargarPeliculasDesdeCSV(archivoCSV);
-    qDebug() << "Películas cargadas desde CSV.";
 }
 
 Peliculas::~Peliculas()
@@ -130,18 +128,23 @@ void Peliculas::guardarPeliculasEnCSV(const QString &filename) {
             << pelicula->getDia().toString("yyyy-MM-dd") << ",";
 
         // Guardar horarios
-        for (int i = 0; i < pelicula->getHorarios().size(); ++i) {
-            out << pelicula->getHorarios()[i].toString("HH:mm");
-            if (i != pelicula->getHorarios().size() - 1) {
-                out << ";"; // Separar horarios por punto y coma
+        const QList<QTime>& horarios = pelicula->getHorarios();
+        for (int i = 0; i < horarios.size(); ++i) {
+            if(horarios[i].isValid()){
+                out << horarios[i].toString("HH:mm");
+                if(i != horarios.size() - 1){
+                    out << ";";
+                }
+            } else {
+                qDebug() << "Horario inválido detectado y no guardado.";
             }
+
         }
         out << "\n";
     }
 
     file.close();
     qDebug() << "Películas guardadas correctamente en el archivo.";
-    QMessageBox::information(this, "Éxito", "Películas guardadas correctamente.");
 }
 
 void Peliculas::cargarPeliculasDesdeCSV(const QString &filename) {
@@ -197,10 +200,15 @@ void Peliculas::cargarPeliculasDesdeCSV(const QString &filename) {
         nuevaPelicula->setDia(QDate::fromString(fields[5], "yyyy-MM-dd"));
 
         // Leer los horarios (los horarios están separados por tabuladores en el CSV)
-        QStringList horarios = fields[6].split("\t"); // Asumiendo que los horarios están separados por tabuladores
+        QStringList horarios = fields[6].split(";"); // Asumiendo que los horarios están separados por tabuladores
         QList<QTime> listaHorarios;
         for (const QString &hora : horarios) {
-            listaHorarios.append(QTime::fromString(hora, "HH:mm"));
+            QTime horario = QTime::fromString(hora, "HH:mm");
+            if(horario.isValid()){
+                listaHorarios.append(horario);
+            } else {
+                qDebug() << "Horario invalido ignorado: " << hora;
+            }
         }
         nuevaPelicula->setHorarios(listaHorarios);
 
@@ -210,26 +218,31 @@ void Peliculas::cargarPeliculasDesdeCSV(const QString &filename) {
 
     file.close();
     qDebug() << "Películas cargadas correctamente desde el archivo.";
-    QMessageBox::information(this, "Éxito", "Películas cargadas correctamente.");
 }
+
 
 
 void Peliculas::agregarPelicula() {
     // Crear una nueva película a partir de los datos ingresados en la interfaz
     Peliculas* nuevaPelicula = new Peliculas(vectorPelicula);
-    nuevaPelicula->setTitulo(ui->lineEdit_nombre->text());
+    nuevaPelicula->setTitulo(ui->lineEdit_nombre->text().trimmed());
     nuevaPelicula->setDuracion(ui->spinBox_duracion->value());
-    nuevaPelicula->setGenero(ui->lineEdit_genero->text());
-    nuevaPelicula->setClasificacion(ui->lineEdit_clasificacion->text());
-    nuevaPelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText());
+    nuevaPelicula->setGenero(ui->lineEdit_genero->text().trimmed());
+    nuevaPelicula->setClasificacion(ui->lineEdit_clasificacion->text().trimmed());
+    nuevaPelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText().trimmed());
     nuevaPelicula->setDia(ui->dateEdit->date());
 
     // Crear la lista de horarios y agregar los valores de los QTimeEdit
     QList<QTime> horarios;
-    horarios.append(ui->timeEdit->time()); // Primer horario
-    horarios.append(ui->timeEdit_2->time()); // Segundo horario
-    horarios.append(ui->timeEdit_3->time()); // Tercer horario
-    horarios.append(ui->timeEdit_4->time()); // Cuarto horario
+    if (ui->timeEdit->time().isValid()) horarios.append(ui->timeEdit->time());
+    if (ui->timeEdit_2->time().isValid()) horarios.append(ui->timeEdit_2->time());
+    if (ui->timeEdit_3->time().isValid()) horarios.append(ui->timeEdit_3->time());
+    if (ui->timeEdit_4->time().isValid()) horarios.append(ui->timeEdit_4->time());
+
+    if (horarios.isEmpty()) {
+        QMessageBox::warning(this, "Error", "Debe ingresar al menos un horario válido.");
+        return;
+    }
 
     nuevaPelicula->setHorarios(horarios); // Asignar los horarios a la película
 
@@ -293,7 +306,7 @@ void Peliculas::eliminarPelicula() {
     }
 }
 
-
+/*
 void Peliculas::modificarPelicula() {
     QString tituloModificar = ui->lineEdit_buscar->text().trimmed();
 
@@ -339,3 +352,4 @@ void Peliculas::modificarPelicula() {
         QMessageBox::information(this, "No encontrada", "No se encontró una película con ese título.");
     }
 }
+*/

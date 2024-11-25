@@ -1,6 +1,7 @@
 #include "pago.h"
 #include "ui_pago.h"
 
+
 Pago::Pago(QString metodo, float monto, QString fecha, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Pago)
@@ -66,9 +67,11 @@ void Pago::setFecha(QString fecha)
     Fecha = fecha;  // Usamos 'Fecha' en lugar de 'fechaPago'
 }
 
-void Pago::finalizarCompra()
+bool Pago::finalizarCompra()
 {
     this->accept();  // Cierra el diálogo y devuelve QDialog::Accepted
+    return true;
+
 }
 
 // HOJA DE ESTILOS
@@ -84,6 +87,6 @@ void Pago::initstylesheet()
 void Pago::setAsientos(const QString& asientos)
 {
     AsientosSeleccionados = asientos;
-    ui->label_asiento->setText("Asientos seleccionados: " + asientos);
 
 }
+
