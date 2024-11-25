@@ -1,0 +1,98 @@
+/* Fondo principal de la ventana */
+QMainWindow
+{
+    background-color: #E9F1F7;
+}
+
+/* Título y etiquetas */
+QLabel#tituloLabel
+{
+    color: #623CEA;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Botones primarios */
+QPushButton
+{
+    background-color: #545E75;
+    color: #E7DFC6;
+    border: 2px solid #304D6D;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+QPushButton:hover
+{
+    background-color: #63ADF2;
+    color: #304D6D;
+}
+
+QPushButton:pressed {
+    background-color: #A62639;
+    color: #E9F1F7;
+}
+
+/* Campos de texto */
+QLineEdit
+{
+    background-color: #A7CCED;
+    color: #304D6D;
+    border: 1px solid #82A0BC;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+/* Mensajes de advertencia */
+QMessageBox
+{
+    background-color: #F4E409;
+    color: #511C29;
+}
+
+QMessageBox QLabel
+{
+    color: #710000;
+    font-weight: bold;
+}
+
+/* Estilo del QMenuBar */
+QMenuBar {
+    background-color: #545E75;
+    color: #E7DFC6;
+    padding: 5px;
+}
+
+/* Color de los items dentro del QMenuBar */
+QMenuBar::item {
+    background-color: transparent;
+    color: #E7DFC6;
+    padding: 5px 10px;
+}
+
+/* Estilo cuando el item está seleccionado (hover) */
+QMenuBar::item:selected {
+    background-color: #63ADF2;
+    color: #304D6D;
+    border-radius: 4px;
+}
+
+/* Estilo del QMenu que se despliega al hacer clic en un item del QMenuBar */
+QMenu {
+    background-color: #545E75;
+    border: 1px solid #304D6D;
+    padding: 5px;
+}
+
+/* Estilo de los items dentro del QMenu */
+QMenu::item {
+    background-color: transparent;
+    color: #E7DFC6;
+    padding: 5px 10px;
+}
+
+/* Estilo cuando se selecciona (hover) un item dentro del QMenu */
+QMenu::item:selected {
+    background-color: #63ADF2;
+    color: #304D6D;
+}

@@ -1,0 +1,165 @@
+/* Fondo de la ventana de inicio de sesión */
+QDialog {
+    background-color: #E9F1F7;  /* Fondo claro */
+}
+
+/* Título y etiquetas */
+QLabel {
+    color: #304D6D; /* Texto oscuro */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Botones de inicio de sesión, salir, y olvide contraseña */
+QPushButton {
+    background-color: #545E75;  /* Fondo del botón */
+    color: #E7DFC6;             /* Color del texto */
+    border: 2px solid #304D6D;  /* Bordes de botón */
+    border-radius: 5px;
+    padding: 8px;
+}
+
+QPushButton:hover {
+    background-color: #63ADF2;  /* Color de fondo cuando se pasa el mouse */
+    color: #304D6D;
+}
+
+QPushButton:pressed {
+    background-color: #A62639;  /* Fondo cuando el botón está presionado */
+    color: #E9F1F7;
+}
+
+/* Campos de entrada de usuario y contraseña */
+QLineEdit {
+    background-color: #A7CCED;  /* Fondo de entrada */
+    color: #304D6D;             /* Texto en el campo */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+}
+
+/* ComboBox */
+QComboBox {
+    background-color: #A7CCED;  /* Fondo del ComboBox */
+    color: #304D6D;             /* Texto en el ComboBox */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+    min-width: 150px;
+}
+
+/* ComboBox cuando se abre */
+QComboBox::drop-down {
+    background-color: #545E75;
+    border-radius: 4px;
+}
+
+/* Texto del ComboBox cuando se selecciona */
+QComboBox QAbstractItemView {
+    background-color: #E9F1F7;
+    color: #304D6D;
+}
+
+/* SpinBox */
+QSpinBox {
+    background-color: #A7CCED;  /* Fondo del ComboBox */
+    color: #304D6D;             /* Texto en el ComboBox */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+    min-width: 150px;
+}
+
+/* ComboBox cuando se abre */
+QSpinBox::drop-down {
+    background-color: #545E75;
+    border-radius: 4px;
+}
+
+/* Texto del ComboBox cuando se selecciona */
+QSpinBox QAbstractItemView {
+    background-color: #E9F1F7;
+    color: #304D6D;
+}
+
+/* QTextEdit */
+QTextEdit {
+    background-color: #A7CCED;  /* Fondo del QTextEdit */
+    color: #304D6D;             /* Texto en el QTextEdit */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+    min-height: 100px;          /* Altura mínima */
+}
+
+/* QTableWidget */
+QTableWidget {
+    background-color: #E9F1F7;  /* Fondo de la tabla */
+    color: #304D6D;             /* Texto en la tabla */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+}
+
+QTableWidget::item {
+    border: 1px solid #82A0BC;  /* Bordes de los elementos de la tabla */
+    padding: 4px;
+}
+
+QTableWidget QTableCornerButton {
+    background-color: #545E75;  /* Esquina de la tabla */
+}
+
+/* Mensajes de advertencia (QMessageBox) */
+QMessageBox {
+    background-color: #E9F1F7;  /* Fondo de advertencia */
+    color: #511C29;             /* Texto */
+}
+
+QMessageBox QLabel {
+    color: #710000;             /* Color del mensaje de advertencia */
+    font-weight: bold;
+}
+
+/* SpinBox */
+QDateTimeEdit {
+    background-color: #A7CCED;  /* Fondo del ComboBox */
+    color: #304D6D;             /* Texto en el ComboBox */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+    min-width: 150px;
+}
+
+/* ComboBox cuando se abre */
+QDateTimeEdit::drop-down {
+    background-color: #545E75;
+    border-radius: 4px;
+}
+
+/* Texto del ComboBox cuando se selecciona */
+QDateTimeEdit QAbstractItemView {
+    background-color: #E9F1F7;
+    color: #304D6D;
+}
+
+/* QListWidget */
+QListWidget {
+    background-color: #A7CCED;  /* Fondo */
+    color: #304D6D;             /* Texto */
+    border: 1px solid #82A0BC;  /* Bordes */
+    border-radius: 4px;
+    padding: 6px;
+    min-height: 100px;          /* Altura mínima */
+}
+
+/* Elementos dentro del QListWidget */
+QListWidget::item {
+    border: 1px solid #82A0BC;  /* Bordes de los elementos */
+    padding: 4px;
+}
+
+QListWidget::item:selected {
+    background-color: #63ADF2;  /* Fondo del elemento seleccionado */
+    color: #E9F1F7;             /* Color del texto del seleccionado */
+}

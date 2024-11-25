@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Cine</class>
+ <widget class="QMainWindow" name="Cine">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>508</width>
+    <height>356</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Imagen</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="Boton_venta">
+        <property name="text">
+         <string>Venta</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Imagen</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="Boton_horario">
+        <property name="text">
+         <string>Horarios</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Imagen</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="Boton_precio">
+        <property name="text">
+         <string>Precios</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>508</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPersonal">
+    <property name="title">
+     <string>Personal</string>
+    </property>
+    <addaction name="actionRegistrar_personal"/>
+    <addaction name="actionVer_personal"/>
+   </widget>
+   <widget class="QMenu" name="menuClientes">
+    <property name="title">
+     <string>Clientes</string>
+    </property>
+    <addaction name="actionRegistrar_clientes"/>
+    <addaction name="actionVer_clientes"/>
+   </widget>
+   <widget class="QMenu" name="menuPelicular">
+    <property name="title">
+     <string>Peliculas</string>
+    </property>
+    <addaction name="actionRegistro_peliculas"/>
+    <addaction name="actionVer_peliculas"/>
+   </widget>
+   <widget class="QMenu" name="menuHistorial">
+    <property name="title">
+     <string>Historial</string>
+    </property>
+    <addaction name="actionVer_historial"/>
+   </widget>
+   <addaction name="menuPersonal"/>
+   <addaction name="menuClientes"/>
+   <addaction name="menuPelicular"/>
+   <addaction name="menuHistorial"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionRegistro_cine">
+   <property name="text">
+    <string>Registro cine</string>
+   </property>
+  </action>
+  <action name="actionImprimir">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionRegistrar_personal">
+   <property name="text">
+    <string>Registrar personal</string>
+   </property>
+  </action>
+  <action name="actionVer_personal">
+   <property name="text">
+    <string>Ver personal</string>
+   </property>
+  </action>
+  <action name="actionRegistrar_clientes">
+   <property name="text">
+    <string>Registrar clientes</string>
+   </property>
+  </action>
+  <action name="actionVer_clientes">
+   <property name="text">
+    <string>Ver clientes</string>
+   </property>
+  </action>
+  <action name="actionRegistro_peliculas">
+   <property name="text">
+    <string>Registro peliculas</string>
+   </property>
+  </action>
+  <action name="actionVer_peliculas">
+   <property name="text">
+    <string>Ver peliculas</string>
+   </property>
+  </action>
+  <action name="actionImprimir_2">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionGenerar_ticket">
+   <property name="text">
+    <string>Generar ticket</string>
+   </property>
+  </action>
+  <action name="actionImprimir_3">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionGenerar_venta">
+   <property name="text">
+    <string>Generar venta</string>
+   </property>
+  </action>
+  <action name="actionImprimir_4">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="actionVer_historial">
+   <property name="text">
+    <string>Ver historial</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
