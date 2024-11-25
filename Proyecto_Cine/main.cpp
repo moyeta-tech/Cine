@@ -1,24 +1,18 @@
 #include "iniciosesion.h"  // Incluir la clase de la ventana de inicio de sesión
-#include <QApplication>
+#include <QApplication>     // Incluir la clase QApplication para gestionar la aplicación Qt
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication a(argc, argv);  // Crear la instancia de QApplication, necesaria para ejecutar cualquier aplicación Qt
 
-    // Crear la ventana de inicio de sesión
+    // Crear un objeto de la clase InicioSesion (ventana de inicio de sesión)
     InicioSesion loginDialog;
 
-    // Mostrar la ventana de inicio de sesión
+    // Ejecutar la ventana de inicio de sesión y esperar a que el usuario interactúe
+    // Si el usuario cierra la ventana de inicio de sesión con éxito (aceptada), ejecutamos el ciclo de la aplicación
     if (loginDialog.exec() == QDialog::Accepted) {
-        // Si el inicio de sesión es exitoso, ejecuta el resto de la aplicación o muestra la siguiente ventana
-        // Por ejemplo, puedes iniciar una ventana principal aquí:
-        // MainWindow w;
-        // w.show();
-
-        // Si no quieres mostrar otra ventana, simplemente finalizas la aplicación
-        return a.exec();
+        return a.exec();  // Ejecutamos la aplicación Qt
     }
 
-    // Si el inicio de sesión falla o se cancela, se termina la aplicación
-    return 0;
+    return 0;  // Si el usuario no acepta (cierra la ventana sin iniciar sesión), cerramos la aplicación
 }

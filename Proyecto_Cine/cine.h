@@ -1,18 +1,18 @@
-#ifndef CINE_H
-#define CINE_H
+#ifndef CINE_H //Verifica si CINE_H no ha sido definido previamente
+#define CINE_H //Define CINE_H para evitar múltiples inclusiones del archivo
 
-#include <QMainWindow>
+#include <QMainWindow> //Incluimos las bibliotecas necesarias para una ventana principal en Qt
 
-#include <QDebug>
-#include <QMenuBar>
-#include <QAction>
-#include <QMessageBox>
-#include <QFile>
+#include <QDebug> //Incluimos la biblioteca que permite depuración mediante mensajes en la consola
+#include <QMenuBar> //Incluimos la biblioteca que proporciona una barra de menú para la interfaz
+#include <QAction> //Incluimos la biblioteca permite manejar acciones en el menú y la interfaz
+#include <QMessageBox> //Incluimos la biblioteca que permite mostrar cuadros de mensaje
+#include <QFile> //Incluimos la biblioteca que proporciona manejo de archivos
 
-#include "clientes.h"
-#include "empleados.h"
-#include "peliculas.h"
-#include "verhistorial.h"
+#include "clientes.h" //Incluimos la clase `Clientes`
+#include "empleados.h" //Incluimos la clase `Empleados`
+#include "peliculas.h" //Incluimos la clase `Peliculas`
+#include "verhistorial.h" //Incluimos la clase `verHistorial`
 
 namespace Ui {
 class Cine;
@@ -26,63 +26,50 @@ public:
     explicit Cine(QWidget *parent = nullptr);
     ~Cine();
 
-    // METODOS
-    QString getNombre();
-    void setNombre(QString nombre);
-    QString getUbicacion();
-    void setUbicacion(QString ubicacion);
-
+    QString getNombre(); //Metodo para obtener el nombre del cine
+    void setNombre(QString nombre); //Metodo para establecer el nombre del cine
+    QString getUbicacion(); //Metodo para obtener la ubicación del cine
+    void setUbicacion(QString ubicacion); //Metodo para establecer la ubicación del cine
 
 private slots:
-    //Slots para los elementos de QMenuBar
-    void agregarPelicula();
-    void mostrarPeliculas();
+    void agregarPelicula(); //Slot para agregar una película
+    void mostrarPeliculas(); //Slot para mostrar las películas
 
-    void agregarClientes();
-    void mostrarClientes();
+    void agregarClientes(); //Slot para agregar un cliente
+    void mostrarClientes(); //Slot para mostrar los clientes
 
-    void agregarEmpleados();
-    void mostrarEmpelados();
+    void agregarEmpleados(); //Slot para agregar un empleado
+    void mostrarEmpelados(); //Slot para mostrar los empleados
 
-    void mostrarHistorial();
+    void mostrarHistorial(); //Slot para mostrar el historial de ventas
 
-    //Slots para los botones
-    void mostrarPrecios();
-    void mostrarHorarios();
-    void ventaBoletos();
+    void mostrarPrecios(); //Slot para mostrar los precios de boletos
+    void mostrarHorarios(); //Slot para mostrar los horarios disponibles
 
+    void ventaBoletos(); //Slot para gestionar la venta de boletos
 
-    // SLOT PARA AGREGAR UNA NUEVA PELICULA AL VECTOR
-    void procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis);
+    void procesarPeliAgregada(QString titulo, int duracion, QString genero, QString clasificacion, QString sinopsis); //Slot para procesar la adición de una película
 
-    // SLOT PARA AGREGAR UN CLIENTE AL VECTOR
-    void procesarClienteAgregado(int idcliente, QString nombre, QString apellido, int dni, int edad, int telefono);
+    void procesarClienteAgregado(int idcliente, QString nombre, QString apellido, int dni, int edad, int telefono); //Slot para procesar la adición de un cliente
 
-    // SLOT PARA AGREGAR UN EMPLEADO
-    void procesarEmpleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto);
+    void procesarEmpleadoAgregado(int idempleado, QString nombre, QString apellido, int dni, int edad, int telefono, QString puesto); //Slot para procesar la adición de un empleado
 
-    void agregarVenta(QString fecha, double monto);
+    void agregarVenta(QString fecha, double monto); //Slot para agregar una venta al historial
 
-    //Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
-    void initstylesheet();
-
+    void initstylesheet(); //Slot para inicializar y cargar una hoja de estilo CSS
 
 private:
-    Ui::Cine *ui;
-    // ATRIBUTOS
-    QString Nombre;
-    QString Ubicacion;
-    verHistorial *historialventana = nullptr;
+    Ui::Cine *ui; //Puntero a la interfaz gráfica generada automáticamente
 
+    QString Nombre; //Variable que almacena el nombre del cine
+    QString Ubicacion; //Variable que almacena la ubicación del cine
+    verHistorial *historialventana = nullptr; //Puntero a la ventana de historial de ventas
 
-    // CONTENEDORES PARA EL MANEJO DE DATOS
-
-    std::vector<Peliculas*> vectorPelicula;
-    std::vector<Clientes*> vectorClientes;
-    std::vector<Empleados* > vectorEmpleados;
-    std::vector<Venta* > vectorHistorial;
-    std::vector<Pago* > vectorPago;
-
+    std::vector<Peliculas*> vectorPelicula; //Contenedor para almacenar películas
+    std::vector<Clientes*> vectorClientes; //Contenedor para almacenar clientes
+    std::vector<Empleados*> vectorEmpleados; //Contenedor para almacenar empleados
+    std::vector<Venta*> vectorHistorial; //Contenedor para almacenar el historial de ventas
+    std::vector<Pago*> vectorPago; //Contenedor para almacenar pagos
 };
 
 #endif // CINE_H

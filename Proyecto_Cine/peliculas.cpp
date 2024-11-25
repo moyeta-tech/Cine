@@ -7,39 +7,38 @@
 #include <QMessageBox>
 #include <QDebug>
 
+// Constructor de la clase Peliculas
 Peliculas::Peliculas(std::vector<Peliculas*> &vectorPeliculaRef, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Peliculas),
     vectorPelicula(vectorPeliculaRef),
     archivoCSV("peliculas.csv")  // Ruta por defecto para el archivo CSV
 {
-    qDebug() << "Constructor iniciado.";
-    ui->setupUi(this);
+    qDebug() << "Constructor iniciado.";  // Mensaje de depuración
+    ui->setupUi(this);  // Configura la interfaz de usuario
     qDebug() << "UI configurada.";
 
-    this->setWindowTitle("Peliculas");
-    ui->spinBox_duracion->setMaximum(200);
+    this->setWindowTitle("Peliculas");  // Establece el título de la ventana
+    ui->spinBox_duracion->setMaximum(200);  // Establece el máximo para duración de la película
 
-    initstylesheet();
-    qDebug() << "Stylesheet inicializado.";
+    initstylesheet();  // Inicializa el estilo de la ventana
+    qDebug() << "Stylesheet inicializado.";  // Mensaje de depuración
 
-    connect(ui->Boton_buscar, &QPushButton::clicked, this, &Peliculas::buscarPelicula);
-    connect(ui->Boton_agregar, &QPushButton::clicked, this, &Peliculas::agregarPelicula);
-  //  connect(ui->Boton_modificar, &QPushButton::clicked, this, &Peliculas::modificarPelicula);
-    connect(ui->Boton_eliimnar, &QPushButton::clicked, this, &Peliculas::eliminarPelicula);
-
+    // Conexiones entre botones y sus funciones
+    connect(ui->Boton_buscar, &QPushButton::clicked, this, &Peliculas::buscarPelicula);  // Botón de búsqueda
+    connect(ui->Boton_agregar, &QPushButton::clicked, this, &Peliculas::agregarPelicula);  // Botón de agregar
+    // connect(ui->Boton_modificar, &QPushButton::clicked, this, &Peliculas::modificarPelicula);  // Botón de modificar (comentado)
+    connect(ui->Boton_eliimnar, &QPushButton::clicked, this, &Peliculas::eliminarPelicula);  // Botón de eliminar
 }
 
+// Destructor que limpia los recursos
 Peliculas::~Peliculas()
 {
-    delete ui;
-    qDebug() << "Destructor llamado. UI eliminada.";
+    delete ui;  // Elimina la interfaz de usuario
+    qDebug() << "Destructor llamado. UI eliminada.";  // Mensaje de depuración
 }
 
-//////////////////////////////////////////
-// GETTERS Y SETTERS
-//////////////////////////////////////////
-
+// Getters y setters para los atributos de la clase
 QString Peliculas::getTitulo() const {
     return Titulo;
 }
@@ -96,30 +95,31 @@ void Peliculas::setDia(const QDate &d) {
     dia = d;
 }
 
+// Función para inicializar el estilo de la ventana
 void Peliculas::initstylesheet() {
-    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
-    bool styleOK = style.open(QFile::ReadOnly);
-    qDebug() << "Apertura de archivo de estilo: " << styleOK;
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");  // Ruta del archivo CSS
+    bool styleOK = style.open(QFile::ReadOnly);  // Intenta abrir el archivo CSS en modo solo lectura
+    qDebug() << "Apertura de archivo de estilo: " << styleOK;  // Mensaje de depuración
     if (styleOK) {
-        QString stringEstilo = QString::fromLatin1(style.readAll());
-        this->setStyleSheet(stringEstilo);
+        QString stringEstilo = QString::fromLatin1(style.readAll());  // Lee el contenido del archivo CSS
+        this->setStyleSheet(stringEstilo);  // Aplica el estilo a la ventana
     } else {
-        qDebug() << "No se pudo abrir el archivo de estilo.";
+        qDebug() << "No se pudo abrir el archivo de estilo.";  // Mensaje de error si no se pudo abrir el archivo
     }
 }
 
 // Función para guardar las películas en un archivo CSV
 void Peliculas::guardarPeliculasEnCSV(const QString &filename) {
-    qDebug() << "Guardando películas en CSV...";
-    QFile file(filename);
+    qDebug() << "Guardando películas en CSV...";  // Mensaje de depuración
+    QFile file(filename);  // Abre el archivo para escritura
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "Error al intentar abrir el archivo para guardar.";
-        QMessageBox::warning(this, "Error", "No se pudo abrir el archivo para guardar.");
+        qDebug() << "Error al intentar abrir el archivo para guardar.";  // Mensaje de error
+        QMessageBox::warning(this, "Error", "No se pudo abrir el archivo para guardar.");  // Muestra un cuadro de mensaje
         return;
     }
 
-    QTextStream out(&file);
-    for (Peliculas* pelicula : vectorPelicula) {
+    QTextStream out(&file);  // Prepara un flujo de texto para escribir en el archivo
+    for (Peliculas* pelicula : vectorPelicula) {  // Itera sobre todas las películas
         out << pelicula->getTitulo() << ","
             << pelicula->getDuracion() << ","
             << pelicula->getGenero() << ","
@@ -128,145 +128,136 @@ void Peliculas::guardarPeliculasEnCSV(const QString &filename) {
             << pelicula->getDia().toString("yyyy-MM-dd") << ",";
 
         // Guardar horarios
-        const QList<QTime>& horarios = pelicula->getHorarios();
-        for (int i = 0; i < horarios.size(); ++i) {
-            if(horarios[i].isValid()){
-                out << horarios[i].toString("HH:mm");
+        const QList<QTime>& horarios = pelicula->getHorarios();  // Obtiene los horarios de la película
+        for (int i = 0; i < horarios.size(); ++i) {  // Itera sobre los horarios
+            if(horarios[i].isValid()){  // Verifica que el horario sea válido
+                out << horarios[i].toString("HH:mm");  // Guarda el horario en el archivo
                 if(i != horarios.size() - 1){
-                    out << ";";
+                    out << ";";  // Separa los horarios con punto y coma
                 }
             } else {
-                qDebug() << "Horario inválido detectado y no guardado.";
+                qDebug() << "Horario inválido detectado y no guardado.";  // Mensaje de depuración si el horario es inválido
             }
-
         }
-        out << "\n";
+        out << "\n";  // Salto de línea al final de cada película
     }
 
-    file.close();
-    qDebug() << "Películas guardadas correctamente en el archivo.";
+    file.close();  // Cierra el archivo
+    qDebug() << "Películas guardadas correctamente en el archivo.";  // Mensaje de depuración
 }
 
+// Función para cargar las películas desde un archivo CSV
 void Peliculas::cargarPeliculasDesdeCSV(const QString &filename) {
-    qDebug() << "Cargando películas desde CSV...";
+    qDebug() << "Cargando películas desde CSV...";  // Mensaje de depuración
 
-    QFile file(filename);
-
+    QFile file(filename);  // Abre el archivo
     // Comprobar si el archivo existe
     if (!file.exists()) {
-        qDebug() << "El archivo no existe, creando uno nuevo.";
-        // Si el archivo no existe, podemos crearlo vacío
+        qDebug() << "El archivo no existe, creando uno nuevo.";  // Mensaje de depuración
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            qDebug() << "No se pudo crear el archivo.";
-            QMessageBox::warning(this, "Error", "No se pudo crear el archivo.");
+            qDebug() << "No se pudo crear el archivo.";  // Mensaje de error
+            QMessageBox::warning(this, "Error", "No se pudo crear el archivo.");  // Muestra un cuadro de mensaje
             return;
         }
-        file.close();
-        return; // Salir de la función
+        file.close();  // Cierra el archivo
+        return;  // Sale de la función si no existe el archivo
     }
 
     // Intentamos abrir el archivo en modo lectura de texto con codificación UTF-8
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "Error al intentar abrir el archivo CSV.";
-        QMessageBox::warning(this, "Error", "No se pudo abrir el archivo para cargar.");
+        qDebug() << "Error al intentar abrir el archivo CSV.";  // Mensaje de error
+        QMessageBox::warning(this, "Error", "No se pudo abrir el archivo para cargar.");  // Muestra un cuadro de mensaje
         return;
     }
 
-    // Abrir el archivo con codificación UTF-8 directamente
-    QTextStream in(&file);
-    in.setAutoDetectUnicode(true);  // Esto detectará automáticamente la codificación, y Qt intentará manejar la codificación correctamente
+    QTextStream in(&file);  // Prepara un flujo de texto para leer el archivo
+    in.setAutoDetectUnicode(true);  // Detecta automáticamente la codificación del archivo
 
-    // Limpiar el vector antes de cargar los nuevos datos
-    qDeleteAll(vectorPelicula);  // Eliminar todas las películas previas del vector
-    vectorPelicula.clear();       // Limpiar el vector
+    qDeleteAll(vectorPelicula);  // Elimina todas las películas previas del vector
+    vectorPelicula.clear();  // Limpia el vector
 
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-        qDebug() << "Procesando línea: " << line;
-        QStringList fields = line.split(",");
+    while (!in.atEnd()) {  // Mientras no se haya llegado al final del archivo
+        QString line = in.readLine();  // Lee una línea del archivo
+        qDebug() << "Procesando línea: " << line;  // Mensaje de depuración
+        QStringList fields = line.split(",");  // Separa los campos por coma
 
         // Verificar que haya suficientes campos en la línea
         if (fields.size() < 7) {
-            qDebug() << "Línea ignorada, número de campos insuficiente: " << line;
-            continue;
+            qDebug() << "Línea ignorada, número de campos insuficiente: " << line;  // Mensaje de depuración
+            continue;  // Salta esta línea si no tiene suficientes campos
         }
 
-        Peliculas* nuevaPelicula = new Peliculas(vectorPelicula);
-        nuevaPelicula->setTitulo(fields[0]);
-        nuevaPelicula->setDuracion(fields[1].toInt());
-        nuevaPelicula->setGenero(fields[2]);
-        nuevaPelicula->setClasificacion(fields[3]);
-        nuevaPelicula->setSinopsis(fields[4]);
-        nuevaPelicula->setDia(QDate::fromString(fields[5], "yyyy-MM-dd"));
+        Peliculas* nuevaPelicula = new Peliculas(vectorPelicula);  // Crea una nueva película
+        nuevaPelicula->setTitulo(fields[0]);  // Asigna el título
+        nuevaPelicula->setDuracion(fields[1].toInt());  // Asigna la duración
+        nuevaPelicula->setGenero(fields[2]);  // Asigna el género
+        nuevaPelicula->setClasificacion(fields[3]);  // Asigna la clasificación
+        nuevaPelicula->setSinopsis(fields[4]);  // Asigna la sinopsis
+        nuevaPelicula->setDia(QDate::fromString(fields[5], "yyyy-MM-dd"));  // Asigna la fecha
 
-        // Leer los horarios (los horarios están separados por tabuladores en el CSV)
-        QStringList horarios = fields[6].split(";"); // Asumiendo que los horarios están separados por tabuladores
-        QList<QTime> listaHorarios;
-        for (const QString &hora : horarios) {
-            QTime horario = QTime::fromString(hora, "HH:mm");
-            if(horario.isValid()){
-                listaHorarios.append(horario);
+        // Leer los horarios
+        QStringList horarios = fields[6].split(";");  // Los horarios están separados por punto y coma
+        QList<QTime> listaHorarios;  // Lista para almacenar los horarios
+        for (const QString &hora : horarios) {  // Itera sobre los horarios
+            QTime horario = QTime::fromString(hora, "HH:mm");  // Convierte el horario a QTime
+            if(horario.isValid()) {  // Si el horario es válido
+                listaHorarios.append(horario);  // Lo agrega a la lista
             } else {
-                qDebug() << "Horario invalido ignorado: " << hora;
+                qDebug() << "Horario invalido ignorado: " << hora;  // Mensaje de depuración si el horario es inválido
             }
         }
-        nuevaPelicula->setHorarios(listaHorarios);
+        nuevaPelicula->setHorarios(listaHorarios);  // Asigna los horarios a la película
 
-        // Agregar la nueva película al vector
-        vectorPelicula.push_back(nuevaPelicula);
+        vectorPelicula.push_back(nuevaPelicula);  // Agrega la película al vector
     }
 
-    file.close();
-    qDebug() << "Películas cargadas correctamente desde el archivo.";
+    file.close();  // Cierra el archivo
+    qDebug() << "Películas cargadas correctamente desde el archivo.";  // Mensaje de depuración
 }
 
-
-
+// Función para agregar una película
 void Peliculas::agregarPelicula() {
-    // Crear una nueva película a partir de los datos ingresados en la interfaz
-    Peliculas* nuevaPelicula = new Peliculas(vectorPelicula);
-    nuevaPelicula->setTitulo(ui->lineEdit_nombre->text().trimmed());
-    nuevaPelicula->setDuracion(ui->spinBox_duracion->value());
-    nuevaPelicula->setGenero(ui->lineEdit_genero->text().trimmed());
-    nuevaPelicula->setClasificacion(ui->lineEdit_clasificacion->text().trimmed());
-    nuevaPelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText().trimmed());
-    nuevaPelicula->setDia(ui->dateEdit->date());
+    Peliculas* nuevaPelicula = new Peliculas(vectorPelicula);  // Crea una nueva película
 
-    // Crear la lista de horarios y agregar los valores de los QTimeEdit
-    QList<QTime> horarios;
-    if (ui->timeEdit->time().isValid()) horarios.append(ui->timeEdit->time());
-    if (ui->timeEdit_2->time().isValid()) horarios.append(ui->timeEdit_2->time());
-    if (ui->timeEdit_3->time().isValid()) horarios.append(ui->timeEdit_3->time());
-    if (ui->timeEdit_4->time().isValid()) horarios.append(ui->timeEdit_4->time());
+    nuevaPelicula->setTitulo(ui->lineEdit_nombre->text().trimmed());  // Asigna el título desde la interfaz
+    nuevaPelicula->setDuracion(ui->spinBox_duracion->value());  // Asigna la duración desde la interfaz
+    nuevaPelicula->setGenero(ui->lineEdit_genero->text().trimmed());  // Asigna el género desde la interfaz
+    nuevaPelicula->setClasificacion(ui->lineEdit_clasificacion->text().trimmed());  // Asigna la clasificación
+    nuevaPelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText().trimmed());  // Asigna la sinopsis
+    nuevaPelicula->setDia(ui->dateEdit->date());  // Asigna la fecha desde la interfaz
 
-    if (horarios.isEmpty()) {
-        QMessageBox::warning(this, "Error", "Debe ingresar al menos un horario válido.");
+    QList<QTime> horarios;  // Lista para almacenar los horarios
+    if (ui->timeEdit->time().isValid()) horarios.append(ui->timeEdit->time());  // Agrega el primer horario si es válido
+    if (ui->timeEdit_2->time().isValid()) horarios.append(ui->timeEdit_2->time());  // Agrega el segundo horario si es válido
+    if (ui->timeEdit_3->time().isValid()) horarios.append(ui->timeEdit_3->time());  // Agrega el tercer horario si es válido
+    if (ui->timeEdit_4->time().isValid()) horarios.append(ui->timeEdit_4->time());  // Agrega el cuarto horario si es válido
+
+    if (horarios.isEmpty()) {  // Verifica si no se ingresaron horarios válidos
+        QMessageBox::warning(this, "Error", "Debe ingresar al menos un horario válido.");  // Muestra un mensaje de error
         return;
     }
 
-    nuevaPelicula->setHorarios(horarios); // Asignar los horarios a la película
+    nuevaPelicula->setHorarios(horarios);  // Asigna los horarios a la nueva película
+    vectorPelicula.push_back(nuevaPelicula);  // Agrega la película al vector
 
-    // Agregar la nueva película al vector
-    vectorPelicula.push_back(nuevaPelicula);
+    guardarPeliculasEnCSV(archivoCSV);  // Guarda las películas en el archivo CSV
 
-    // Guardar las películas actualizadas en el archivo CSV
-    guardarPeliculasEnCSV(archivoCSV);
-
-    // Notificar al usuario
-    QMessageBox::information(this, "Éxito", "Película agregada correctamente.");
+    QMessageBox::information(this, "Éxito", "Película agregada correctamente.");  // Mensaje de éxito
 }
 
+// Función para buscar una película por título
 void Peliculas::buscarPelicula() {
-    QString valor = ui->lineEdit_nombre->text();
-    if (valor.isEmpty()) {
-        qDebug() << "El campo de búsqueda está vacío.";
+    QString valor = ui->lineEdit_nombre->text();  // Obtiene el texto de búsqueda
+
+    if (valor.isEmpty()) {  // Verifica si el campo está vacío
+        qDebug() << "El campo de búsqueda está vacío.";  // Mensaje de depuración
         return;
     }
 
-    for (Peliculas* pelicula : vectorPelicula) {
-        if (pelicula->getTitulo().contains(valor, Qt::CaseInsensitive)) {
-            qDebug() << "Película encontrada: " << pelicula->getTitulo();
-            ui->lineEdit_genero->setText(pelicula->getGenero());
+    for (Peliculas* pelicula : vectorPelicula) {  // Itera sobre las películas
+        if (pelicula->getTitulo().contains(valor, Qt::CaseInsensitive)) {  // Si encuentra la película
+            qDebug() << "Película encontrada: " << pelicula->getTitulo();  // Mensaje de depuración
+            ui->lineEdit_genero->setText(pelicula->getGenero());  // Rellena los campos con los datos de la película encontrada
             ui->lineEdit_clasificacion->setText(pelicula->getClasificacion());
             ui->textEdit_sinopsis->setPlainText(pelicula->getSinopsis());
             ui->spinBox_duracion->setValue(pelicula->getDuracion());
@@ -276,80 +267,30 @@ void Peliculas::buscarPelicula() {
     }
 }
 
-
-
+// Función para eliminar una película
 void Peliculas::eliminarPelicula() {
-    QString tituloEliminar = ui->lineEdit_buscar->text().trimmed();
+    QString tituloEliminar = ui->lineEdit_buscar->text().trimmed();  // Obtiene el título a eliminar
 
-    if (tituloEliminar.isEmpty()) {
-        QMessageBox::warning(this, "Advertencia", "Por favor ingrese un título para eliminar.");
+    if (tituloEliminar.isEmpty()) {  // Verifica si el campo está vacío
+        QMessageBox::warning(this, "Advertencia", "Por favor ingrese un título para eliminar.");  // Muestra un mensaje de advertencia
         return;
     }
 
-    bool encontrada = false;
-    for (auto it = vectorPelicula.begin(); it != vectorPelicula.end(); ++it) {
-        if ((*it)->getTitulo().compare(tituloEliminar, Qt::CaseInsensitive) == 0) {
-            // Si la película es encontrada, eliminarla del vector
-            delete *it; // Eliminar el objeto de memoria
-            vectorPelicula.erase(it); // Eliminarla del vector
-            encontrada = true;
+    bool encontrada = false;  // Variable para verificar si se encontró la película
+    for (auto it = vectorPelicula.begin(); it != vectorPelicula.end(); ++it) {  // Itera sobre el vector de películas
+        if ((*it)->getTitulo().compare(tituloEliminar, Qt::CaseInsensitive) == 0) {  // Si encuentra el título
+            delete *it;  // Elimina el objeto de memoria
+            vectorPelicula.erase(it);  // Elimina la película del vector
+            encontrada = true;  // Marca que la película fue encontrada
             break;
         }
     }
 
-    if (encontrada) {
-        guardarPeliculasEnCSV(archivoCSV); // Guardar los cambios en el archivo CSV
-        QMessageBox::information(this, "Éxito", "Película eliminada correctamente.");
-        ui->lineEdit_buscar->clear(); // Limpiar el campo de búsqueda
+    if (encontrada) {  // Si la película fue encontrada
+        guardarPeliculasEnCSV(archivoCSV);  // Guarda los cambios en el archivo CSV
+        QMessageBox::information(this, "Éxito", "Película eliminada correctamente.");  // Mensaje de éxito
+        ui->lineEdit_buscar->clear();  // Limpia el campo de búsqueda
     } else {
-        QMessageBox::information(this, "No encontrada", "No se encontró una película con ese título.");
+        QMessageBox::information(this, "No encontrada", "No se encontró una película con ese título.");  // Mensaje si no se encuentra la película
     }
 }
-
-/*
-void Peliculas::modificarPelicula() {
-    QString tituloModificar = ui->lineEdit_buscar->text().trimmed();
-
-    if (tituloModificar.isEmpty()) {
-        QMessageBox::warning(this, "Advertencia", "Por favor ingrese un título para modificar.");
-        return;
-    }
-
-    bool encontrada = false;
-    for (Peliculas* pelicula : vectorPelicula) {
-        if (pelicula->getTitulo().compare(tituloModificar, Qt::CaseInsensitive) == 0) {
-            // Modificar los datos de la película
-            pelicula->setTitulo(ui->lineEdit_nombre->text());
-            pelicula->setDuracion(ui->spinBox_duracion->value());
-            pelicula->setGenero(ui->lineEdit_genero->text());
-            pelicula->setClasificacion(ui->lineEdit_clasificacion->text());
-            pelicula->setSinopsis(ui->textEdit_sinopsis->toPlainText());
-            pelicula->setDia(ui->dateEdit->date());
-
-            // Crear la lista de horarios modificada
-            QList<QTime> horarios;
-            if (ui->timeEdit->time().isValid()) horarios.append(ui->timeEdit->time());
-            if (ui->timeEdit_2->time().isValid()) horarios.append(ui->timeEdit_2->time());
-            if (ui->timeEdit_3->time().isValid()) horarios.append(ui->timeEdit_3->time());
-            if (ui->timeEdit_4->time().isValid()) horarios.append(ui->timeEdit_4->time());
-
-            if (horarios.isEmpty()) {
-                QMessageBox::warning(this, "Error", "Debe ingresar al menos un horario.");
-                return;
-            }
-
-            pelicula->setHorarios(horarios);
-            encontrada = true;
-            break;
-        }
-    }
-
-    if (encontrada) {
-        guardarPeliculasEnCSV(archivoCSV); // Guardar los cambios en el archivo CSV
-        QMessageBox::information(this, "Éxito", "Película modificada correctamente.");
-        ui->lineEdit_buscar->clear(); // Limpiar el campo de búsqueda
-    } else {
-        QMessageBox::information(this, "No encontrada", "No se encontró una película con ese título.");
-    }
-}
-*/

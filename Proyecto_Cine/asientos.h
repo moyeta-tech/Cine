@@ -1,11 +1,12 @@
-#ifndef ASIENTOS_H
-#define ASIENTOS_H
+#ifndef ASIENTOS_H //Verifica si ASIENTOS_H no ha sido definido previamente
+#define ASIENTOS_H //Define ASIENTOS_H para evitar multiples inclusiones de este archivo
 
-#include <QDialog>
 
-#include <QFile>
-#include <QStringList>
-#include <QMessageBox>
+#include <QDialog> //Incluimos la biblioteca QDialog para crear y manejar cuadros de dialogo
+
+#include <QFile> //Incluimos bibliotecas para manejar archivos
+#include <QStringList> //Incluimos bibliotecas para cadenas de texto
+#include <QMessageBox> //Incluimos bibliotecas para cuadros de mensajes
 
 namespace Ui {
 class Asientos;
@@ -19,56 +20,49 @@ public:
     explicit Asientos(QWidget *parent = nullptr);
     ~Asientos();
 
-    int getNumero();
-    void setNumero(int numero);
-    QString getFila();
-    void setFila(QString fila);
+    int getNumero(); //Metodo para obtener el numero de asiento
 
-    // Método para obtener la lista de asientos seleccionados
-    QStringList getAsientosSeleccionados() const;
+    void setNumero(int numero); //Metodo para establecer el numero de asiento
 
-    // Método para establecer el límite de asientos seleccionables
-    void setLimiteAsientos(int limite);
+    QString getFila(); //Metodo para obtener la fila del asiento
+
+    void setFila(QString fila); //Metodo para establecer la fila del asiento
+
+    QStringList getAsientosSeleccionados() const; //Metodo para obtener la lista de asientos seleccionados por el usuario
+
+    void setLimiteAsientos(int limite); //Metodo para establecer el limite de asientos seleccionables
 
 private slots:
-    void continuarPago();  // Slot para continuar al pago
+    void continuarPago(); //Slot para manejar la acción de continuar al pago
 
-    // Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
-    void initstylesheet();
+    void initstylesheet(); //Slot para inicializar y cargar la hoja de estilo (CSS) para personalizar el diseño
 
-    void seleccionarAsiento(); // Slot para manejar la selección de un asiento
-    void actualizarAsientoOcupado(int indice); // Actualiza un asiento a ocupado
+    void seleccionarAsiento(); //Slot para manejar la acción de seleccionar un asiento
+
+    void actualizarAsientoOcupado(int indice); //Slot para marcar un asiento como ocupado según su índice
 
 private:
-    Ui::Asientos *ui;
+    Ui::Asientos *ui; //Puntero a la interfaz gráfica generada automáticamente
 
-    int Numero;        // Número del asiento
-    bool Ocupado;      // Estado de ocupación del asiento
-    QString Fila;      // Fila del asiento
+    int Numero; // Variable que almacena el numero del asiento
+    bool Ocupado; // Variable booleana que indica si el asiento esta ocupado
+    QString Fila; // Variable que almacena la fila del asiento
 
-    // Lista para almacenar los botones de los asientos
-    QList<QPushButton*> botonesAsientos;
+    QList<QPushButton*> botonesAsientos; //Lista que contiene los botones correspondientes a los asientos en la interfaz
 
-    // Lista para almacenar los asientos ocupados (por su índice)
-    QList<int> asientosOcupados;
+    QList<int> asientosOcupados; //Lista que almacena los índices de los asientos ocupados
 
-    // Lista de asientos seleccionados (cuando el usuario los selecciona)
-    QStringList asientosSeleccionados;
+    QStringList asientosSeleccionados; //Lista de cadenas que representan los asientos seleccionados por el usuario
 
-    // Función para inicializar y marcar los asientos ocupados
-    void marcarAsientosOcupados();
+    void marcarAsientosOcupados(); //Metodo para inicializar y marcar los asientos ocupados en la interfaz
 
-    // Función para guardar los asientos ocupados en un archivo
-    void guardarAsientosOcupados();
+    void guardarAsientosOcupados(); //Metodo para guardar los asientos ocupados en un archivo
 
-    // Función para cargar los asientos ocupados desde un archivo
-    void cargarAsientosOcupados();
+    void cargarAsientosOcupados(); //Metodo para cargar los asientos ocupados desde un archivo
 
-    // Límite de asientos seleccionables
-    int limiteAsientos = 0;
+    int limiteAsientos = 0; //Variable que almacena el límite de asientos seleccionables
 
-    // Número de asientos actualmente seleccionados
-    int seleccionados = 0;
+    int seleccionados = 0; //Variable que almacena el número de asientos actualmente seleccionados
 };
 
 #endif // ASIENTOS_H

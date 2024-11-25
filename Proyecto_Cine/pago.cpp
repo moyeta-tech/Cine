@@ -1,92 +1,96 @@
 #include "pago.h"
 #include "ui_pago.h"
 
-
+// Constructor de la clase Pago
+// Inicializa la ventana de pago con los parámetros: método de pago, monto total y fecha.
 Pago::Pago(QString metodo, float monto, QString fecha, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Pago)
 {
-    ui->setupUi(this);
+    ui->setupUi(this);  // Configura la interfaz gráfica (UI)
 
-    Metodo = metodo;
-    Monto = monto;
-    Fecha = fecha;
+    Metodo = metodo;    // Almacena el método de pago
+    Monto = monto;      // Almacena el monto total
+    Fecha = fecha;      // Almacena la fecha de la transacción
 
-    //Establecemos el titulo de la ventana
+    // Establece el título de la ventana
     this->setWindowTitle("Paso 3: Seleccion metodo de pago");
 
-    //Llamamos al slot para cargar el stylesheet
+    // Llama al método para cargar el archivo de estilo (CSS)
     initstylesheet();
 
-    // INTRODUCIMOS LOS METODOS DE PAGO EN EL COMBOBOX
+    // Introduce los métodos de pago en el QComboBox
     ui->comboBox_medios->addItem("Efectivo");
     ui->comboBox_medios->addItem("Tarjeta de crédito");
     ui->comboBox_medios->addItem("Tarjeta de débito");
 
-
-    //Conectamos los botones con los slots
+    // Conecta el botón de finalizar con el slot que procesa la compra
     connect(ui->Boton_finalizar, &QPushButton::clicked, this, &Pago::finalizarCompra);
 }
-Pago::Pago(){
+
+// Constructor vacío, probablemente para crear un objeto sin inicializar al principio
+Pago::Pago() {
 
 }
 
+// Destructor de la clase, elimina la UI
 Pago::~Pago()
 {
-    delete ui;
+    delete ui;  // Libera la memoria ocupada por la interfaz
 }
 
+// Métodos getter y setter para los atributos privados
 
 QString Pago::getMetodo()
 {
-    return Metodo;  // Usamos 'Metodo' en lugar de 'metodoPago'
+    return Metodo;  // Devuelve el método de pago seleccionado
 }
 
 void Pago::setMetodo(QString metodo)
 {
-    Metodo = metodo;  // Usamos 'Metodo' en lugar de 'metodoPago'
+    Metodo = metodo;  // Establece el método de pago
 }
 
 double Pago::getMonto() const
 {
-    return Monto;  // Usamos 'Monto' en lugar de 'montoTotal'
+    return Monto;  // Devuelve el monto total de la compra
 }
 
 void Pago::setMonto(double monto)
 {
-    Monto = monto;  // Usamos 'Monto' en lugar de 'montoTotal'
+    Monto = monto;  // Establece el monto total de la compra
 }
 
 QString Pago::getFecha()
 {
-    return Fecha;  // Usamos 'Fecha' en lugar de 'fechaPago'
+    return Fecha;  // Devuelve la fecha de la transacción
 }
 
 void Pago::setFecha(QString fecha)
 {
-    Fecha = fecha;  // Usamos 'Fecha' en lugar de 'fechaPago'
+    Fecha = fecha;  // Establece la fecha de la transacción
 }
 
+// Método que simula la finalización de la compra
+// Al ser llamado, se cierra el diálogo y marca el estado como "aceptado"
 bool Pago::finalizarCompra()
 {
     this->accept();  // Cierra el diálogo y devuelve QDialog::Accepted
-    return true;
-
+    return true;     // Indica que la compra se ha finalizado correctamente
 }
 
-// HOJA DE ESTILOS
+// Método para cargar el archivo de estilos (CSS) para la interfaz
 void Pago::initstylesheet()
 {
-    QFile style(":/src/stylesheet/stylesheet-ventanas.css");
-    bool styleOK = style.open(QFile::ReadOnly);
-    qDebug() << "Apertura de archivos: " <<styleOK;
-    QString stringEstilo = QString::fromLatin1(style.readAll());
-    this->setStyleSheet(stringEstilo);
+    QFile style(":/src/stylesheet/stylesheet-ventanas.css");  // Ruta al archivo de estilo
+    bool styleOK = style.open(QFile::ReadOnly);  // Abre el archivo de estilo en modo solo lectura
+    qDebug() << "Apertura de archivos: " << styleOK;  // Imprime en el log si el archivo se abrió correctamente
+    QString stringEstilo = QString::fromLatin1(style.readAll());  // Lee el contenido del archivo CSS
+    this->setStyleSheet(stringEstilo);  // Aplica el estilo al diálogo
 }
 
+// Método para establecer los asientos seleccionados
 void Pago::setAsientos(const QString& asientos)
 {
-    AsientosSeleccionados = asientos;
-
+    AsientosSeleccionados = asientos;  // Almacena los asientos seleccionados por el usuario
 }
-

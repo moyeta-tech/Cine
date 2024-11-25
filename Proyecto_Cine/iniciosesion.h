@@ -1,10 +1,12 @@
-#ifndef INICIOSESION_H
-#define INICIOSESION_H
+#ifndef INICIOSESION_H //Verifica si INICIOSESION_H no ha sido definido previamente
+#define INICIOSESION_H //Define INICIOSESION_H para evitar múltiples inclusiones del archivo
 
-#include <QDialog>
-#include <QFile>
-#include <QSet>  // Para almacenar los IDs de los empleados
-#include <QDebug>
+#include <QDialog> //Incluimos la biblioteca QDialog para crear y manejar cuadros de dialogo
+
+#include <QFile> //Incluimos la biblioteca para manejar archivos
+#include <QSet> //Incluimos la biblioteca para conjuntos, utilizada para almacenar IDs de empleados
+#include <QDebug> //Incluimos la biblioteca para las funciones de depuración para imprimir en la consola
+
 
 namespace Ui {
 class InicioSesion;
@@ -15,30 +17,27 @@ class InicioSesion : public QDialog
     Q_OBJECT
 
 public:
-    explicit InicioSesion(QWidget *parent = nullptr);
+    explicit InicioSesion(QWidget *parent = nullptr); // Constructor que inicializa el cuadro de diálogo con un padre opcional
     ~InicioSesion();
 
 private slots:
-    void iniciarSesion();
-    void salirVentana();
+    void iniciarSesion(); //Slot para manejar el evento de inicio de sesión
 
-    // Slot para inicializar y cargar la hoja de estilo (CSS) para el widget
-    void initstylesheet();
+    void salirVentana(); //Slot para cerrar la ventana de inicio de sesión
+
+    void initstylesheet(); //Slot para inicializar y cargar la hoja de estilo (CSS) del widget
 
 private:
-    Ui::InicioSesion *ui;
+    Ui::InicioSesion *ui; //Puntero a la interfaz gráfica generada automáticamente
 
-    // Función que valida si el ID de empleado existe en el conjunto de empleados
-    bool validarCredenciales(const QString &usuario);
+    bool validarCredenciales(const QString &usuario); //Validamos si el ID de empleado existe en el conjunto `empleadosIDs`
 
-    // Conjunto estático para almacenar los IDs de los empleados
-    static QSet<QString> empleadosIDs;
+    static QSet<QString> empleadosIDs; //Conjunto estático para almacenar los IDs únicos de empleados
 
-    // Carga los IDs de los empleados desde el archivo CSV
-    void cargarEmpleados();
+    void cargarEmpleados(); //Cargamos los IDs de los empleados desde un archivo CSV y los almacena en `empleadosIDs`
 
-    // Función para obtener el nombre del empleado desde el archivo CSV
-    QString obtenerNombreEmpleado(const QString &idEmpleado);
+    QString obtenerNombreEmpleado(const QString &idEmpleado); //Obtenemos el nombre del empleado asociado a un ID desde el archivo CSV
+
 };
 
 #endif // INICIOSESION_H
