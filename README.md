@@ -1,36 +1,36 @@
-Proyecto Cine
-Descripción
-Este es un programa básico diseñado para empleados de cine. Permite gestionar datos de clientes, empleados y películas, además de realizar ventas de boletos. El sistema está diseñado para trabajar con archivos .csv que se pueden abrir fácilmente con aplicaciones como Excel.
+# Proyecto Cine
 
-Características Principales
+**Descripción**  
+Este es un programa básico diseñado para empleados de cine. Permite gestionar datos de clientes, empleados y películas, además de realizar ventas de boletos. El sistema está diseñado para trabajar con archivos `.csv` que se pueden abrir fácilmente con aplicaciones como Excel. 
 
-Inserción y eliminación de datos desde archivos .csv (reconocidos como archivos Excel).
-Realización de ventas de boletos: eligiendo película, horario y asiento.
-Visualización del historial de ventas.
-Tecnologías Utilizadas
+**Características Principales**  
+- Inserción y eliminación de datos desde archivos `.csv` (reconocidos como archivos Excel).
+- Realización de ventas de boletos: eligiendo película, horario y asiento.
+- Visualización del historial de ventas.
 
-Lenguaje de Programación: C++
-Framework: Qt Creator
-Diseño: CSS (para algunos detalles visuales de la interfaz).
-Instrucciones de Instalación
+**Tecnologías Utilizadas**  
+- **Lenguaje de Programación**: C++
+- **Framework**: Qt Creator
+- **Diseño**: CSS (para algunos detalles visuales de la interfaz).
 
-Descarga el archivo .zip del proyecto.
-Descomprime la carpeta en tu equipo.
-Navega a la carpeta Ejecutable Proyecto_Cine.
-Ejecuta el archivo Proyecto_Cine.exe.
-Uso
+**Instrucciones de Instalación**  
+1. Descarga el archivo `.zip` del proyecto.
+2. Descomprime la carpeta en tu equipo.
+3. Navega a la carpeta `Ejecutable Proyecto_Cine`.
+4. Ejecuta el archivo `Proyecto_Cine.exe`.
 
-Al abrir la aplicación, se te pedirá ingresar un ID. Ingresa el siguiente ID para comenzar:
-2908
-Desde la interfaz de usuario, podrás insertar o eliminar datos relacionados con clientes, empleados y películas.
-También podrás realizar una venta de boletos eligiendo una película, horario y asiento, y luego visualizar el historial de ventas.
-Colaboradores
+**Uso**  
+1. Al abrir la aplicación, se te pedirá ingresar un **ID**. Ingresa el siguiente ID para comenzar:  
+   `2908`
+2. Desde la interfaz de usuario, podrás insertar o eliminar datos relacionados con clientes, empleados y películas.
+3. También podrás realizar una venta de boletos eligiendo una película, horario y asiento, y luego visualizar el historial de ventas.
 
-anitsako: Gran apoyo en el desarrollo de este proyecto.
-Licencia
+**Colaboradores**  
+- **anitsako**: Gran apoyo en el desarrollo de este proyecto.
+
+**Licencia**  
 Este proyecto no tiene licencia.
 
-Notas Adicionales
-
-El programa funciona correctamente, pero algunos detalles menores podrían ser mejorados en el futuro.
-Asegúrate de ingresar el ID correctamente al iniciar el programa: 2908.
+**Notas Adicionales**  
+- El programa funciona correctamente, pero algunos detalles menores podrían ser mejorados en el futuro.
+- Asegúrate de ingresar el ID correctamente al iniciar el programa: `2908`.
